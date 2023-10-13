@@ -1,7 +1,9 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
-const Layout = () => {
-    return <Stack />;
+export const unstable_settings = {
+  initialRouteName: "home",
+};
+
+export default function Layout() {
+  return <Stack initialRouteName="home" />;
 }
-
-export default Layout;
