@@ -5,8 +5,11 @@ import { Link } from "expo-router";
 export default function Home() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-      <Link href="/grocery">Go to grocery</Link>
+      <h1>PantryPal</h1>
+
+      <Link href="/recipebook">See Recipe Book</Link>
+      <Link href="/grocery">See Grocery List</Link>
+
     </View>
   );
 }
