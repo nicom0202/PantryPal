@@ -1,9 +1,11 @@
 import { Stack } from "expo-router";
 
-export const unstable_settings = {
-  initialRouteName: "home",
-};
-
-export default function Layout() {
-  return <Stack initialRouteName="home" />;
+const StackLayout = () => {
+  return (
+    <Stack>
+        <Stack.Screen name="(tabs)" options={ { headerShown: false }}/>
+    </Stack>
+  )
 }
+
+export default StackLayout;
