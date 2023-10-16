@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { View, Text, Button } from "react-native";
-import { Link, useNavigation, useRouter } from "expo-router";
-=======
 import { View, Text, StyleSheet } from "react-native";
->>>>>>> updating tab bar
 
 /* Colors:
  * Taupe: #54494B
@@ -13,14 +8,7 @@ import { View, Text, StyleSheet } from "react-native";
  * Faded Green: #6F8F72
  */
 
-<<<<<<< HEAD
-export default function Details() {
-	const router = useRouter();
-  	const navigation = useNavigation();
-
-=======
 const recipe = () => {
->>>>>>> updating tab bar
 	const styles = StyleSheet.create({
 		container: {
 			backgroundColor: '#E2D0BE',		// beige
@@ -51,21 +39,8 @@ const recipe = () => {
 
   	return (
     	<View style={{ styles }}>
-<<<<<<< HEAD
-      	<Link href="/home">Home</Link>
-      	<Button
-        title="Grocery List" onPress={() => router.push("/grocery")}/>
-      	<Button title="Go back" onPress={() => router.back()} />
-      
-      	<Text>My Recipes</Text>
-
-    	</View>
-  	);
-}
-=======
       	    <Text>My Recipes</Text>
     	</View>
   	);
 }
 export default recipe;
->>>>>>> updating tab bar
