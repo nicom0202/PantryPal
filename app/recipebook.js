@@ -1,25 +1,55 @@
 import { View, Text, Button } from "react-native";
 import { Link, useNavigation, useRouter } from "expo-router";
 
+/* Colors:
+ * Taupe: #54494B
+ * Beige: #E2D0BE
+ * Dark Green: #082D0F
+ * Bright Green: #68A357
+ * Faded Green: #6F8F72
+ */
+
 export default function Details() {
-  const router = useRouter();
-  const navigation = useNavigation();
+	const router = useRouter();
+  	const navigation = useNavigation();
 
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Grocery Screen</Text>
+	const styles = StyleSheet.create({
+		container: {
+			backgroundColor: '#E2D0BE',		// beige
+			flex: 1,
+			alignItems: 'center',
+			justifyContent: 'center',
+		},
 
-      <Link href="/home">Go to Home</Link>
+		heading: {
+			color: '#6F8F72',				// faded green
+			backgroundColor: '#082D0F',		// dark green
+			fontSize: 24,
+		},
 
-      <Button
-        title="Go to grocery... again"
-        onPress={() => router.push("/grocery")}
-      />
-      <Button title="Go back" onPress={() => router.back()} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
+		text: {
+			color: '#54494B',				// taupe
+			fontSize: 18,
+		},
+
+		box: {
+			borderColor: '#68A357',				// bright green
+			borderWidth: 5,
+			borderRadius: 5,
+			backgroundColor: '#E2D0BE',			// beige
+			color: '#54494B',					// taupe
+		}
+	});
+
+  	return (
+    	<View style={{ styles }}>
+      	<Link href="/home">Home</Link>
+      	<Button
+        title="Grocery List" onPress={() => router.push("/grocery")}/>
+      	<Button title="Go back" onPress={() => router.back()} />
+      
+      	<Text>My Recipes</Text>
+
+    	</View>
+  	);
 }
