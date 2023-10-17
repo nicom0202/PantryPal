@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import ClickableBox from '../(components)/clickableBox';
+import ClickableBox from '../../COMPONENTS/clickableBox';
 
 const home = () => {
     const handleBoxClick = () => {
