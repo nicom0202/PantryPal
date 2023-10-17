@@ -1,11 +1,14 @@
+// Pantry Pal
+// Loads default fonts and page layout
+
 import { Stack } from "expo-router";
 
-const StackLayout = () => {
-  return (
-    <Stack>
-        <Stack.Screen name="(tabs)" options={ { headerShown: false }}/>
-    </Stack>
-  )
-}
+const Layout = () => {
+    return (
+        <Stack>
+            <Stack.Screen name="(tabs)" options={ { headerShown: false }}/>
+        </Stack>
+      );
+};
 
-export default StackLayout;
+export default Layout;
