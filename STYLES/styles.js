@@ -1,11 +1,11 @@
 // FJ Tria
 // Pantry Pal
-// General stylesheet for the front-end
+// Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
 import { COLORS, FONT, SIZES } from "../CONSTANTS/theme";
 
-const styles = StyleSheet.create({
+const containerStyle = StyleSheet.create({
     container: {
         width: "100%",
         backgroundColor: COLORS.lightWhite,
@@ -13,20 +13,34 @@ const styles = StyleSheet.create({
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
+});
 
+const titleStyle = StyleSheet.create({
     title: {
         fontFamily: FONT.fancy,
         fontSize: SIZES.xLarge,
         color: COLORS.smokeBlack,
     },
+});
 
+const textStyle = StyleSheet.create({
+    text: {
+        fontFamily: FONT.regular,
+        fontSize: SIZES.medium,
+        color: COLORS.smokeBlack,
+    },
+})
+    
+const gridStyle = StyleSheet.create({
     grid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginBottom: 100,
     },
-    
+});
+  
+const centeredView = StyleSheet.create({
     /* Modal styles */
     centeredView: {
         flex: 1,
@@ -34,7 +48,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
+});
 
+const modalView = StyleSheet.create({
     modalView: {
         width: "90%",
         height: "70%",
@@ -51,7 +67,9 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
+});
 
+const buttonClose = StyleSheet.create({
     buttonClose: {
         position: 'absolute',
         top: 10,
@@ -63,22 +81,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+});
 
+const buttonOpen = StyleSheet.create({
     buttonOpen: {
         backgroundColor: '#F194FF',
     },
-
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
+});
     
+const modalText = StyleSheet.create({
     modalText: {
         margin: 15,
         textAlign: 'center',
     },
-    /* End of Modal styles, some of it can be modified/removed if needed */
 });
 
-export default styles;
+export {containerStyle, titleStyle, textStyle, gridStyle};

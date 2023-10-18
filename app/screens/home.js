@@ -1,13 +1,19 @@
 import { View, Text, Modal, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
-import styles from '../../STYLES/styles.js';
+import {gridStyle} from '../../STYLES/styles.js';
+
 
 const Home = () => {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
-        <View style={styles.grid}>
+        <View style={{ flex: 1 }}>
+            <View style={[gridStyle.grid]}>
+                <ClickableBox content="Recipe 1" onClick={handleBoxClick} />
+                <ClickableBox content="Recipe 2" onClick={handleBoxClick} />
+                <ClickableBox content={require('./chicken.jpeg')} onClick={handleBoxClick} />
+        <View style={[gridStyle.grid]}>
             <View>
                 {/* Modal popout for each individual recipe */}
                 <Modal 
