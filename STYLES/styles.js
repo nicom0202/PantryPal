@@ -37,7 +37,63 @@ const gridStyle = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginBottom: 100,
-    },  
+    },
+});
+  
+const centeredView = StyleSheet.create({
+    /* Modal styles */
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+    },
+});
+
+const modalView = StyleSheet.create({
+    modalView: {
+        width: "90%",
+        height: "70%",
+        margin: 10,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+});
+
+const buttonClose = StyleSheet.create({
+    buttonClose: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        width: 40,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+const buttonOpen = StyleSheet.create({
+    buttonOpen: {
+        backgroundColor: '#F194FF',
+    },
+});
+    
+const modalText = StyleSheet.create({
+    modalText: {
+        margin: 15,
+        textAlign: 'center',
+    },
 });
 
 export {containerStyle, titleStyle, textStyle, gridStyle};
