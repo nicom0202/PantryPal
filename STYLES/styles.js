@@ -3,7 +3,7 @@
 // General stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, FONT, SIZES } from "../CONSTANTS";
+import { COLORS, FONT, SIZES } from "../CONSTANTS/theme";
 
 const styles = StyleSheet.create({
     container: {
@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
         fontSize: SIZES.xLarge,
         color: COLORS.smokeBlack,
     },
+
+    grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginBottom: 100,
+    }
 });
 
 export default styles;
