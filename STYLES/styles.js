@@ -15,19 +15,20 @@ const containerStyle = StyleSheet.create({
     },
 });
 
-const titleStyle = StyleSheet.create({
+const textStyle = StyleSheet.create({
     title: {
         fontFamily: FONT.fancy,
         fontSize: SIZES.xLarge,
         color: COLORS.smokeBlack,
     },
-});
-
-const textStyle = StyleSheet.create({
-    text: {
+    body: {
         fontFamily: FONT.regular,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
+    },
+    modalText: {
+        margin: 15,
+        textAlign: 'center',
     },
 })
     
@@ -39,18 +40,15 @@ const gridStyle = StyleSheet.create({
         marginBottom: 100,
     },
 });
-  
-const centeredView = StyleSheet.create({
-    /* Modal styles */
+
+/* Modal styles */
+const viewStyle = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
     },
-});
-
-const modalView = StyleSheet.create({
     modalView: {
         width: "90%",
         height: "70%",
@@ -69,8 +67,8 @@ const modalView = StyleSheet.create({
     },
 });
 
-const buttonClose = StyleSheet.create({
-    buttonClose: {
+const buttonStyle = StyleSheet.create({
+    close: {
         position: 'absolute',
         top: 10,
         right: 10,
@@ -81,19 +79,16 @@ const buttonClose = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-});
-
-const buttonOpen = StyleSheet.create({
-    buttonOpen: {
+    open: {
         backgroundColor: '#F194FF',
     },
 });
-    
-const modalText = StyleSheet.create({
-    modalText: {
-        margin: 15,
-        textAlign: 'center',
-    },
-});
 
-export {containerStyle, titleStyle, textStyle, gridStyle};
+
+export {
+    containerStyle,
+    textStyle,
+    gridStyle,
+    viewStyle,
+    buttonStyle,
+};
