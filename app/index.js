@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/home";
 import RecipeBook from "./screens/RecipeBook";
 import GroceryList from "./screens/GroceryList";
+import Login from "./screens/Login";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,7 @@ export default function Container(){
                 <Tab.Screen name="Home" component={Home}/>
                 <Tab.Screen name="Recipe Book" component={RecipeBook}/>
                 <Tab.Screen name="Grocery List" component={GroceryList}/>
+                <Tab.Screen name="Login" component={Login}/>
             </Tab.Navigator>
         </NavigationContainer>
     );
