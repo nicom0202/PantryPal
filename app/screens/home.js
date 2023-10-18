@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import * as React from 'react';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
-import styles from '../../STYLES/styles.js'
+import {gridStyle} from '../../STYLES/styles.js';
 
 const Home = () => {
     const handleBoxClick = () => {
@@ -11,7 +11,7 @@ const Home = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View>
+            <View style={[gridStyle.grid]}>
                 <ClickableBox content="Recipe 1" onClick={handleBoxClick} />
                 <ClickableBox content="Recipe 2" onClick={handleBoxClick} />
                 <ClickableBox content={require('./chicken.jpeg')} onClick={handleBoxClick} />
