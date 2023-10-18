@@ -1,7 +1,13 @@
-import { Redirect } from "expo-router"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
-const StartPage = () => {
-    return <Redirect href="/home" />;
-};
+const Tab = createBottomTabNavigator();
 
-export default StartPage;
+function Layout() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="GroceryList" component={GroceryList} />
+      <Tab.Screen name="RecipeBook" component={RecipeBook} />
+    </Tab.Navigator>
+  );
+}
