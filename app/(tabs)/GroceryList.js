@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { View, Text } from 'react-native';
 
-const grocery = () => {
+const GroceryList = () => {
     return (
         <View>
             <Text>Grocery</Text>
@@ -9,4 +9,4 @@ const grocery = () => {
     )
 }
 
-export default grocery;
+export default GroceryList;

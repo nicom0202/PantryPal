@@ -1,14 +1,12 @@
 // Pantry Pal
-// Loads default fonts and page layout
+import { Tabs } from "expo-router/tabs";
 
-import { Stack } from "expo-router";
-
-const Layout = () => {
+export default function AppLayout() {
     return (
-        <Stack>
-            <Stack.Screen name="(tabs)" options={ { headerShown: false }}/>
-        </Stack>
+        <Tabs>
+            <Tabs.Screen name="RecipeBook" options={{ href: "./(tabs)/RecipeBook.js" }}/>
+            <Tabs.Screen name="Home" options={{ href: "./(tabs)/Home.js" }}/>
+            <Tabs.Screen name="GroceryList" options={{ href: "./(tabs)/GroceryList.js" }}/>
+        </Tabs>
       );
 };
-
-export default Layout;

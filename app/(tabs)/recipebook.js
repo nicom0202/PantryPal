@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const recipe = () => {
+const RecipeBook = () => {
 	
 
   	return (
@@ -9,4 +9,4 @@ const recipe = () => {
     	</View>
   	);
 }
-export default recipe;
+export default RecipeBook;

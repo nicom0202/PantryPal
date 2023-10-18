@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import ClickableBox from '../../COMPONENTS/clickableBox';
 
-const home = () => {
+const Home = () => {
     const handleBoxClick = () => {
         // Handle the click action here
         alert('Box clicked!');
@@ -27,4 +27,4 @@ const home = () => {
     )
 }
 
-export default home;
+export default Home;
