@@ -3,13 +3,12 @@
 // Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, FONT, SIZES } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "../CONSTANTS/theme";
 
 const containerStyle = StyleSheet.create({
     container: {
         width: "100%",
         backgroundColor: COLORS.lightWhite,
-        fontFamily: FONT.regular,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
@@ -17,12 +16,10 @@ const containerStyle = StyleSheet.create({
 
 const textStyle = StyleSheet.create({
     title: {
-        fontFamily: FONT.fancy,
         fontSize: SIZES.xLarge,
         color: COLORS.smokeBlack,
     },
     body: {
-        fontFamily: FONT.regular,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
