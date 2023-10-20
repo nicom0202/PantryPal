@@ -14,9 +14,9 @@ const COLORS = {
 };
 
 const FONT = {
-    regular: "Lato-Regular",    // default text
-    medium: "Lato-Medium",
-    bold: "Lato-Bold",
+    regular: "LatoRegular",    // default text
+    medium: "LatoMedium",
+    bold: "LatoBold",
     fancy: "KFhimaji"           // headings
 };
 
