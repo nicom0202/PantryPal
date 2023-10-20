@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { app as firebaseApp } from "../../firebase";  // Import the initialized Firebase app
 
 const LoginScreen = () => {
@@ -14,7 +14,7 @@ const LoginScreen = () => {
     const auth = getAuth(firebaseApp);
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.replace('Home');  // Navigate to Home screen
+        navigation.navigate('Home');  // Navigate to Home screen
       }
     });
 
@@ -31,6 +31,7 @@ const LoginScreen = () => {
         // ...
       })
       .catch((error) => {
+        console.log("Wrong email or password")
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -39,8 +40,37 @@ const LoginScreen = () => {
 
 
   const handleLogin = () => {
-    
+    const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            navigation.navigate('Home');
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+              console.log('Wrong email or password');
+              // Display an error message to the user
+              alert('Wrong email or password. Please try again.');
+            } else {
+              console.error('Error logging in:', error);
+            }
+        });
   }
+
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      console.log("Signed Out")
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
+ 
 
   return (
     <KeyboardAvoidingView
@@ -70,12 +100,21 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleSignOut}
+          style={[styles.button, styles.buttonOutline]}
+        >
+          <Text style={styles.buttonOutlineText}>Logout</Text>
+        </TouchableOpacity>
+
       </View>
     </KeyboardAvoidingView>
   )
@@ -127,5 +166,9 @@ const styles = StyleSheet.create({
     color: '#0782F9',
     fontWeight: '700',
     fontSize: 16,
+  },
+  errorMessage: {
+    color: 'red',
+    marginTop: 10,
   },
 })
