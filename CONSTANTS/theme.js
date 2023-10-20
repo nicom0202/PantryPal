@@ -13,13 +13,6 @@ const COLORS = {
     lightWhite: "#FAFAFA",      // default text
 };
 
-const FONT = {
-    regular: "LatoRegular",    // default text
-    medium: "LatoMedium",
-    bold: "LatoBold",
-    fancy: "KFhimaji"           // headings
-};
-
 const SIZES = {
     xSmall: 12,
     small: 14,
@@ -29,4 +22,4 @@ const SIZES = {
     xxLarge: 30,
 };
 
-export { COLORS, FONT, SIZES };
+export { COLORS, SIZES };
