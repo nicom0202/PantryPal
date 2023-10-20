@@ -82,6 +82,28 @@ const buttonStyle = StyleSheet.create({
     open: {
         backgroundColor: '#F194FF',
     },
+    deleteRecipe: {
+        width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 20, // Adjust this value to control the vertical position
+        left: 113.5, // Center the button horizontally
+    },
+    saveRecipeTitle: {
+        width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 70, // Adjust this value to control the vertical position
+        left: 113.5, // Center the button horizontally
+    },
 });
 
 
