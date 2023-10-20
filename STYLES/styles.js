@@ -8,7 +8,7 @@ import { COLORS, SIZES } from "../CONSTANTS/theme";
 const containerStyle = StyleSheet.create({
     container: {
         width: "100%",
-        backgroundColor: COLORS.lightWhite,
+        backgroundColor: COLORS.beige,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
@@ -17,6 +17,7 @@ const containerStyle = StyleSheet.create({
 const textStyle = StyleSheet.create({
     title: {
         fontSize: SIZES.xLarge,
+        textAlign: "center",
         color: COLORS.smokeBlack,
     },
     body: {
@@ -92,6 +93,22 @@ const buttonStyle = StyleSheet.create({
     },
 });
 
+const checkBoxStyle = StyleSheet.create({
+    container: { 
+        justifyContent: "flex-start", 
+        alignItems: "center", 
+        flexDirection: "row", 
+        width: 150, 
+        marginTop: 5, 
+        marginHorizontal: 5, 
+    }, 
+    title: { 
+        fontSize: 16, 
+        color: "#000", 
+        marginLeft: 5, 
+        fontWeight: "600", 
+    }, 
+});
 
 export {
     containerStyle,
@@ -99,4 +116,5 @@ export {
     gridStyle,
     viewStyle,
     buttonStyle,
+    checkBoxStyle,
 };
