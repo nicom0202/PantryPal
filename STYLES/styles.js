@@ -3,13 +3,12 @@
 // Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, FONT, SIZES } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "../CONSTANTS/theme";
 
 const containerStyle = StyleSheet.create({
     container: {
         width: "100%",
-        backgroundColor: COLORS.lightWhite,
-        fontFamily: FONT.regular,
+        backgroundColor: COLORS.beige,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
@@ -17,12 +16,11 @@ const containerStyle = StyleSheet.create({
 
 const textStyle = StyleSheet.create({
     title: {
-        fontFamily: FONT.fancy,
         fontSize: SIZES.xLarge,
+        textAlign: "center",
         color: COLORS.smokeBlack,
     },
     body: {
-        fontFamily: FONT.regular,
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
@@ -106,6 +104,22 @@ const buttonStyle = StyleSheet.create({
     },
 });
 
+const checkBoxStyle = StyleSheet.create({
+    container: { 
+        justifyContent: "flex-start", 
+        alignItems: "center", 
+        flexDirection: "row", 
+        width: 150, 
+        marginTop: 5, 
+        marginHorizontal: 5, 
+    }, 
+    title: { 
+        fontSize: 16, 
+        color: "#000", 
+        marginLeft: 5, 
+        fontWeight: "600", 
+    }, 
+});
 
 export {
     containerStyle,
@@ -113,4 +127,5 @@ export {
     gridStyle,
     viewStyle,
     buttonStyle,
+    checkBoxStyle,
 };

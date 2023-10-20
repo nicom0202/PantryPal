@@ -4,20 +4,13 @@
 
 const COLORS = {
     taupe: "#54494B",
-    beige: "#E2D0BE", 
+    beige: "#E2D0BE",           // default background
     darkGreen: "#082D0F",
     brightGreen: "#68A357",     // logo color
     fadedGreen: "#6F8F72",
 
-    smokeBlack: "#1A1A1A",      // default background
+    smokeBlack: "#1A1A1A",      
     lightWhite: "#FAFAFA",      // default text
-};
-
-const FONT = {
-    regular: "Lato-Regular",    // default text
-    medium: "Lato-Medium",
-    bold: "Lato-Bold",
-    fancy: "KFhimaji"           // headings
 };
 
 const SIZES = {
@@ -29,4 +22,4 @@ const SIZES = {
     xxLarge: 30,
 };
 
-export { COLORS, FONT, SIZES };
+export { COLORS, SIZES };

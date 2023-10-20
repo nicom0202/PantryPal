@@ -1,19 +1,26 @@
+
 import { View, Text, Modal, Pressable, TextInput, StyleSheet, SafeAreaView } from 'react-native';
+
+import { Alert } from 'react-native';
+
 import React, { useState } from 'react';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle, viewStyle, buttonStyle, textStyle } from '../../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; // universally unique indentifiers for recipes
+
 
 const Home = () => {
+    /* States for modal, currently selected recipe, and list of recipes */
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [recipeName, setRecipeName] = useState(''); // Add state for the recipe name
-
     const [recipes, setRecipes] = useState([
         { id: uuidv4(), name: "Recipe 1" },
         { id: uuidv4(), name: "Recipe 2", image: require('./chicken.jpeg') },
     ]);
+
+    /* toggle the state of the modal when a recipe is clicked */
 
     const handleRecipeInteraction = (recipe) => {
         if (selectedRecipe && selectedRecipe.id === recipe.id) {
@@ -24,6 +31,7 @@ const Home = () => {
             // Open the modal for the selected recipe
             setModalVisible(true);
             setSelectedRecipe(recipe);
+
             setRecipeName(recipe.name); // Set the recipe name in the state
         }
     };
@@ -36,8 +44,33 @@ const Home = () => {
 
         // Open the modal for the newly added recipe
         handleRecipeInteraction(newRecipe);
+     };
+        }
     };
 
+    /* Alerts the user to confirm before deleting recipe */
+    const handleDeleteRecipe = () => {
+        Alert.alert(
+            "Confirm Delete",
+            "Are you sure you want to delete this recipe?",
+            [
+            {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+            },
+            {
+                text: "Delete",
+                onPress: () => {
+                // Delete the recipe here
+                removeRecipe();
+                },
+            },
+            ]
+        );
+    };      
+
+    /* remove the recipe from list of recipes and close modal */
     const removeRecipe = () => {
         if (selectedRecipe) {
             const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
@@ -60,6 +93,7 @@ const Home = () => {
             setModalVisible(false);
             setSelectedRecipe(null);
         }
+
     };
 
     return (
@@ -73,13 +107,13 @@ const Home = () => {
                         <View style={viewStyle.modalView}>
                             <Pressable
                                 style={buttonStyle.close}
+                                hitSlop={15}
                                 onPress={() => {
                                     setModalVisible(false);
                                     setSelectedRecipe(null);
                                 }}>
                                 <Text style={textStyle.body}>X</Text>
                             </Pressable>
-
                             <SafeAreaView>
                               <TextInput
                                 style={styles.input}
@@ -100,11 +134,13 @@ const Home = () => {
                             <Pressable
                                 style={buttonStyle.deleteRecipe}
                                 onPress={removeRecipe}>
+
                                 <Text style={textStyle.body}>Delete Recipe</Text>
                             </Pressable>
                         </View>
                     </View>
                 </Modal>
+
 
                 {recipes.map((recipe) => (
                     <ClickableBox
@@ -113,6 +149,7 @@ const Home = () => {
                         onClick={() => handleRecipeInteraction(recipe)}
                     />
                 ))}
+
 
                 <ClickableBox
                     content={"Add Recipe"}
