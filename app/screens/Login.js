@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { app as firebaseApp } from "../../firebase";  // Import the initialized Firebase app
-import AddUserToDatabase from "../../COMPONENTS/AddUserToDatabase";
 import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
 
 const LoginScreen = () => {
