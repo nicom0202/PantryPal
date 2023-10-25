@@ -10,6 +10,7 @@ const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [recipeName, setRecipeName] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([
         { id: uuidv4(), name: "Recipe 1" },
         { id: uuidv4(), name: "Recipe 2", image: require('./chicken.jpeg') },
@@ -29,6 +30,7 @@ const RecipeBook = () => {
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);
+        setIsEditing(true);
     };
 
     return (
@@ -40,10 +42,12 @@ const RecipeBook = () => {
                     selectedRecipe={selectedRecipe}
                     recipes={recipes}
                     recipeName={recipeName}
+                    isEditing={isEditing}
                     setRecipes={setRecipes}
                     setRecipeName={setRecipeName}
                     setModalVisible={setModalVisible}
                     setSelectedRecipe={setSelectedRecipe}
+                    setIsEditing={setIsEditing}
                 />
                 {/* Clickable boxes that displays each recipe */}
                 {recipes.map((recipe) => (
