@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // SCREENS
-import Home from "./screens/home";
 import RecipeBook from "./screens/RecipeBook";
 import GroceryList from "./screens/GroceryList";
 import Login from "./screens/Login";
@@ -36,8 +35,7 @@ export default function Container() {
 
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator initialRouteName={isUserSignedIn ? "Home" : "Login"}>
-        <Tab.Screen name="Home" component={Home} />
+      <Tab.Navigator initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}>
         <Tab.Screen name="Recipe Book" component={RecipeBook} />
         <Tab.Screen name="Grocery List" component={GroceryList} />
         <Tab.Screen name="Login" component={Login} />
