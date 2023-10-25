@@ -7,13 +7,13 @@ const RecipeModal = ({
     selectedRecipe, 
     recipes, 
     recipeName, 
+    isEditing,
     setRecipeName, 
     setRecipes, 
     setModalVisible,
     setSelectedRecipe,
+    setIsEditing,
 }) => {
-    const [isEditing, setIsEditing] = useState(false);
-
     const startEditing = () => {
         setIsEditing(true);
     };
@@ -61,6 +61,7 @@ const RecipeModal = ({
             setRecipes(updatedRecipes);
             setModalVisible(false);
             setSelectedRecipe(null);
+            setIsEditing(false);
         }
     };
 
