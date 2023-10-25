@@ -91,7 +91,18 @@ const buttonStyle = StyleSheet.create({
         bottom: 20, // Adjust this value to control the vertical position
         left: 113.5, // Center the button horizontally
     },
-    saveRecipeTitle: {
+    saveRecipe: {
+        width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 70, // Adjust this value to control the vertical position
+        left: 113.5, // Center the button horizontally
+    },
+    editRecipe: {
         width: 125,
         height: 40,
         borderRadius: 30,
