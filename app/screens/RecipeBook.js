@@ -9,18 +9,36 @@ import { gridStyle } from '../../STYLES/styles.js';
 const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
-    const [recipeName, setRecipeName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([
-        { id: uuidv4(), name: "Recipe 1" },
-        { id: uuidv4(), name: "Recipe 2", image: require('./chicken.jpeg') },
+        {
+            id: uuidv4(),
+            name: "Recipe 1",
+            image: null, // You can specify the image path here
+            ingredients: [
+                { id: uuidv4(), name: "Ingredient 1", quantity: "2 cups" },
+                { id: uuidv4(), name: "Ingredient 2", quantity: "1 tsp" },
+                // Add more ingredients as needed
+            ],
+            instructions: "Step 1: Do something...\nStep 2: Do something else...", // Multi-line instructions
+        },
+        {
+            id: uuidv4(),
+            name: "Chicken",
+            image: require('./chicken.jpeg'),
+            ingredients: [
+                { id: uuidv4(), name: "Chicken", quantity: "1 lb" },
+                { id: uuidv4(), name: "Salt", quantity: "1 tsp" },
+                // Add more ingredients as needed
+            ],
+            instructions: "Step 1: Season the chicken...\nStep 2: Cook it...",
+        },
     ]);
-
+    
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {
         setModalVisible(true);
         setSelectedRecipe(recipe);
-        setRecipeName(recipe.name);
     };
 
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
@@ -41,10 +59,8 @@ const RecipeBook = () => {
                     modalVisible={modalVisible}
                     selectedRecipe={selectedRecipe}
                     recipes={recipes}
-                    recipeName={recipeName}
                     isEditing={isEditing}
                     setRecipes={setRecipes}
-                    setRecipeName={setRecipeName}
                     setModalVisible={setModalVisible}
                     setSelectedRecipe={setSelectedRecipe}
                     setIsEditing={setIsEditing}

@@ -135,11 +135,17 @@ const checkBoxStyle = StyleSheet.create({
 });
 
 const textInputStyle = StyleSheet.create({
-    input: {
+    inputRecipeName: {
       height: 40,
       margin: 12,
       borderWidth: 1,
       padding: 10,
+    },
+    inputRecipeInstructions: {
+        height: 200,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
     },
 });
 
