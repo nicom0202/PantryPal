@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";  // Import the initialized Firebase app
 
 
@@ -18,7 +18,7 @@ export default async function GetRecipes(UserUID){
         const RecipeRef = doc(db, "Recipes", RecipeIDArray[i]);
         const RecipeDocSnap = await getDoc(RecipeRef);
         if (RecipeDocSnap.exists()) {
-            RecipeArray[i] = RecipedocSnap.id.toString();
+            RecipeArray[i] = RecipeDocSnap;
         } else {
             console.log("No such document!");
         }
