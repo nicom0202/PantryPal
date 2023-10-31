@@ -41,9 +41,11 @@ export default function Container() {
       <Tab.Navigator
         initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}
         screenOptions={{
-          headerStyle: {backgroundColor : COLORS.brightGreen},
-          headerTitleStyle: {fontSize: SIZES.xLarge},
+          headerStyle: {backgroundColor : COLORS.brightGreen,height: 50},
+          headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
+          headerStatusBarHeight: 0
           }}
+      
       >
 
         <Tab.Screen name="Recipe Book" component={RecipeBook}/>
