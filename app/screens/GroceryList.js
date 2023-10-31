@@ -3,7 +3,8 @@ import { View } from 'react-native';
 import CheckBox from "../../COMPONENTS/checkBox";
 import { containerStyle } from '../../STYLES/styles.js';
 import { doc, getDoc } from "firebase/firestore";
-import { db, getFirestore, collection, addDoc } from "../../firebase.js";
+import { db } from "../../firebase.js";
+import { createTraverser } from 'firewalk';
 
 export default function GroceryList() {
     // insert logic for generating list items here eventually
@@ -12,9 +13,13 @@ export default function GroceryList() {
     const [eggs, setEggs] = useState(false);
     const [bread, setBread] = useState(false);
 
+  
+
+
 
 // third parameter needs to be pulled from the list of documents in "Recipes" collection
-    const recipeDocRef = doc(db, 'Recipes', 'cheeseburgers', 'better', 'steak');
+    const recipeDocRef = doc(db, 'Recipes', 'cheeseburgers');
+    // const recipeDocRef = doc(db, 'Recipes', 'cheeseburgers');
     getDoc(recipeDocRef)
       .then((docSnapshot) => {
         if (docSnapshot.exists()) {
