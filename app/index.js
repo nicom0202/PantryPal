@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { containerStyle } from "../STYLES/styles";
-import { COLORS } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "../CONSTANTS/theme";
 
 // SCREENS
 import RecipeBook from "./screens/RecipeBook";
@@ -38,19 +38,17 @@ export default function Container() {
   return (
     <NavigationContainer independent={true}>
       
-      <Tab.Navigator initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}>
+      <Tab.Navigator
+        initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}
+        screenOptions={{
+          headerStyle: {backgroundColor : COLORS.brightGreen},
+          headerTitleStyle: {fontSize: SIZES.xLarge},
+          }}
+      >
 
-        <Tab.Screen name="Recipe Book"
-                    component={RecipeBook}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}} />
-
-        <Tab.Screen name="Grocery List"
-                    component={GroceryList}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}} />
-
-        <Tab.Screen name="Login"
-                    component={Login}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}}/>
+        <Tab.Screen name="Recipe Book" component={RecipeBook}/>
+        <Tab.Screen name="Grocery List" component={GroceryList}/>
+        <Tab.Screen name="Login" component={Login}/>
                     
       </Tab.Navigator>
     </NavigationContainer>
