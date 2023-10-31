@@ -38,6 +38,7 @@ const RecipeModal = ({
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
                 setRecipes(updatedRecipes);
             }
+            
             setIsEditing(false);
         }
     };
@@ -111,7 +112,7 @@ const RecipeModal = ({
         >
             <View style={viewStyle.centeredView}>
                 <View style={viewStyle.modalView}>
-                    {/* Close button (top right) */}
+                    {/* Close button (top right) -- TODO save editing? alert */}
                     <Pressable
                         style={buttonStyle.close}
                         hitSlop={15}
