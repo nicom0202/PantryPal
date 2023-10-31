@@ -1,9 +1,11 @@
-import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { app as firebaseApp } from "../../firebase";  // Import the initialized Firebase app
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -15,7 +17,7 @@ const LoginScreen = () => {
     const auth = getAuth(firebaseApp);
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.navigate('Home');  // Navigate to Home screen
+        navigation.navigate('RecipeBook');  // Navigate to Home screen
       }
     });
 
@@ -26,41 +28,41 @@ const LoginScreen = () => {
     const auth = getAuth(firebaseApp);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed up 
-        hello = AddUserToDB(auth.currentUser.email);
+        AddUserToDB(auth.currentUser.email);
         const user = userCredential.user;
-        navigation.navigate('Home');
-        // ...
-        
+        // Set user token in AsyncStorage
+        AsyncStorage.setItem('userToken', 'user_token_here')
+          .then(() => {
+            navigation.navigate('Recipe Book');
+          })
+          .catch((error) => {
+            console.log('Error setting user token:', error);
+          });
       })
       .catch((error) => {
-        console.log("Wrong email or password")
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        console.log('Error signing up:', error);
+        // Handle error as needed
       });
-  }
-
+  };
 
   const handleLogin = () => {
-    const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            navigation.navigate('Home');
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
-              console.log('Wrong email or password');
-              // Display an error message to the user
-              alert('Wrong email or password. Please try again.');
-            } else {
-              console.error('Error logging in:', error);
-            }
-        });
+    const auth = getAuth(firebaseApp);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // Set user token in AsyncStorage
+        AsyncStorage.setItem('userToken', 'user_token_here')
+          .then(() => {
+            navigation.navigate('Recipe Book');
+          })
+          .catch((error) => {
+            console.log('Error setting user token:', error);
+          });
+      })
+      .catch((error) => {
+        console.log('Error signing in:', error);
+        // Handle error as needed
+      });
   }
 
   const handleSignOut = () => {

@@ -37,6 +37,7 @@ export default function Container() {
 
   return (
     <NavigationContainer independent={true}>
+      
       <Tab.Navigator initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}>
 
         <Tab.Screen name="Recipe Book"
