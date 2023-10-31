@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, Pressable, TextInput, SafeAreaView, Alert } from 'react-native';
+import { 
+    View, 
+    Text, 
+    Modal, 
+    Pressable, 
+    TextInput, 
+    SafeAreaView, 
+    Alert,
+    Keyboard,
+    TouchableWithoutFeedback,
+} from 'react-native';
 import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
+
+const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
 const RecipeModal = ({
     modalVisible, 
     selectedRecipe, 
     recipes, 
-    recipeName, 
     isEditing,
-    setRecipeName, 
     setRecipes, 
     setModalVisible,
     setSelectedRecipe,
@@ -25,9 +35,10 @@ const RecipeModal = ({
             if (recipeIndex !== -1) {
                 /* Create a copy of the recipes array and update the name of the selected recipe */
                 const updatedRecipes = [...recipes];
-                updatedRecipes[recipeIndex].name = recipeName || "Recipe";
+                updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
                 setRecipes(updatedRecipes);
             }
+            
             setIsEditing(false);
         }
     };
@@ -65,6 +76,34 @@ const RecipeModal = ({
         }
     };
 
+    /* Update the name of the selected recipe */
+    const updateRecipeName = (newName) => {
+        if (selectedRecipe && newName.length <= MAX_RECIPE_NAME_LENGTH) {
+            selectedRecipe.name = newName; // Update the name directly in the selectedRecipe object
+
+            const updatedRecipes = recipes.map((recipe) =>
+                recipe.id === selectedRecipe.id ? { ...recipe, name: newName } : recipe
+            );
+            setRecipes(updatedRecipes);
+        }   
+    };
+
+    /* Update the instructions of the selected recipe */
+    const updateRecipeInstructions = (newInstructions) => {
+        if (selectedRecipe) {
+            selectedRecipe.instructions = newInstructions; // Update the name directly in the selectedRecipe object
+
+            const updatedRecipes = recipes.map((recipe) =>
+                recipe.id === selectedRecipe.id ? { ...recipe, instructions: newInstructions } : recipe
+            );
+            setRecipes(updatedRecipes);
+        }   
+    };
+
+    const handleDismissKeyboard = () => {
+        Keyboard.dismiss(); // This will dismiss the keyboard when you tap away from the TextInput
+    };
+
     return (
         <Modal
             animationType="slide"
@@ -73,6 +112,7 @@ const RecipeModal = ({
         >
             <View style={viewStyle.centeredView}>
                 <View style={viewStyle.modalView}>
+                    {/* Close button (top right) -- TODO save editing? alert */}
                     <Pressable
                         style={buttonStyle.close}
                         hitSlop={15}
@@ -85,19 +125,41 @@ const RecipeModal = ({
                         <Text style={textStyle.body}>X</Text>
                     </Pressable>
 
+                    {/* Recipe Name Text Box while editing, Text otherwise */}
                     {isEditing ? (
-                        <SafeAreaView>
-                            <TextInput
-                            style={[textInputStyle.input]} 
-                            value={recipeName}
-                            onChangeText={text => setRecipeName(text)}
-                            placeholder="Recipe Name"
-                            placeholderTextColor="grey"
-                            keyboardType="alphabetic"
-                            />
-                        </SafeAreaView>
+                        <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+                            <SafeAreaView>
+                                <TextInput
+                                style={[textInputStyle.inputRecipeName]} 
+                                value={selectedRecipe ? selectedRecipe.name : ''}
+                                onChangeText={text => updateRecipeName(text)}
+                                placeholder="Recipe Name"
+                                placeholderTextColor="grey"
+                                keyboardType="alphabetic"
+                                />
+                            </SafeAreaView>
+                        </TouchableWithoutFeedback>
                     ) : (
                         <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                    )}
+
+                    {/* Recipe Ingredients Text Box while editing, Text otherwise */}
+                    {isEditing ? (
+                        <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+                            <SafeAreaView>
+                                <TextInput
+                                style={[textInputStyle.inputRecipeInstructions]} 
+                                value={selectedRecipe ? selectedRecipe.instructions : ''}
+                                onChangeText={text => updateRecipeInstructions(text)}
+                                placeholder="Recipe Instructions"
+                                placeholderTextColor="grey"
+                                keyboardType="alphabetic"
+                                multiline={true}
+                                />
+                            </SafeAreaView>
+                        </TouchableWithoutFeedback>
+                    ) : (
+                        <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
                     )}
 
                     {isEditing ? (

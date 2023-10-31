@@ -9,7 +9,6 @@ import { gridStyle } from '../../STYLES/styles.js';
 const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
-    const [recipeName, setRecipeName] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([
         { id: uuidv4(), name: "Recipe 1" },
@@ -20,7 +19,6 @@ const RecipeBook = () => {
     const handleRecipeInteraction = (recipe) => {
         setModalVisible(true);
         setSelectedRecipe(recipe);
-        setRecipeName(recipe.name);
     };
 
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
@@ -41,10 +39,8 @@ const RecipeBook = () => {
                     modalVisible={modalVisible}
                     selectedRecipe={selectedRecipe}
                     recipes={recipes}
-                    recipeName={recipeName}
                     isEditing={isEditing}
                     setRecipes={setRecipes}
-                    setRecipeName={setRecipeName}
                     setModalVisible={setModalVisible}
                     setSelectedRecipe={setSelectedRecipe}
                     setIsEditing={setIsEditing}
