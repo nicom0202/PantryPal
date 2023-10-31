@@ -41,9 +41,13 @@ export default function Container() {
       <Tab.Navigator
         initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}
         screenOptions={{
-          headerStyle: {backgroundColor : COLORS.brightGreen,height: 50},
+          headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
-          headerStatusBarHeight: 0
+          headerStatusBarHeight: 0,
+          tabBarInactiveBackgroundColor: COLORS.brightGreen,
+          tabBarInactiveTintColor: COLORS.lightWhite,
+          tabBarActiveBackgroundColor: COLORS.fadedGreen,
+          tabBarActiveTintColor: COLORS.lightWhite,
           }}      
       >
 
@@ -52,7 +56,7 @@ export default function Container() {
         <Tab.Screen name="Login" component={Login}/>
                     
       </Tab.Navigator>
-      
+
     </NavigationContainer>
   );
 }
