@@ -11,10 +11,31 @@ const RecipeBook = () => {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([
-        { id: uuidv4(), name: "Recipe 1" },
-        { id: uuidv4(), name: "Recipe 2", image: require('./chicken.jpeg') },
+        {
+            id: uuidv4(),
+            name: "Recipe 1",
+            image: null, // You can specify the image path here
+            ingredients: [
+                {  name: "Ingredient 1", quantity: "2 cups" },
+                {  name: "Ingredient 2", quantity: "1 tsp" },
+                // Add more ingredients as needed
+            ],
+            instructions: "Step 1: Do something...\nStep 2: Do something else...", // Multi-line instructions
+            
+        },
+        {
+            id: uuidv4(),
+            name: "Chicken",
+            image: require('./chicken.jpeg'),
+            ingredients: [
+                {  name: "Chicken", quantity: "1 lb" },
+                {  name: "Salt", quantity: "1 tsp" },
+                // Add more ingredients as needed
+            ],
+            instructions: "Step 1: Season the chicken...\nStep 2: Cook it...",
+        },
     ]);
-
+    
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {
         setModalVisible(true);
@@ -24,7 +45,7 @@ const RecipeBook = () => {
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
     const handleAddRecipe = () => {
         const uniqueId = uuidv4();
-        const newRecipe = { id: uniqueId, name: "" };
+        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: ""};
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);

@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import addRecipeNameToUserCollection from './AddRecipeNameToUserCollection.js';
+import addRecipeToRecipeCollection from './AddRecipetoRecipeCollection.js';
+import deleteRecipeFromUserCollection from './DeleteRecipeFromUserCollection.js';
+
 import { 
     View, 
     Text, 
@@ -37,6 +41,8 @@ const RecipeModal = ({
                 const updatedRecipes = [...recipes];
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
                 setRecipes(updatedRecipes);
+                addRecipeNameToUserCollection(updatedRecipes[recipeIndex])
+                addRecipeToRecipeCollection(updatedRecipes[recipeIndex])
             }
             
             setIsEditing(false);
@@ -69,6 +75,7 @@ const RecipeModal = ({
     const removeRecipe = () => {
         if (selectedRecipe) {
             const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
+            deleteRecipeFromUserCollection(selectedRecipe)
             setRecipes(updatedRecipes);
             setModalVisible(false);
             setSelectedRecipe(null);
