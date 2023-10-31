@@ -44,8 +44,7 @@ export default function Container() {
           headerStyle: {backgroundColor : COLORS.brightGreen,height: 50},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
           headerStatusBarHeight: 0
-          }}
-      
+          }}      
       >
 
         <Tab.Screen name="Recipe Book" component={RecipeBook}/>
@@ -53,6 +52,7 @@ export default function Container() {
         <Tab.Screen name="Login" component={Login}/>
                     
       </Tab.Navigator>
+      
     </NavigationContainer>
   );
 }
