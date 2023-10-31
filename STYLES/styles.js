@@ -5,9 +5,6 @@ import { StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../CONSTANTS/theme";
 
 const containerStyle = StyleSheet.create({
-    header: {
-        backgroundColor: COLORS.brightGreen,
-    },
     container: {
         width: "100%",
         backgroundColor: COLORS.lightWhite,
