@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
@@ -82,6 +82,12 @@ const LoginScreen = () => {
       style={styles.container}
       behavior="padding"
     >
+      <View>
+        <Image source={require('../../ASSETS/pantrypal.png')}
+               style={{width: 325, height: 200}}
+        />
+      </View>
+
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
