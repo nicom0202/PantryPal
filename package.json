@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/masked-view": "^0.1.11",
@@ -26,6 +27,7 @@
     "expo-splash-screen": "~0.20.4",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.5.0",
+    "firewalk": "^1.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.6",

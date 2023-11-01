@@ -1,9 +1,9 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { containerStyle } from "../STYLES/styles";
-import { COLORS } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "../CONSTANTS/theme";
 
 // SCREENS
 import RecipeBook from "./screens/RecipeBook";
@@ -37,21 +37,49 @@ export default function Container() {
 
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}>
+      
+      <Tab.Navigator
+        initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}
+        screenOptions={{
+          headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
+          headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
+          headerStatusBarHeight: 0,
+          tabBarInactiveBackgroundColor: COLORS.brightGreen,
+          tabBarInactiveTintColor: COLORS.lightWhite,
+          tabBarActiveBackgroundColor: COLORS.fadedGreen,
+          tabBarActiveTintColor: COLORS.lightWhite,
+        }}
+      >
 
         <Tab.Screen name="Recipe Book"
                     component={RecipeBook}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}} />
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="book-sharp" color={color} size={size} />
+                      )
+                    }}
+        />
 
         <Tab.Screen name="Grocery List"
                     component={GroceryList}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}} />
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="list-sharp" color={color} size={size} />
+                      )
+                    }}
+        />
 
         <Tab.Screen name="Login"
                     component={Login}
-                    options={{headerStyle: {backgroundColor: COLORS.brightGreen}}}/>
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="person-sharp" color={color} size={size} />
+                      )
+                    }}
+        />
                     
       </Tab.Navigator>
+
     </NavigationContainer>
   );
 }

@@ -16,19 +16,20 @@ const RecipeBook = () => {
             name: "Recipe 1",
             image: null, // You can specify the image path here
             ingredients: [
-                { id: uuidv4(), name: "Ingredient 1", quantity: "2 cups" },
-                { id: uuidv4(), name: "Ingredient 2", quantity: "1 tsp" },
+                {  name: "Ingredient 1", quantity: "2 cups" },
+                {  name: "Ingredient 2", quantity: "1 tsp" },
                 // Add more ingredients as needed
             ],
             instructions: "Step 1: Do something...\nStep 2: Do something else...", // Multi-line instructions
+            
         },
         {
             id: uuidv4(),
             name: "Chicken",
             image: require('./chicken.jpeg'),
             ingredients: [
-                { id: uuidv4(), name: "Chicken", quantity: "1 lb" },
-                { id: uuidv4(), name: "Salt", quantity: "1 tsp" },
+                {  name: "Chicken", quantity: "1 lb" },
+                {  name: "Salt", quantity: "1 tsp" },
                 // Add more ingredients as needed
             ],
             instructions: "Step 1: Season the chicken...\nStep 2: Cook it...",
@@ -44,7 +45,7 @@ const RecipeBook = () => {
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
     const handleAddRecipe = () => {
         const uniqueId = uuidv4();
-        const newRecipe = { id: uniqueId, name: "" };
+        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: ""};
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);
