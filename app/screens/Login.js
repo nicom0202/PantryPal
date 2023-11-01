@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
+import { COLORS } from '../../CONSTANTS/theme'
 
 
 const LoginScreen = () => {
@@ -94,6 +95,7 @@ const LoginScreen = () => {
           value={email}
           onChangeText={text => setEmail(text)}
           style={styles.input}
+          placeholderTextColor={COLORS.fadedGreen}
         />
         <TextInput
           placeholder="Password"
@@ -101,6 +103,7 @@ const LoginScreen = () => {
           onChangeText={text => setPassword(text)}
           style={styles.input}
           secureTextEntry
+          placeholderTextColor={COLORS.fadedGreen}
         />
       </View>
 
@@ -140,10 +143,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    width: '80%'
+    width: '80%',
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.lightWhite,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
@@ -156,25 +159,25 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: '#0782F9',
+    backgroundColor: COLORS.brightGreen,
     width: '100%',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
   },
   buttonOutline: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.lightWhite,
     marginTop: 5,
-    borderColor: '#0782F9',
+    borderColor: COLORS.brightGreen,
     borderWidth: 2,
   },
   buttonText: {
-    color: 'white',
+    color: COLORS.lightWhite,
     fontWeight: '700',
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: '#0782F9',
+    color: COLORS.brightGreen,
     fontWeight: '700',
     fontSize: 16,
   },
