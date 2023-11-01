@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   input: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.lightWhite,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
@@ -164,13 +164,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonOutline: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.lightWhite,
     marginTop: 5,
     borderColor: COLORS.brightGreen,
     borderWidth: 2,
   },
   buttonText: {
-    color: 'white',
+    color: COLORS.lightWhite,
     fontWeight: '700',
     fontSize: 16,
   },
