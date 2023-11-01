@@ -6,9 +6,8 @@ const COLORS = {
     taupe: "#54494B",
     beige: "#E2D0BE",           
     darkGreen: "#082D0F",       
-    brightGreen: "#68A357",     // logo color / header background
-    fadedGreen: "#6F8F72",
-
+    brightGreen: "#68A357",     // logo, tab bar, headers
+    fadedGreen: "#6F8F72",      // active tab, accent
     smokeBlack: "#1A1A1A",      // default background
     lightWhite: "#FAFAFA",      // default text
 };
@@ -19,7 +18,6 @@ const SIZES = {
     medium : 16,    // default text
     large: 18,
     xLarge: 24,     // headings
-    xxLarge: 30,
 };
 
 export { COLORS, SIZES };

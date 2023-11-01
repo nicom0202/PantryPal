@@ -44,6 +44,7 @@ export default function Container() {
           headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
           headerStatusBarHeight: 0,
+          tabBarLabelStyle: {fontSize: SIZES.xSmall},
           tabBarInactiveBackgroundColor: COLORS.brightGreen,
           tabBarInactiveTintColor: COLORS.lightWhite,
           tabBarActiveBackgroundColor: COLORS.fadedGreen,
