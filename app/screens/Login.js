@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
+import { COLORS } from '../../CONSTANTS/theme'
 
 
 const LoginScreen = () => {
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: '#0782F9',
+    backgroundColor: COLORS.brightGreen,
     width: '100%',
     padding: 15,
     borderRadius: 10,
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: 'white',
     marginTop: 5,
-    borderColor: '#0782F9',
+    borderColor: COLORS.brightGreen,
     borderWidth: 2,
   },
   buttonText: {
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: '#0782F9',
+    color: COLORS.brightGreen,
     fontWeight: '700',
     fontSize: 16,
   },
