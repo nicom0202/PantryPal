@@ -38,6 +38,8 @@ export default addRecipe
 //         // ... other ingredients
 //     ],
 //     instructions: "1. Boil spaghetti until al dente. \n2. In a separate pan, cook pancetta until crispy. \n3. In a bowl, mix eggs, cheese, and black pepper. \n4. Drain spaghetti and mix with the egg mixture and pancetta. \n5. Serve immediately with extra cheese and black pepper on top."
+//     cook_time: 15
+//     image_path_to_firebase_storage: ""
 //     // You can add more fields if needed
 // };
 
