@@ -2,14 +2,14 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../firebase";
 
-const addRecipe = async (userId, recipeData) => {
+const addRecipe = async (recipeData) => {
     try {
         if (!recipeData || !recipeData.name || !recipeData.ingredients || !recipeData.instructions) {
             console.error("Recipe data is incomplete or undefined.");
             return;
         }
 
-        const userDocRef = doc(db, "Users", userId);
+        const userDocRef = doc(db, "Users", auth.currentUser.email);
         const recipesCollectionRef = collection(userDocRef, "Recipes");
 
         // Add a new document to the "Recipes" subcollection within the user's document
@@ -29,7 +29,6 @@ const addRecipe = async (userId, recipeData) => {
 export default addRecipe
 
 // Example usage:
-// const userId = "user123"; // Replace with the actual user ID
 // const recipeData = {
 //     name: "Spaghetti Carbonara",
 //     ingredients: [
@@ -43,4 +42,4 @@ export default addRecipe
 //     // You can add more fields if needed
 // };
 
-// addRecipeToUser(userId, recipeData);
+// addRecipeToUser(recipeData);
