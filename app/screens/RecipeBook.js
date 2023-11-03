@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
@@ -10,31 +10,8 @@ const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [recipes, setRecipes] = useState([
-        {
-            id: uuidv4(),
-            name: "Recipe 1",
-            image: null, // You can specify the image path here
-            ingredients: [
-                {  name: "Ingredient 1", quantity: "2 cups" },
-                {  name: "Ingredient 2", quantity: "1 tsp" },
-                // Add more ingredients as needed
-            ],
-            instructions: "Step 1: Do something...\nStep 2: Do something else...", // Multi-line instructions
-            
-        },
-        {
-            id: uuidv4(),
-            name: "Chicken",
-            image: require('./chicken.jpeg'),
-            ingredients: [
-                {  name: "Chicken", quantity: "1 lb" },
-                {  name: "Salt", quantity: "1 tsp" },
-                // Add more ingredients as needed
-            ],
-            instructions: "Step 1: Season the chicken...\nStep 2: Cook it...",
-        },
-    ]);
+    const [recipes, setRecipes] = useState([]);
+
     
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {

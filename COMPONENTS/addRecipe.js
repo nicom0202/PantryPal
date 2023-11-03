@@ -1,10 +1,10 @@
-import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, addDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
 const addRecipe = async (recipeData) => {
     try {
-        if (!recipeData || !recipeData.name || !recipeData.ingredients || !recipeData.instructions) {
-            console.error("Recipe data is incomplete or undefined.");
+        if (!recipeData || !recipeData.id) {
+            console.error("No recipe id");
             return;
         }
 
@@ -14,33 +14,32 @@ const addRecipe = async (recipeData) => {
         if (userDocSnapshot.exists()) {
             const userRecipesRef = collection(userDocRef, "Recipes");
 
-            if (recipeData.databaseDocID) {
-                const userRecipesDocRef = doc(userDocRef, "Recipes", recipeData.databaseDocID);
+            if (recipeData.id) {
+                const userRecipesDocRef = doc(userRecipesRef, recipeData.id);
 
                 // Update the existing document in the Recipes subcollection
                 await setDoc(userRecipesDocRef, {
-                    title: recipeData.name,
+                    name: recipeData.name,
                     ingredients: recipeData.ingredients,
                     instructions: recipeData.instructions,
-                    databaseDocID: recipeData.databaseDocID,
+                    id: recipeData.id,
                     // Add more fields if needed
                 });
 
                 console.log("Recipe updated in the user's 'Recipes' subcollection.");
             } else {
-                // Add a new recipe to the Recipes subcollection
+                // Add a new recipe to the Recipes subcollection with recipeData.id as document name
                 const newRecipeData = {
-                    title: recipeData.name,
+                    name: recipeData.name,
                     ingredients: recipeData.ingredients,
                     instructions: recipeData.instructions,
-                    databaseDocID: recipeData.databaseDocID,
+                    id: recipeData.id,
                     // Add more fields if needed
                 };
 
-                const newRecipeDocRef = await addDoc(userRecipesRef, newRecipeData);
+                const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), newRecipeData);
 
-                console.log("New recipe added to the user's 'Recipes' subcollection.");
-                recipeData.databaseDocID = newRecipeDocRef.id; // Assign the document ID
+                console.log("New recipe added to the user's 'Recipes' subcollection with custom document name.");
             }
         } else {
             // If the user document doesn't exist, create a new user document with the recipe in Recipes subcollection
@@ -52,17 +51,16 @@ const addRecipe = async (recipeData) => {
 
             const userRecipesRef = collection(userDocRef, "Recipes");
             const newRecipeData = {
-                title: recipeData.name,
+                name: recipeData.name,
                 ingredients: recipeData.ingredients,
                 instructions: recipeData.instructions,
-                databaseDocID: recipeData.databaseDocID,
+                id: recipeData.id,
                 // Add more fields if needed
             };
 
-            const newRecipeDocRef = await addDoc(userRecipesRef, newRecipeData);
+            const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), newRecipeData);
 
-            console.log("New user document created with the recipe in 'Recipes' subcollection.");
-            recipeData.databaseDocID = newRecipeDocRef.id; // Assign the document ID
+            console.log("New user document created with the recipe in 'Recipes' subcollection with custom document name.");
         }
     } catch (error) {
         console.error("Error adding or updating recipe in the user's 'Recipes' subcollection: ", error);
@@ -70,53 +68,3 @@ const addRecipe = async (recipeData) => {
 };
 
 export default addRecipe;
-
-
-
-
-//NEED TO UPDATE RecipeBook.js:
-
-/* Add a recipe with unique ID, open the modal for the newly added recipe */
-// const handleAddRecipe = () => {
-//     const uniqueId = uuidv4();
-//     const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: "", databaseDocID: uniqueId,};
-//     const updatedRecipes = [...recipes, newRecipe];
-//     setRecipes(updatedRecipes);
-//     handleRecipeInteraction(newRecipe);
-//     setIsEditing(true);
-// };
-
-
-
-//NEED TO UPDATE recipeModal.js:
-
-// const saveEditing = () => {
-//     if (selectedRecipe) {
-//         /* Find the index of the selected recipe */
-//         const recipeIndex = recipes.findIndex(recipe => recipe.id === selectedRecipe.id);
-//         if (recipeIndex !== -1) {
-//             /* Create a copy of the recipes array and update the name of the selected recipe */
-//             const updatedRecipes = [...recipes];
-//             updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
-//             //updatedRecipes[recipeIndex].databaseDocID = selectedRecipe.id;
-//             setRecipes(updatedRecipes);
-//             addRecipe(updatedRecipes[recipeIndex]);
-//             //addRecipeNameToUserCollection(updatedRecipes[recipeIndex])
-//             //addRecipeToRecipeCollection(updatedRecipes[recipeIndex])
-//         }
-        
-//         setIsEditing(false);
-//     }
-// };
-
-//     const removeRecipe = () => {
-//         if (selectedRecipe) {
-//             const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
-//             deleteRecipe(selectedRecipe)
-//             //deleteRecipeFromUserCollection(selectedRecipe)
-//             setRecipes(updatedRecipes);
-//             setModalVisible(false);
-//             setSelectedRecipe(null);
-//             setIsEditing(false);
-//         }
-//     };
