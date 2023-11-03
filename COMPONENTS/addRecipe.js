@@ -1,6 +1,5 @@
-import { collection, doc, setDoc } from "firebase/firestore"; 
-import { db } from "../firebase";
-import { auth } from "../firebase";
+import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db, auth } from "../firebase";
 
 const addRecipe = async (recipeData) => {
     try {
@@ -10,36 +9,114 @@ const addRecipe = async (recipeData) => {
         }
 
         const userDocRef = doc(db, "Users", auth.currentUser.email);
-        const recipesCollectionRef = collection(userDocRef, "Recipes");
+        const userDocSnapshot = await getDoc(userDocRef);
 
-        // Add a new document to the "Recipes" subcollection within the user's document
-        await setDoc(doc(recipesCollectionRef, recipeData.name), {
-            title: recipeData.name, // 'title' field filled with 'name' from recipeData
-            ingredients: recipeData.ingredients,
-            instructions: recipeData.instructions,
-            // You can add more fields if needed
-        });
+        if (userDocSnapshot.exists()) {
+            const userRecipesRef = collection(userDocRef, "Recipes");
 
-        console.log("Recipe added to the user's 'Recipes' subcollection.");
+            if (recipeData.databaseDocID) {
+                const userRecipesDocRef = doc(userDocRef, "Recipes", recipeData.databaseDocID);
+
+                // Update the existing document in the Recipes subcollection
+                await setDoc(userRecipesDocRef, {
+                    title: recipeData.name,
+                    ingredients: recipeData.ingredients,
+                    instructions: recipeData.instructions,
+                    databaseDocID: recipeData.databaseDocID,
+                    // Add more fields if needed
+                });
+
+                console.log("Recipe updated in the user's 'Recipes' subcollection.");
+            } else {
+                // Add a new recipe to the Recipes subcollection
+                const newRecipeData = {
+                    title: recipeData.name,
+                    ingredients: recipeData.ingredients,
+                    instructions: recipeData.instructions,
+                    databaseDocID: recipeData.databaseDocID,
+                    // Add more fields if needed
+                };
+
+                const newRecipeDocRef = await addDoc(userRecipesRef, newRecipeData);
+
+                console.log("New recipe added to the user's 'Recipes' subcollection.");
+                recipeData.databaseDocID = newRecipeDocRef.id; // Assign the document ID
+            }
+        } else {
+            // If the user document doesn't exist, create a new user document with the recipe in Recipes subcollection
+            const userDocData = {
+                // Add user details if needed
+            };
+
+            await setDoc(userDocRef, userDocData);
+
+            const userRecipesRef = collection(userDocRef, "Recipes");
+            const newRecipeData = {
+                title: recipeData.name,
+                ingredients: recipeData.ingredients,
+                instructions: recipeData.instructions,
+                databaseDocID: recipeData.databaseDocID,
+                // Add more fields if needed
+            };
+
+            const newRecipeDocRef = await addDoc(userRecipesRef, newRecipeData);
+
+            console.log("New user document created with the recipe in 'Recipes' subcollection.");
+            recipeData.databaseDocID = newRecipeDocRef.id; // Assign the document ID
+        }
     } catch (error) {
-        console.error("Error adding recipe to the user's 'Recipes' subcollection: ", error);
+        console.error("Error adding or updating recipe in the user's 'Recipes' subcollection: ", error);
     }
 };
 
-export default addRecipe
+export default addRecipe;
 
-// Example usage:
-// const recipeData = {
-//     name: "Spaghetti Carbonara",
-//     ingredients: [
-//         "200g spaghetti",
-//         "100g pancetta or guanciale",
-//         // ... other ingredients
-//     ],
-//     instructions: "1. Boil spaghetti until al dente. \n2. In a separate pan, cook pancetta until crispy. \n3. In a bowl, mix eggs, cheese, and black pepper. \n4. Drain spaghetti and mix with the egg mixture and pancetta. \n5. Serve immediately with extra cheese and black pepper on top."
-//     cook_time: 15
-//     image_path_to_firebase_storage: ""
-//     // You can add more fields if needed
+
+
+
+//NEED TO UPDATE RecipeBook.js:
+
+/* Add a recipe with unique ID, open the modal for the newly added recipe */
+// const handleAddRecipe = () => {
+//     const uniqueId = uuidv4();
+//     const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: "", databaseDocID: uniqueId,};
+//     const updatedRecipes = [...recipes, newRecipe];
+//     setRecipes(updatedRecipes);
+//     handleRecipeInteraction(newRecipe);
+//     setIsEditing(true);
 // };
 
-// addRecipeToUser(recipeData);
+
+
+//NEED TO UPDATE recipeModal.js:
+
+// const saveEditing = () => {
+//     if (selectedRecipe) {
+//         /* Find the index of the selected recipe */
+//         const recipeIndex = recipes.findIndex(recipe => recipe.id === selectedRecipe.id);
+//         if (recipeIndex !== -1) {
+//             /* Create a copy of the recipes array and update the name of the selected recipe */
+//             const updatedRecipes = [...recipes];
+//             updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
+//             //updatedRecipes[recipeIndex].databaseDocID = selectedRecipe.id;
+//             setRecipes(updatedRecipes);
+//             addRecipe(updatedRecipes[recipeIndex]);
+//             //addRecipeNameToUserCollection(updatedRecipes[recipeIndex])
+//             //addRecipeToRecipeCollection(updatedRecipes[recipeIndex])
+//         }
+        
+//         setIsEditing(false);
+//     }
+// };
+
+//     const removeRecipe = () => {
+//         if (selectedRecipe) {
+//             const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
+//             deleteRecipe(selectedRecipe)
+//             //deleteRecipeFromUserCollection(selectedRecipe)
+//             setRecipes(updatedRecipes);
+//             setModalVisible(false);
+//             setSelectedRecipe(null);
+//             setIsEditing(false);
+//         }
+//     };
