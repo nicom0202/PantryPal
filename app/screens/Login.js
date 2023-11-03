@@ -34,7 +34,7 @@ const LoginScreen = () => {
         // Set user token in AsyncStorage
         AsyncStorage.setItem('userToken', 'user_token_here')
           .then(() => {
-            navigation.navigate('Recipe Book');
+            navigation.navigate('RecipeBook');
           })
           .catch((error) => {
             console.log('Error setting user token:', error);
@@ -54,7 +54,7 @@ const LoginScreen = () => {
         // Set user token in AsyncStorage
         AsyncStorage.setItem('userToken', 'user_token_here')
           .then(() => {
-            navigation.navigate('Recipe Book');
+            navigation.navigate('RecipeBook');
           })
           .catch((error) => {
             console.log('Error setting user token:', error);

@@ -39,7 +39,7 @@ export default function Container() {
     <NavigationContainer independent={true}>
       
       <Tab.Navigator
-        initialRouteName={isUserSignedIn ? "Recipe Book" : "Login"}
+        initialRouteName={isUserSignedIn ? "RecipeBook" : "Login"}
         screenOptions={{
           headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
@@ -52,7 +52,7 @@ export default function Container() {
         }}
       >
 
-        <Tab.Screen name="Recipe Book"
+        <Tab.Screen name="RecipeBook"
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
