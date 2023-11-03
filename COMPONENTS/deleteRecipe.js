@@ -1,10 +1,15 @@
-import { doc, deleteDoc} from "firebase/firestore"; 
+import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../firebase";
 
 const deleteRecipe = async (recipeData) => {
     try {
-        const userDocRef = doc(db, "Users", auth.currentUser.email, "Recipes", recipeData.name); // Reference to the currentUser document
+        if (!recipeData || !recipeData.databaseDocID) {
+            console.error("Recipe data or document ID is missing.");
+            return;
+        }
+
+        const userDocRef = doc(db, "Users", auth.currentUser.email, "Recipes",  recipeData.databaseDocID);
 
         // Delete the specific recipe document
         await deleteDoc(userDocRef);
