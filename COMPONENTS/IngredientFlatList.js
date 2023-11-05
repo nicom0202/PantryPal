@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TextInput } from 'react-native';
+import { View, Text, FlatList, TextInput, Button, StyleSheet, Pressable } from 'react-native';
 
 const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
   const [localNames, setLocalNames] = useState(selectedRecipe.ingredients.map(ingredient => ingredient.name));
@@ -31,29 +31,67 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
     setLocalQuantities(updatedQuantities);
   };
 
-  const renderIngredientItem = ({ item, index }) => {
-    return (
-      <View key={index}>
-        <TextInput
-          value={localNames[index]}
-          onChangeText={(newName) => setLocalNames([...localNames.slice(0, index), newName, ...localNames.slice(index + 1)])}
-          onBlur={() => handleIngredientChange(index, localNames[index], localQuantities[index])}
-          placeholder="Ingredient Name"
-          placeholderTextColor="grey"
-          keyboardType="default"
-        />
-        <TextInput
-          value={localQuantities[index]}
-          onChangeText={(newQuantity) => setLocalQuantities([...localQuantities.slice(0, index), newQuantity, ...localQuantities.slice(index + 1)])}
-          onBlur={() => handleIngredientChange(index, localNames[index], localQuantities[index])}
-          placeholder="Quantity"
-          placeholderTextColor="grey"
-          keyboardType="numeric"
-        />
-        {/* Add any additional fields for units or other ingredient properties */}
-      </View>
+  const addIngredient = () => {
+    // Add a new ingredient with empty name and quantity
+    const newIngredient = { name: '', quantity: '' };
+
+    // Update the selected recipe's ingredients
+    selectedRecipe.ingredients = [...selectedRecipe.ingredients, newIngredient];
+
+    // Create a copy of the recipes array and update the selected recipe's ingredients
+    const updatedRecipes = recipes.map((recipe) =>
+      recipe.id === selectedRecipe.id ? { ...recipe, ingredients: selectedRecipe.ingredients } : recipe
     );
+
+    // Update the recipes list using setRecipes
+    setRecipes(updatedRecipes);
+
+    // Update the local state
+    setLocalNames([...localNames, '']);
+    setLocalQuantities([...localQuantities, '']);
   };
+
+  const renderIngredientItem = ({ item, index }) => {
+    const handleDeleteIngredient = () => {
+        // Create a copy of the selected recipe's ingredients and remove the ingredient at the specified index
+        const updatedIngredients = [...selectedRecipe.ingredients];
+        updatedIngredients.splice(index, 1);
+
+
+        // Update the selected recipe's ingredients
+        selectedRecipe.ingredients = updatedIngredients;
+
+        // Update the recipes list using setRecipes
+        const updatedRecipes = recipes.map((recipe) =>
+            recipe.id === selectedRecipe.id ? selectedRecipe : recipe
+        );
+        setRecipes(updatedRecipes);
+    };
+
+    return (
+        <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TextInput
+                style={styles.ingredientItem}
+                value={item.name}
+                onChangeText={(newName) => handleIngredientChange(index, newName, item.quantity)}
+                placeholder="Ingredient Name"
+                placeholderTextColor="grey"
+            />
+            <TextInput
+                style={styles.ingredientItem}
+                value={item.quantity}
+                onChangeText={(newQuantity) => handleIngredientChange(index, item.name, newQuantity)}
+                placeholder="Quantity"
+                placeholderTextColor="grey"
+                keyboardType="numeric"
+            />
+            <Pressable onPress={handleDeleteIngredient}>
+                <Text>Delete</Text>
+            </Pressable>
+        </View>
+    );
+};
+
 
   return (
     <View>
@@ -62,9 +100,28 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderIngredientItem}
       />
-      {/* Add other components or UI elements here */}
+      <Button title="Add Ingredient" onPress={addIngredient} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  ingredientContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  ingredientItem: {
+    flex: 1,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    height: 40,
+  },
+});
 
 export default IngredientFlatList;
