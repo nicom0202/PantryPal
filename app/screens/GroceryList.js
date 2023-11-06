@@ -46,32 +46,3 @@ export default function GroceryList() {
     </View>
   );
 }
-
-// export default function GroceryList() {
-//     UserUID = auth.currentUser.email;
-//     ingredientsForUsers = GetIngredients(UserUID);
-
-
-//     const [selectedIngredients, setSelectedIngredients] = useState({});
-
-//     const handleCheckboxChange = (ingredient) => {
-//       setSelectedIngredients({
-//         ...selectedIngredients,
-//         [ingredient]: !selectedIngredients[ingredient]
-//       });
-//     };
-    
-
-//   return (
-//     <View style={containerStyle.container}>
-//       {ingredientsForUsers.map((ingredient, index) => (
-//         <CheckBox
-//           key={index}
-//           onPress={() => handleCheckboxChange(ingredient)}
-//           title={ingredient}
-//           isChecked={selectedIngredients[ingredient] || false}
-//         />
-//       ))}
-//     </View>
-//   );
-// };
