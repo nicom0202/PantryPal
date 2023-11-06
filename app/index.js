@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLORS, SIZES } from "../CONSTANTS/theme";
+import { createStackNavigator } from "@react-navigation/stack";
+import { auth } from '../firebase.js'
 
 // SCREENS
 import RecipeBook from "./screens/RecipeBook";
@@ -11,35 +13,13 @@ import GroceryList from "./screens/GroceryList";
 import Login from "./screens/Login";
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator(); // Adding Stack Navigator
 
-export default function Container() {
-  const [isUserSignedIn, setIsUserSignedIn] = React.useState(false);
 
-  // Check the user's sign-in status when the component mounts
-  React.useEffect(() => {
-    // Implement your authentication check here, for example, using AsyncStorage:
-    async function checkSignInStatus() {
-      try {
-        const token = await AsyncStorage.getItem('userToken');
-        if (token) {
-          setIsUserSignedIn(true);
-        } else {
-          setIsUserSignedIn(false);
-        }
-      } catch (error) {
-        console.error('Error checking sign-in status:', error);
-        setIsUserSignedIn(false);
-      }
-    }
-
-    checkSignInStatus();
-  }, []);
-
+function TabNavigator() {
   return (
-    <NavigationContainer independent={true}>
-      
-      <Tab.Navigator
-        initialRouteName={isUserSignedIn ? "RecipeBook" : "Login"}
+    <Tab.Navigator
+        //initialRouteName={isUserSignedIn ? "RecipeBook" : "Login"}
         screenOptions={{
           headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
@@ -52,7 +32,7 @@ export default function Container() {
         }}
       >
 
-        <Tab.Screen name="RecipeBook"
+        <Tab.Screen name="Home"
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
@@ -68,19 +48,29 @@ export default function Container() {
                         <Ionicons name="list-sharp" color={color} size={size} />
                       )
                     }}
-        />
-
-        <Tab.Screen name="Login"
-                    component={Login}
-                    options={{
-                      tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person-sharp" color={color} size={size} />
-                      )
-                    }}
-        />
-                    
+        />          
       </Tab.Navigator>
+  );
+}
 
+export default function Container() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }} // Hide the header for the Login screen
+        />
+        <Stack.Screen
+          name="RecipeBook"
+          options={{ headerShown: false }} // Hide the header for the RecipeBookHome screen
+        >
+          {() => (
+            <TabNavigator />
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

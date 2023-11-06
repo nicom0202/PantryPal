@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle } from '../../STYLES/styles.js';
+import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
+
 
 const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -56,6 +58,10 @@ const RecipeBook = () => {
                     content={"Add Recipe"}
                     onClick={handleAddRecipe}
                 />
+
+                {/* IMPORT LOGOUT BUTTON HERE */}
+                <LogoutButton />
+                
             </View>
         </ScrollView>
     );

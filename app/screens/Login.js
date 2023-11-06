@@ -6,14 +6,15 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
 import { COLORS } from '../../CONSTANTS/theme'
-
+import { LoginStyles } from '../../STYLES/styles';
+import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigation = useNavigation()
-
+  
   useEffect(() => {
     const auth = getAuth(firebaseApp);
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -24,6 +25,7 @@ const LoginScreen = () => {
 
     return () => unsubscribe(); // Cleanup the subscription on component unmount
   }, [navigation]);
+  
 
   const handleSignUp = () => {
     const auth = getAuth(firebaseApp);
@@ -80,7 +82,7 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={LoginStyles.container}
       behavior="padding"
     >
       <View>
@@ -89,45 +91,40 @@ const LoginScreen = () => {
         />
       </View>
 
-      <View style={styles.inputContainer}>
+      <View style={LoginStyles.inputContainer}>
         <TextInput
           placeholder="Email"
           value={email}
           onChangeText={text => setEmail(text)}
-          style={styles.input}
+          style={LoginStyles.input}
           placeholderTextColor={COLORS.fadedGreen}
         />
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={text => setPassword(text)}
-          style={styles.input}
+          style={LoginStyles.input}
           secureTextEntry
           placeholderTextColor={COLORS.fadedGreen}
         />
       </View>
 
-      <View style={styles.buttonContainer}>
+      <View style={LoginStyles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
-          style={styles.button}
+          style={LoginStyles.button}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={LoginStyles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
+          style={[LoginStyles.button, LoginStyles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={LoginStyles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={handleSignOut}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Logout</Text>
-        </TouchableOpacity>
+        <LogoutButton />
 
       </View>
     </KeyboardAvoidingView>
@@ -135,54 +132,3 @@ const LoginScreen = () => {
 }
 
 export default LoginScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputContainer: {
-    width: '80%',
-  },
-  input: {
-    backgroundColor: COLORS.lightWhite,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
-  buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  button: {
-    backgroundColor: COLORS.brightGreen,
-    width: '100%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  buttonOutline: {
-    backgroundColor: COLORS.lightWhite,
-    marginTop: 5,
-    borderColor: COLORS.brightGreen,
-    borderWidth: 2,
-  },
-  buttonText: {
-    color: COLORS.lightWhite,
-    fontWeight: '700',
-    fontSize: 16,
-  },
-  buttonOutlineText: {
-    color: COLORS.brightGreen,
-    fontWeight: '700',
-    fontSize: 16,
-  },
-  errorMessage: {
-    color: 'red',
-    marginTop: 10,
-  },
-})
