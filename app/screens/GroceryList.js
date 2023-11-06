@@ -1,52 +1,77 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View } from 'react-native';
 import CheckBox from "../../COMPONENTS/checkBox";
 import { containerStyle } from '../../STYLES/styles.js';
 import GetIngredients from "../../COMPONENTS/GetUserIngredients";
 import { auth } from "../../firebase";
 
+
+
 export default function GroceryList() {
-    const [milk, setMilk] = useState(false);
-    const [eggs, setEggs] = useState(false);
-    const [bread, setBread] = useState(false);
+  const [ingredientsForUsers, setIngredientsForUsers] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState({});
 
-    UserUID = auth.currentUser.email;
-    ingredientsForUsers = GetIngredients(UserUID);
-    // displayIngredients(ingredientsForUsers);
-
-
-    const CheckboxList = ({ ingredientsForUsers }) => {
-      const [checkedItems, setCheckedItems] = useState({});
-
-    const handleCheckboxChange = (title) => {
-      setCheckedItems({
-        ...checkedItems,
-        [title]: !checkedItems[title]
-      });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const UserUID = auth.currentUser.email;
+        const ingredients = await GetIngredients(UserUID);
+        console.log(ingredients);
+        setIngredientsForUsers(ingredients);
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+      }
     };
+
+    fetchData();
+  }, []); // Empty dependency array ensures the effect runs once after the initial render
+
+  const handleCheckboxChange = (ingredient) => {
+    setSelectedIngredients({
+      ...selectedIngredients,
+      [ingredient]: !selectedIngredients[ingredient],
+    });
   };
-    
 
   return (
-      <View style={containerStyle.container}>
-          
-          {/* again, eventually change to function for dynamic updating */}
-
-          <CheckBox
-              onPress={ () => setMilk(!milk) }
-              title="Milk"
-              isChecked={milk}
-          />
-          <CheckBox
-              onPress={ () => setEggs(!eggs) }
-              title="Eggs"
-              isChecked={eggs}
-          />
-          <CheckBox
-              onPress={ () => setBread(!bread) }
-              title="Bread"
-              isChecked={bread}
-          />
-      </View>
+    <View style={containerStyle.container}>
+      {ingredientsForUsers.map((ingredient, index) => (
+        <CheckBox
+          key={index}
+          onPress={() => handleCheckboxChange(ingredient)}
+          title={ingredient}
+          isChecked={selectedIngredients[ingredient] || false}
+        />
+      ))}
+    </View>
   );
 }
+
+// export default function GroceryList() {
+//     UserUID = auth.currentUser.email;
+//     ingredientsForUsers = GetIngredients(UserUID);
+
+
+//     const [selectedIngredients, setSelectedIngredients] = useState({});
+
+//     const handleCheckboxChange = (ingredient) => {
+//       setSelectedIngredients({
+//         ...selectedIngredients,
+//         [ingredient]: !selectedIngredients[ingredient]
+//       });
+//     };
+    
+
+//   return (
+//     <View style={containerStyle.container}>
+//       {ingredientsForUsers.map((ingredient, index) => (
+//         <CheckBox
+//           key={index}
+//           onPress={() => handleCheckboxChange(ingredient)}
+//           title={ingredient}
+//           isChecked={selectedIngredients[ingredient] || false}
+//         />
+//       ))}
+//     </View>
+//   );
+// };
