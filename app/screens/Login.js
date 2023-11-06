@@ -68,17 +68,6 @@ const LoginScreen = () => {
       });
   }
 
-  const handleSignOut = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      console.log("Signed Out")
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
-
- 
 
   return (
     <KeyboardAvoidingView
