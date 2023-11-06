@@ -6,13 +6,18 @@ import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle } from '../../STYLES/styles.js';
 import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
-
+import pullSavedRecipes from '../../COMPONENTS/pullSavedRecipes.js';
 
 const RecipeBook = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([]);
+
+    // Call pullSavedRecipes after the component mounts
+    useEffect(() => {
+        pullSavedRecipes(setRecipes);
+    }, []);
 
     
     /* toggle the state of the modal when a recipe is clicked */
@@ -61,7 +66,6 @@ const RecipeBook = () => {
 
                 {/* IMPORT LOGOUT BUTTON HERE */}
                 <LogoutButton />
-                
             </View>
         </ScrollView>
     );
