@@ -2,10 +2,9 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLORS, SIZES } from "../CONSTANTS/theme";
 import { createStackNavigator } from "@react-navigation/stack";
-import { auth } from '../firebase.js'
+import { LogoutButton } from '../COMPONENTS/LogoutButton.js'
 
 // SCREENS
 import RecipeBook from "./screens/RecipeBook";
@@ -32,7 +31,7 @@ function TabNavigator() {
         }}
       >
 
-        <Tab.Screen name="Home"
+        <Tab.Screen name="Recipe Book"
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
