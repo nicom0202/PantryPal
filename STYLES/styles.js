@@ -197,6 +197,21 @@ const LoginStyles = StyleSheet.create({
     },
 });
 
+const LogoutStyles = StyleSheet.create({
+    button: {
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        height: 50,
+        width: 50,
+        top: -10,
+        left: 25,
+
+        borderWidth: 2,
+        borderRadius: 999,
+    }
+});
+
   export {
     containerStyle,
     textStyle,
@@ -206,4 +221,5 @@ const LoginStyles = StyleSheet.create({
     checkBoxStyle,
     textInputStyle,
     LoginStyles,
+    LogoutStyles,
 };
