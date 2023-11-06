@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import addRecipeNameToUserCollection from './AddRecipeNameToUserCollection.js';
-import addRecipeToRecipeCollection from './AddRecipetoRecipeCollection.js';
-import deleteRecipeFromUserCollection from './DeleteRecipeFromUserCollection.js';
+import addRecipe from './addRecipe';
+import deleteRecipe from './deleteRecipe';
+import IngredientFlatList from './IngredientFlatList.js';
 
 import { 
     View, 
@@ -41,8 +41,7 @@ const RecipeModal = ({
                 const updatedRecipes = [...recipes];
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
                 setRecipes(updatedRecipes);
-                addRecipeNameToUserCollection(updatedRecipes[recipeIndex])
-                addRecipeToRecipeCollection(updatedRecipes[recipeIndex])
+                addRecipe(updatedRecipes[recipeIndex])
             }
             
             setIsEditing(false);
@@ -75,7 +74,7 @@ const RecipeModal = ({
     const removeRecipe = () => {
         if (selectedRecipe) {
             const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
-            deleteRecipeFromUserCollection(selectedRecipe)
+            deleteRecipe(selectedRecipe)
             setRecipes(updatedRecipes);
             setModalVisible(false);
             setSelectedRecipe(null);
@@ -124,9 +123,9 @@ const RecipeModal = ({
                         style={buttonStyle.close}
                         hitSlop={15}
                         onPress={() => {
+                            saveEditing();
                             setModalVisible(false);
                             setSelectedRecipe(null);
-                            saveEditing();
                         }}
                     >
                         <Text style={textStyle.body}>X</Text>
@@ -142,7 +141,6 @@ const RecipeModal = ({
                                 onChangeText={text => updateRecipeName(text)}
                                 placeholder="Recipe Name"
                                 placeholderTextColor="grey"
-                                keyboardType="alphabetic"
                                 />
                             </SafeAreaView>
                         </TouchableWithoutFeedback>
@@ -160,13 +158,30 @@ const RecipeModal = ({
                                 onChangeText={text => updateRecipeInstructions(text)}
                                 placeholder="Recipe Instructions"
                                 placeholderTextColor="grey"
-                                keyboardType="alphabetic"
                                 multiline={true}
                                 />
                             </SafeAreaView>
                         </TouchableWithoutFeedback>
                     ) : (
                         <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                    )}
+
+                    {/* Ingredients list */}
+                    {isEditing ? (
+                        <IngredientFlatList 
+                            recipes={recipes}
+                            selectedRecipe={selectedRecipe}
+                            setRecipes={setRecipes}
+                        />
+                    ) : (
+                        <View>
+                            <Text style={textStyle.body}>Ingredients:</Text>
+                            {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
+                                <Text key={index} style={textStyle.body}>
+                                    {ingredient.name}: {ingredient.quantity}
+                                </Text>
+                            )) : ''}
+                        </View>
                     )}
 
                     {isEditing ? (
