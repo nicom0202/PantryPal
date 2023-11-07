@@ -15,6 +15,7 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native';
 import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -131,58 +132,60 @@ const RecipeModal = ({
                         <Text style={textStyle.body}>X</Text>
                     </Pressable>
 
-                    {/* Recipe Name Text Box while editing, Text otherwise */}
-                    {isEditing ? (
-                        <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
-                            <SafeAreaView>
-                                <TextInput
-                                style={[textInputStyle.inputRecipeName]} 
-                                value={selectedRecipe ? selectedRecipe.name : ''}
-                                onChangeText={text => updateRecipeName(text)}
-                                placeholder="Recipe Name"
-                                placeholderTextColor="grey"
-                                />
-                            </SafeAreaView>
-                        </TouchableWithoutFeedback>
-                    ) : (
-                        <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
-                    )}
+                    <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
+                        {/* Recipe Name Text Box while editing, Text otherwise */}
+                        {isEditing ? (
+                            <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+                                <SafeAreaView>
+                                    <TextInput
+                                    style={[textInputStyle.inputRecipeName]} 
+                                    value={selectedRecipe ? selectedRecipe.name : ''}
+                                    onChangeText={text => updateRecipeName(text)}
+                                    placeholder="Recipe Name"
+                                    placeholderTextColor="grey"
+                                    />
+                                </SafeAreaView>
+                            </TouchableWithoutFeedback>
+                        ) : (
+                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                        )}
 
-                    {/* Recipe Ingredients Text Box while editing, Text otherwise */}
-                    {isEditing ? (
-                        <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
-                            <SafeAreaView>
-                                <TextInput
-                                style={[textInputStyle.inputRecipeInstructions]} 
-                                value={selectedRecipe ? selectedRecipe.instructions : ''}
-                                onChangeText={text => updateRecipeInstructions(text)}
-                                placeholder="Recipe Instructions"
-                                placeholderTextColor="grey"
-                                multiline={true}
-                                />
-                            </SafeAreaView>
-                        </TouchableWithoutFeedback>
-                    ) : (
-                        <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
-                    )}
+                        {/* Recipe Ingredients Text Box while editing, Text otherwise */}
+                        {isEditing ? (
+                            <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+                                <SafeAreaView>
+                                    <TextInput
+                                    style={[textInputStyle.inputRecipeInstructions]} 
+                                    value={selectedRecipe ? selectedRecipe.instructions : ''}
+                                    onChangeText={text => updateRecipeInstructions(text)}
+                                    placeholder="Recipe Instructions"
+                                    placeholderTextColor="grey"
+                                    multiline={true}
+                                    />
+                                </SafeAreaView>
+                            </TouchableWithoutFeedback>
+                        ) : (
+                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                        )}
 
-                    {/* Ingredients list */}
-                    {isEditing ? (
-                        <IngredientFlatList 
-                            recipes={recipes}
-                            selectedRecipe={selectedRecipe}
-                            setRecipes={setRecipes}
-                        />
-                    ) : (
-                        <View>
-                            <Text style={textStyle.body}>Ingredients:</Text>
-                            {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                <Text key={index} style={textStyle.body}>
-                                    {ingredient.name}: {ingredient.quantity}
-                                </Text>
-                            )) : ''}
-                        </View>
-                    )}
+                        {/* Ingredients list */}
+                        {isEditing ? (
+                            <IngredientFlatList 
+                                recipes={recipes}
+                                selectedRecipe={selectedRecipe}
+                                setRecipes={setRecipes}
+                            />
+                        ) : (
+                            <View>
+                                <Text style={textStyle.body}>Ingredients:</Text>
+                                {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
+                                    <Text key={index} style={textStyle.body}>
+                                        {ingredient.name}: {ingredient.quantity}
+                                    </Text>
+                                )) : ''}
+                            </View>
+                        )}
+                    </ScrollView>
 
                     {isEditing ? (
                         <Pressable
@@ -208,6 +211,7 @@ const RecipeModal = ({
                             <Text style={textStyle.body}>Delete Recipe</Text>
                         </Pressable>
                     )}
+                    
                 </View>
             </View>
         </Modal>

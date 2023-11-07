@@ -1,26 +1,56 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TextInput, Button, StyleSheet, Pressable } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Pressable } from 'react-native';
 
 const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
   const [localNames, setLocalNames] = useState(selectedRecipe.ingredients.map(ingredient => ingredient.name));
   const [localQuantities, setLocalQuantities] = useState(selectedRecipe.ingredients.map(ingredient => ingredient.quantity));
 
-  const handleIngredientChange = (index, newName, newQuantity) => {
-    // Create copies of the local state arrays
+  const handleIngredientNameChange = (index, newName) => {
+    // Create a copy of the local state arrays
     const updatedNames = [...localNames];
-    const updatedQuantities = [...localQuantities];
 
-    // Update the values at the specified index
+    // Update the value at the specified index
     updatedNames[index] = newName;
-    updatedQuantities[index] = newQuantity;
 
     // Update the selected recipe's ingredients
     selectedRecipe.ingredients[index].name = newName;
+
+    // Update the selected recipe's ingredients
+    const updatedIngredients = selectedRecipe.ingredients.map((ingredient, i) => {
+      if (i === index) {
+        return { ...ingredient, name: newName };
+      }
+      return ingredient;
+    });
+
+    updateRecipesAndLocalState(updatedIngredients, updatedNames, localQuantities);
+  };
+
+  const handleIngredientQuantityChange = (index, newQuantity) => {
+    // Create a copy of the local state arrays
+    const updatedQuantities = [...localQuantities];
+
+    // Update the value at the specified index
+    updatedQuantities[index] = newQuantity;
+
+    // Update the selected recipe's ingredients
     selectedRecipe.ingredients[index].quantity = newQuantity;
 
-    // Create a copy of the recipes array and update the selected recipe's ingredients
+    // Update the selected recipe's ingredients
+    const updatedIngredients = selectedRecipe.ingredients.map((ingredient, i) => {
+      if (i === index) {
+        return { ...ingredient, quantity: newQuantity };
+      }
+      return ingredient;
+    });
+
+    updateRecipesAndLocalState(updatedIngredients, localNames, updatedQuantities);
+  };
+
+  const updateRecipesAndLocalState = (updatedIngredients, updatedNames, updatedQuantities) => {
+    // Create a copy of the recipes array with the updated ingredients
     const updatedRecipes = recipes.map((recipe) =>
-      recipe.id === selectedRecipe.id ? { ...recipe, ingredients: selectedRecipe.ingredients } : recipe
+      recipe.id === selectedRecipe.id ? { ...recipe, ingredients: updatedIngredients } : recipe
     );
 
     // Update the recipes list using setRecipes
@@ -34,8 +64,8 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
   const addIngredient = () => {
     // Add a new ingredient with empty name and quantity
     const newIngredient = { name: '', quantity: '' };
-
-    // Update the selected recipe's ingredients
+  
+    // Make sure to initialize the new ingredient's properties
     selectedRecipe.ingredients = [...selectedRecipe.ingredients, newIngredient];
 
     // Create a copy of the recipes array and update the selected recipe's ingredients
@@ -53,54 +83,52 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
 
   const renderIngredientItem = ({ item, index }) => {
     const handleDeleteIngredient = () => {
-        // Create a copy of the selected recipe's ingredients and remove the ingredient at the specified index
-        const updatedIngredients = [...selectedRecipe.ingredients];
-        updatedIngredients.splice(index, 1);
-
-
-        // Update the selected recipe's ingredients
-        selectedRecipe.ingredients = updatedIngredients;
-
-        // Update the recipes list using setRecipes
-        const updatedRecipes = recipes.map((recipe) =>
-            recipe.id === selectedRecipe.id ? selectedRecipe : recipe
-        );
-        setRecipes(updatedRecipes);
+      // Create a copy of the selected recipe's ingredients and remove the ingredient at the specified index
+      const updatedIngredients = [...selectedRecipe.ingredients];
+      updatedIngredients.splice(index, 1);
+  
+      // Update the selected recipe's ingredients
+      selectedRecipe.ingredients = updatedIngredients;
+  
+      // Update the recipes list using setRecipes
+      const updatedRecipes = recipes.map((recipe) =>
+        recipe.id === selectedRecipe.id ? selectedRecipe : recipe
+      );
+      setRecipes(updatedRecipes);
     };
-
+  
     return (
-        <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TextInput
-                style={styles.ingredientItem}
-                value={item.name}
-                onChangeText={(newName) => handleIngredientChange(index, newName, item.quantity)}
-                placeholder="Ingredient Name"
-                placeholderTextColor="grey"
-            />
-            <TextInput
-                style={styles.ingredientItem}
-                value={item.quantity}
-                onChangeText={(newQuantity) => handleIngredientChange(index, item.name, newQuantity)}
-                placeholder="Quantity"
-                placeholderTextColor="grey"
-                keyboardType="numeric"
-            />
-            <Pressable onPress={handleDeleteIngredient}>
-                <Text>Delete</Text>
-            </Pressable>
-        </View>
+      <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <TextInput
+          style={styles.ingredientItem}
+          value={item ? item.name : ''}
+          onChangeText={(newName) => handleIngredientNameChange(index, newName)}
+          placeholder="Ingredient Name"
+          placeholderTextColor="grey"
+        />
+        <TextInput
+          style={styles.ingredientItem}
+          value={item ? item.quantity : ''}
+          onChangeText={(newQuantity) => handleIngredientQuantityChange(index, newQuantity)}
+          placeholder="Quantity"
+          placeholderTextColor="grey"
+          keyboardType="numeric"
+        />
+        <Pressable onPress={handleDeleteIngredient}>
+          <Text>Delete</Text>
+        </Pressable>
+      </View>
     );
-};
-
+  };
+  
 
   return (
     <View>
-      <FlatList
-        data={selectedRecipe.ingredients}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderIngredientItem}
-      />
-      <Button title="Add Ingredient" onPress={addIngredient} />
+        {selectedRecipe.ingredients.map((ingredient, index) =>
+            renderIngredientItem({ item: ingredient, index: index })
+        )}
+
+        <Button title="Add Ingredient" onPress={addIngredient} />
     </View>
   );
 };

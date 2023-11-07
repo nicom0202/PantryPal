@@ -61,6 +61,9 @@ const viewStyle = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
+    scrollViewContent: {
+        paddingBottom: 50,
+    },
 });
 
 const buttonStyle = StyleSheet.create({
@@ -86,8 +89,8 @@ const buttonStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
-        bottom: 20, // Adjust this value to control the vertical position
-        left: 113.5, // Center the button horizontally
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 185, // Center the button horizontally
     },
     saveRecipe: {
         width: 125,
@@ -97,8 +100,8 @@ const buttonStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
-        bottom: 70, // Adjust this value to control the vertical position
-        left: 113.5, // Center the button horizontally
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 40, // Center the button horizontally
     },
     editRecipe: {
         width: 125,
