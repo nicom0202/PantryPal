@@ -15,6 +15,7 @@ const RecipeBook = () => {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectMode, setSelectMode] = useState(false);
+    const [selectedRecipesForGrocery, setSelectedRecipesForGrocery] = useState([]);
 
     // Call pullSavedRecipes after the component mounts
     useEffect(() => {
@@ -46,17 +47,17 @@ const RecipeBook = () => {
         setSelectMode(!selectMode);
     };
 
-    const handleContinue = () => {
+    const handleCheckout = () => {
         if (selectMode) {
             setSelectMode(false);
             setModalVisible(false);
             // Call a function to generate the list with the selected recipes (selectedRecipes)
+            setSelectedRecipesForGrocery(selectedRecipes); // Save the selected recipes for grocery list
             console.log("Selected Recipes Array:", selectedRecipes);
             generateList(selectedRecipes);
             // Clear the selectedRecipes array
             setSelectedRecipes([]);
-            // Navigate to the grocery list screen
-            // (You may implement your own navigation logic here)
+            //navigate to grocerylist
         } else {
             // Handle transitioning to the select mode
             setSelectMode(true);
@@ -104,7 +105,7 @@ const RecipeBook = () => {
 
                 {/* SELECT/CHECKOUT BUTTON */}
                 {selectMode ? (
-                    <Button title="Checkout" onPress={handleContinue} />
+                    <Button title="Checkout" onPress={handleCheckout} />
                 ) : (
                     <Button title="Select" onPress={handleSelectMode} />
                 )}
