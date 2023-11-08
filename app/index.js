@@ -9,6 +9,7 @@ import { LogoutButton } from '../COMPONENTS/LogoutButton.js'
 // SCREENS
 import RecipeBook from "./screens/RecipeBook";
 import GroceryList from "./screens/GroceryList";
+import Account from "./screens/Account";
 import Login from "./screens/Login";
 
 const Tab = createBottomTabNavigator();
@@ -35,7 +36,7 @@ function TabNavigator() {
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="book-sharp" color={color} size={size} />
+                        <Ionicons name="book" color={color} size={size} />
                       )
                     }}
         />
@@ -44,10 +45,19 @@ function TabNavigator() {
                     component={GroceryList}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="list-sharp" color={color} size={size} />
+                        <Ionicons name="list" color={color} size={size} />
                       )
                     }}
-        />          
+        />         
+
+        <Tab.Screen name="Account"
+                    component={Account}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="person" color={color} size={size} />
+                      )
+                    }}
+        />       
       </Tab.Navigator>
   );
 }
