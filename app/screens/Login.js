@@ -113,8 +113,6 @@ const LoginScreen = () => {
           <Text style={LoginStyles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
 
-        <LogoutButton />
-
       </View>
     </KeyboardAvoidingView>
   )
