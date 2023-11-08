@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Button } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
 import RecipeModal from '../../COMPONENTS/recipeModal.js';
@@ -13,6 +13,9 @@ const RecipeBook = () => {
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [recipes, setRecipes] = useState([]);
+    const [selectedRecipes, setSelectedRecipes] = useState([]);
+    const [selectMode, setSelectMode] = useState(false);
+    const [selectedRecipesForGrocery, setSelectedRecipesForGrocery] = useState([]);
 
     // Call pullSavedRecipes after the component mounts
     useEffect(() => {
@@ -22,8 +25,13 @@ const RecipeBook = () => {
     
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {
-        setModalVisible(true);
-        setSelectedRecipe(recipe);
+        if (selectMode) {
+            const updatedSelected = selectedRecipes.includes(recipe) ? selectedRecipes.filter(r => r !== recipe) : [...selectedRecipes, recipe];
+            setSelectedRecipes(updatedSelected);
+        } else {
+            setModalVisible(true);
+            setSelectedRecipe(recipe);
+        }
     };
 
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
@@ -34,6 +42,33 @@ const RecipeBook = () => {
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);
         setIsEditing(true);
+    };
+    const handleSelectMode = () => {
+        setSelectMode(!selectMode);
+    };
+
+    const handleCheckout = () => {
+        if (selectMode) {
+            setSelectMode(false);
+            setModalVisible(false);
+            // Call a function to generate the list with the selected recipes (selectedRecipes)
+            setSelectedRecipesForGrocery(selectedRecipes); // Save the selected recipes for grocery list
+            console.log("Selected Recipes Array:", selectedRecipes);
+            generateList(selectedRecipes);
+            // Clear the selectedRecipes array
+            setSelectedRecipes([]);
+            //navigate to grocerylist
+        } else {
+            // Handle transitioning to the select mode
+            setSelectMode(true);
+        }
+    };
+
+    const generateList = (selectedRecipes) => {
+        // Implement the logic to generate the grocery list using the selected recipes
+        // This function will receive the array of selected recipes
+        // and create a grocery list or perform other required actions.
+        console.log("Generating grocery list with selected recipes:", selectedRecipes);
     };
 
     return (
@@ -49,6 +84,7 @@ const RecipeBook = () => {
                     setModalVisible={setModalVisible}
                     setSelectedRecipe={setSelectedRecipe}
                     setIsEditing={setIsEditing}
+                    selectedModal={modalVisible}
                 />
                 {/* Clickable boxes that displays each recipe */}
                 {recipes.map((recipe) => (
@@ -63,6 +99,16 @@ const RecipeBook = () => {
                     content={"Add Recipe"}
                     onClick={handleAddRecipe}
                 />
+
+                {/* IMPORT LOGOUT BUTTON HERE */}
+                <LogoutButton />
+
+                {/* SELECT/CHECKOUT BUTTON */}
+                {selectMode ? (
+                    <Button title="Checkout" onPress={handleCheckout} />
+                ) : (
+                    <Button title="Select" onPress={handleSelectMode} />
+                )}
             </View>
         </ScrollView>
     );
