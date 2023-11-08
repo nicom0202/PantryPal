@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle } from '../../STYLES/styles.js';
-import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
 import pullSavedRecipes from '../../COMPONENTS/pullSavedRecipes.js';
 
 const RecipeBook = () => {
@@ -99,9 +98,6 @@ const RecipeBook = () => {
                     content={"Add Recipe"}
                     onClick={handleAddRecipe}
                 />
-
-                {/* IMPORT LOGOUT BUTTON HERE */}
-                <LogoutButton />
 
                 {/* SELECT/CHECKOUT BUTTON */}
                 {selectMode ? (
