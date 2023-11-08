@@ -23,6 +23,7 @@ const addRecipe = async (recipeData) => {
                     ingredients: recipeData.ingredients,
                     instructions: recipeData.instructions,
                     id: recipeData.id,
+                    cookTime: recipeData.cookTime
                     // Add more fields if needed
                 });
 
@@ -34,6 +35,7 @@ const addRecipe = async (recipeData) => {
                     ingredients: recipeData.ingredients,
                     instructions: recipeData.instructions,
                     id: recipeData.id,
+                    cookTime: recipeData.cookTime
                     // Add more fields if needed
                 };
 
@@ -55,6 +57,7 @@ const addRecipe = async (recipeData) => {
                 ingredients: recipeData.ingredients,
                 instructions: recipeData.instructions,
                 id: recipeData.id,
+                cookTime: recipeData.cookTime
                 // Add more fields if needed
             };
 
