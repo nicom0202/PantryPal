@@ -35,7 +35,7 @@ const RecipeBook = () => {
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
     const handleAddRecipe = () => {
         const uniqueId = uuidv4();
-        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: ""};
+        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: "", cookTime: 0};
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);
@@ -80,6 +80,8 @@ const RecipeBook = () => {
                     <ClickableBox
                         key={recipe.id}
                         content={recipe.image ? recipe.image : recipe.name}
+                        // Check if the recipe is in the selectedRecipes array
+                        highlighted={selectedRecipes.includes(recipe)} // Add this prop
                         onClick={() => handleRecipeInteraction(recipe)}
                     />
                 ))}
