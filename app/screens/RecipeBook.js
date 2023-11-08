@@ -14,7 +14,6 @@ const RecipeBook = () => {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectMode, setSelectMode] = useState(false);
-    const [selectedRecipesForGrocery, setSelectedRecipesForGrocery] = useState([]);
 
     // Call pullSavedRecipes after the component mounts
     useEffect(() => {
@@ -51,9 +50,7 @@ const RecipeBook = () => {
             setSelectMode(false);
             setModalVisible(false);
             // Call a function to generate the list with the selected recipes (selectedRecipes)
-            setSelectedRecipesForGrocery(selectedRecipes); // Save the selected recipes for grocery list
             console.log("Selected Recipes Array:", selectedRecipes);
-            generateList(selectedRecipes);
             // Clear the selectedRecipes array
             setSelectedRecipes([]);
             //navigate to grocerylist
@@ -61,13 +58,6 @@ const RecipeBook = () => {
             // Handle transitioning to the select mode
             setSelectMode(true);
         }
-    };
-
-    const generateList = (selectedRecipes) => {
-        // Implement the logic to generate the grocery list using the selected recipes
-        // This function will receive the array of selected recipes
-        // and create a grocery list or perform other required actions.
-        console.log("Generating grocery list with selected recipes:", selectedRecipes);
     };
 
     return (
