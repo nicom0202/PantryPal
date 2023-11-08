@@ -63,9 +63,6 @@ const RecipeBook = () => {
                     content={"Add Recipe"}
                     onClick={handleAddRecipe}
                 />
-
-                {/* IMPORT LOGOUT BUTTON HERE */}
-                <LogoutButton />
             </View>
         </ScrollView>
     );
