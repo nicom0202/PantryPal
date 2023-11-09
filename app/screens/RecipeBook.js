@@ -35,7 +35,8 @@ const RecipeBook = () => {
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
     const handleAddRecipe = () => {
         const uniqueId = uuidv4();
-        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: "", cookTime: 0};
+        const randomDiscoverID = Math.random();
+        const newRecipe = { id: uniqueId, name: "", ingredients: [{ name: "", quantity: "" }], instructions: "", cookTime: 0, discoverID: randomDiscoverID};
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
         handleRecipeInteraction(newRecipe);
