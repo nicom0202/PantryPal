@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, Pressable, Text } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
@@ -6,6 +6,7 @@ import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle, buttonStyle, textStyle, } from '../../STYLES/styles.js';
 import pullSavedRecipes from '../../COMPONENTS/pullSavedRecipes.js';
+import { useFocusEffect } from '@react-navigation/native';
 
 const RecipeBook = () => {
     /* 
@@ -23,10 +24,16 @@ const RecipeBook = () => {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectMode, setSelectMode] = useState(false);
 
-    /* Call pullSavedRecipes after the component mounts */
-    useEffect(() => {
-        pullSavedRecipes(setRecipes);
-    }, []);
+    // Use useFocusEffect to call pullSavedRecipes when the screen comes into focus
+    useFocusEffect(
+        useCallback(() => {
+            // Clear current recipes
+            setRecipes([]);
+            
+            // Call pullSavedRecipes to fetch updated recipes
+            pullSavedRecipes(setRecipes);
+        }, [])
+    );
 
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {
