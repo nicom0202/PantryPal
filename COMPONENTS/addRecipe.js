@@ -18,28 +18,12 @@ const addRecipe = async (recipeData) => {
                 const userRecipesDocRef = doc(userRecipesRef, recipeData.id);
 
                 // Update the existing document in the Recipes subcollection
-                await setDoc(userRecipesDocRef, {
-                    name: recipeData.name,
-                    ingredients: recipeData.ingredients,
-                    instructions: recipeData.instructions,
-                    id: recipeData.id,
-                    cookTime: recipeData.cookTime
-                    // Add more fields if needed
-                });
+                await setDoc(userRecipesDocRef, recipeData);
 
                 console.log("Recipe updated in the user's 'Recipes' subcollection.");
             } else {
                 // Add a new recipe to the Recipes subcollection with recipeData.id as document name
-                const newRecipeData = {
-                    name: recipeData.name,
-                    ingredients: recipeData.ingredients,
-                    instructions: recipeData.instructions,
-                    id: recipeData.id,
-                    cookTime: recipeData.cookTime
-                    // Add more fields if needed
-                };
-
-                const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), newRecipeData);
+                const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), reicpeData);
 
                 console.log("New recipe added to the user's 'Recipes' subcollection with custom document name.");
             }
@@ -52,16 +36,7 @@ const addRecipe = async (recipeData) => {
             await setDoc(userDocRef, userDocData);
 
             const userRecipesRef = collection(userDocRef, "Recipes");
-            const newRecipeData = {
-                name: recipeData.name,
-                ingredients: recipeData.ingredients,
-                instructions: recipeData.instructions,
-                id: recipeData.id,
-                cookTime: recipeData.cookTime
-                // Add more fields if needed
-            };
-
-            const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), newRecipeData);
+            const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), recipeData);
 
             console.log("New user document created with the recipe in 'Recipes' subcollection with custom document name.");
         }

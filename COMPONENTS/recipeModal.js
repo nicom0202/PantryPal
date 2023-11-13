@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import addRecipe from './addRecipe';
 import deleteRecipe from './deleteRecipe';
 import IngredientFlatList from './IngredientFlatList.js';
+import addToDiscover from './addToDiscover.js';
 
 import { 
     View, 
@@ -62,25 +63,46 @@ const RecipeModal = ({
             },
             {
                 text: "Delete",
-                onPress: () => {
-                /* Delete the recipe here */
-                removeRecipe();
+                onPress: () => {              
+                    /* remove the recipe from list of recipes and close modal */
+                    if (selectedRecipe) {
+                        const updatedRecipes = recipes.filter(
+                            recipe => recipe.id !== selectedRecipe.id);
+                        deleteRecipe(selectedRecipe)
+                        setRecipes(updatedRecipes);
+                        setModalVisible(false);
+                        setSelectedRecipe(null);
+                        setIsEditing(false);
+                    }
                 },
             },
             ]
         );
-    };      
-
-    /* remove the recipe from list of recipes and close modal */
-    const removeRecipe = () => {
-        if (selectedRecipe) {
-            const updatedRecipes = recipes.filter(recipe => recipe.id !== selectedRecipe.id);
-            deleteRecipe(selectedRecipe)
-            setRecipes(updatedRecipes);
-            setModalVisible(false);
-            setSelectedRecipe(null);
-            setIsEditing(false);
-        }
+    };    
+   
+    /* Alerts the user to confirm before publishing recipe */
+    const sendToDiscover = () => {
+        Alert.alert(
+            "Confirm Publish",
+            "Are you sure you want to publish this recipe and send it to the discover page?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
+                },
+                {
+                    text: "Publish",
+                    onPress: () => {
+                        /* Publish the recipe here */            
+                        if (selectedRecipe) {
+                            addToDiscover(selectedRecipe);
+                            console.log("Recipe sent to Discover");
+                        }
+                    },
+                },
+            ]
+        );
     };
 
     /* Update the name of the selected recipe */
@@ -203,15 +225,22 @@ const RecipeModal = ({
                         </Pressable>
                     )}
 
-                    {isEditing && (
+                    {isEditing ? (
                         <Pressable
                             style={buttonStyle.deleteRecipe}
                             onPress={handleDeleteRecipe}
                         >
                             <Text style={textStyle.body}>Delete Recipe</Text>
                         </Pressable>
+                    ) : (
+                        <Pressable
+                            style={buttonStyle.sendRecipeToDiscover}
+                            onPress={sendToDiscover}
+                        >
+                            <Text style={textStyle.light}>Publish</Text>
+                        </Pressable>
                     )}
-                    
+
                 </View>
             </View>
         </Modal>

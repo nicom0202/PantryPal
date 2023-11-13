@@ -11,6 +11,7 @@ import RecipeBook from "./screens/RecipeBook";
 import GroceryList from "./screens/GroceryList";
 import Account from "./screens/Account";
 import Login from "./screens/Login";
+import Discover from "./screens/Discover";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator(); // Adding Stack Navigator
@@ -50,6 +51,18 @@ function TabNavigator() {
                     }}
         />         
 
+        <Tab.Screen name="Discover"
+                    component={Discover}
+                    /*
+                    TODO:
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="" color={color} size={size} />
+                      )
+                    }}
+                    */
+        />
+
         <Tab.Screen name="Account"
                     component={Account}
                     options={{
@@ -57,7 +70,7 @@ function TabNavigator() {
                         <Ionicons name="person" color={color} size={size} />
                       )
                     }}
-        />       
+        />        
       </Tab.Navigator>
   );
 }
