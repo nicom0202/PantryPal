@@ -22,6 +22,10 @@ const textStyle = StyleSheet.create({
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
+    light: {
+        fontSize: SIZES.medium,
+        color: COLORS.lightWhite,
+    },
     modalText: {
         margin: 15,
         textAlign: 'center',
@@ -33,6 +37,7 @@ const gridStyle = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        marginTop: 75,
         marginBottom: 100,
     },
 });
@@ -111,8 +116,43 @@ const buttonStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
-        bottom: 70, // Adjust this value to control the vertical position
-        left: 113.5, // Center the button horizontally
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 40, // Center the button horizontally
+    },
+    sendRecipeToDiscover: {
+        width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: 'blue',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 185, // Center the button horizontally
+    },
+    selectGroceries: {
+        width: 375,
+        height: 50,
+        borderRadius: 30,
+        padding: 0,
+        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        top: 20, // Adjust this value to control the vertical position
+        left: 8, // Center the button horizontally
+    },
+    newDiscoverRecipes: {
+        width: 375,
+        height: 50,
+        borderRadius: 30,
+        padding: 0,
+        backgroundColor: 'green',
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        top: 20, // Adjust this value to control the vertical position
+        left: 8, // Center the button horizontally
     },
 });
 
