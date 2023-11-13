@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Button } from 'react-native';
+import { View, ScrollView, Pressable, Text } from 'react-native';
 import DiscoverModal from '../../COMPONENTS/discoverModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle } from '../../STYLES/styles.js';
 import pullDiscoverRecipes from '../../COMPONENTS/pullDiscoverRecipes.js';
+import { buttonStyle, textStyle, } from '../../STYLES/styles.js';
 
 const Discover = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -36,6 +37,15 @@ const Discover = () => {
     };
     return (
         <ScrollView style={{ flex: 1 }}>
+            <View>
+                {/* PULL NEW DISCOVER RECIPES BUTTON */}
+                <Pressable 
+                    style={buttonStyle.newDiscoverRecipes}
+                    onPress={handleNewDiscoverRecipes} 
+                > 
+                    <Text style={textStyle.light}>Gather New Recipes</Text>
+                </Pressable>
+            </View>
             <View style={[gridStyle.grid]}>
                 {/* Modal that displays recipe information */}
                 <DiscoverModal
@@ -57,11 +67,6 @@ const Discover = () => {
                         onClick={() => handleRecipeInteraction(recipe)}
                     />
                 ))}
-
-                {/* PULL NEW DISCOVER RECIPES BUTTON */}
-                <Button title="New Recipes Please" 
-                    onPress={handleNewDiscoverRecipes} 
-                />
             </View>
         </ScrollView>
     );
