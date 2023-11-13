@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, } from 'react-native';
 import { viewStyle, buttonStyle, textStyle } from '../STYLES/styles.js';
+import addRecipe from './addRecipe.js';
 const DiscoverModal = ({
     modalVisible, 
     selectedRecipe, 
@@ -12,7 +13,9 @@ const DiscoverModal = ({
     const handleAddDiscoverRecipe = () => {
        //TODO:
        //make new id and discoverID for recipe
-       //add to recipeModal in RecipeBook
+       addRecipe(selectedRecipe);
+       setModalVisible(false);
+        setSelectedRecipe(null);
     };
 
     return (
