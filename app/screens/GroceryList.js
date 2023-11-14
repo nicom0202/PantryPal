@@ -5,8 +5,6 @@ import { containerStyle } from '../../STYLES/styles.js';
 import GetIngredients from "../../COMPONENTS/GetUserIngredients";
 import { auth } from "../../firebase";
 
-
-
 export default function GroceryList() {
   const [ingredientsForUsers, setIngredientsForUsers] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState({});

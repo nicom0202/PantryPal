@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import LogoutButton from '../../COMPONENTS/LogoutButton';
-import { LoginStyles, containerStyle } from '../../STYLES/styles';
+import { LoginStyles } from '../../STYLES/styles';
  
 export default function Account() {
 
