@@ -3,9 +3,10 @@ import { collection, query, where, limit, getDocs } from 'firebase/firestore';
 
 async function getTenRandomRecipes(setRecipes) {
   const randomRecipes = [];
+  const num_of_discover_recipes = 3
 
   // Fetch 10 random documents by using a random field (here, 'discoverID')
-  const q = query(collection(db, 'Discover'), where('discoverID', '>=', Math.random()), limit(3));
+  const q = query(collection(db, 'Discover'), where('discoverID', '>=', Math.random()), limit(num_of_discover_recipes)); //
   const querySnapshot = await getDocs(q);
 
   querySnapshot.forEach(doc => {

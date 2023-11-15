@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { View } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
+import { auth } from "../../firebase";
 import CheckBox from "../../COMPONENTS/checkBox";
-import { containerStyle } from '../../STYLES/styles.js';
 import GetIngredients from "../../COMPONENTS/GetUserIngredients";
 
+import { containerStyle } from '../../STYLES/styles.js';
 export default function GroceryList({ route }) {
   const [ingredientsForUsers, setIngredientsForUsers] = useState({});
   const [selectedIngredients, setSelectedIngredients] = useState({});
@@ -30,6 +31,14 @@ export default function GroceryList({ route }) {
     fetchData();
   }, [route.params]); // Empty dependency array ensures the effect runs once after the initial render
 
+
+  // TEMPORARY: Only changes list for current session
+  // TODO: Implement persistent storage
+  const handleClearList = () => {
+    setIngredientsForUsers([]);
+    setSelectedIngredients({});
+  }
+
   const handleCheckboxChange = (ingredient) => {
     setSelectedIngredients({
       ...selectedIngredients,
@@ -41,6 +50,13 @@ export default function GroceryList({ route }) {
     <View style={containerStyle.container}>
       {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
         // console.log("Ingredient:", ingredientsForUsers),
+      {/* Clear Button */}
+      <Pressable onPress={handleClearList}>
+        <Text> Clear</Text>
+      </Pressable>
+
+      {/* Checkbox List*/}
+      {ingredientsForUsers.map((ingredient, index) => (
         <CheckBox
           key={index}
           onPress={() => handleCheckboxChange(ingredient)}
