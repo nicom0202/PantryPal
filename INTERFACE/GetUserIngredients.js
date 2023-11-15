@@ -1,20 +1,23 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, getDocs } from "firebase/firestore";
 import { db } from "../firebase";  // Import the initialized Firebase app
 
-const GetIngredients = async (UserID) => {
-  const recipesCollectionRef = collection(db, "Users", UserID, "Recipes");
-  const ingredientsList = [];
+// The RecipeModalArray is an array of Recipes that the user has selected
+const GetIngredients = async (RecipeModalArray) => {
+  const ingredientsList = {};
 
   try {
-    const recipesQuerySnapshot = await getDocs(query(recipesCollectionRef));
-
-    recipesQuerySnapshot.forEach((recipeDoc) => {
-      console.log(recipeDoc.data());
-      const ingredients = recipeDoc.data().ingredients;
+    RecipeModalArray.forEach((recipeDoc) => {
+      const ingredients = recipeDoc.ingredients;
       if (ingredients && Array.isArray(ingredients)) {
         ingredients.forEach((ingredient) => {
-          if (ingredient && ingredient.name) {
-            ingredientsList.push(ingredient.name);
+          // check if in the dictionary, if so add quantity, if not add to dictionary
+          if (ingredient && ingredient.name && ingredient.quantity) {
+            if (ingredientsList[ingredient.name]) {
+              ingredientsList[ingredient.name] += Number(ingredient.quantity);
+            } 
+            else {
+              ingredientsList[ingredient.name] = Number(ingredient.quantity);
+            }
           }
         });
       }
@@ -22,7 +25,6 @@ const GetIngredients = async (UserID) => {
 
     return ingredientsList;
   } 
-  
   catch (error) {
     console.error("Error fetching ingredients:", error);
     return [];
