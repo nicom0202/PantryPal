@@ -4,7 +4,7 @@ import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpac
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
-import AddUserToDB from '../../COMPONENTS/AddUserToDatabase';
+import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
 import { COLORS } from '../../CONSTANTS/theme'
 import { LoginStyles } from '../../STYLES/styles';
 import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
