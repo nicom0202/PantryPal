@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, } from 'react-native';
 import { viewStyle, buttonStyle, textStyle } from '../STYLES/styles.js';
-import addRecipe from './addRecipe.js';
+import addRecipe from '../INTERFACE/AddRecipe.js';
 import { v4 as uuidv4 } from 'uuid'; 
 const DiscoverModal = ({
     modalVisible, 

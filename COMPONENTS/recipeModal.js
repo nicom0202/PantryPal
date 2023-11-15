@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import addRecipe from './addRecipe';
-import deleteRecipe from './deleteRecipe';
+import addRecipe from '../INTERFACE/AddRecipe.js';
+import deleteRecipe from '../INTERFACE/DeleteRecipe.js';
 import IngredientFlatList from './IngredientFlatList.js';
-import addToDiscover from './addToDiscover.js';
+import addToDiscover from '../INTERFACE/AddToDiscover.js';
 
 import { 
     View, 

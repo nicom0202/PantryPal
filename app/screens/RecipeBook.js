@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, Pressable, Text } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
-import RecipeModal from '../../COMPONENTS/recipeModal.js';
-import ClickableBox from '../../COMPONENTS/clickableBox.js';
+import RecipeModal from '../../COMPONENTS/RecipeModal.js';
+import ClickableBox from '../../COMPONENTS/ClickableBox.js';
 import { gridStyle, buttonStyle, textStyle, } from '../../STYLES/styles.js';
-import pullSavedRecipes from '../../COMPONENTS/pullSavedRecipes.js';
+import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes.js';
 import { useFocusEffect } from '@react-navigation/native';
 
 const RecipeBook = () => {
@@ -94,7 +94,9 @@ const RecipeBook = () => {
                         style={buttonStyle.selectGroceries}
                         onPress={handleCheckout} 
                     > 
-                        <Text style={textStyle.light}>Checkout - Send to Grocery List</Text>
+                        <Text style={textStyle.light}> 
+                            Checkout - Send to Grocery List
+                        </Text>
                     </Pressable>
                 ) : (
                     <Pressable 
