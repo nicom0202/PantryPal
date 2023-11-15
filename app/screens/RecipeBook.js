@@ -6,9 +6,13 @@ import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle, buttonStyle, textStyle, } from '../../STYLES/styles.js';
 import pullSavedRecipes from '../../COMPONENTS/pullSavedRecipes.js';
+
+import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 
+
 const RecipeBook = () => {
+    const navigation = useNavigation();
     /* 
     * State variables for recipe book:
     * modalVisible: bool that enables/disables recipe modal
@@ -76,9 +80,11 @@ const RecipeBook = () => {
             setModalVisible(false);
             // Call a function to generate the list with the selected recipes (selectedRecipes)
             console.log("Selected Recipes Array:", selectedRecipes);
+            //navigate to grocerylist
+            navigation.navigate('GroceryList', { selectedRecipes });
             // Clear the selectedRecipes array
             setSelectedRecipes([]);
-            //navigate to grocerylist
+
         } else {
             // Handle transitioning to the select mode
             setSelectMode(true);

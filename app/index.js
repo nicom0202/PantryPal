@@ -89,6 +89,11 @@ export default function Container() {
             <TabNavigator />
           )}
         </Stack.Screen>
+        <Stack.Screen
+          name="GroceryList"
+          component={GroceryList}
+          options={{ title: 'Grocery List' }} // Customize the header title if needed
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
