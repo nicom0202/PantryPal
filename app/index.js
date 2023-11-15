@@ -37,7 +37,7 @@ function TabNavigator() {
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="book" color={color} size={size} />
+                        <Ionicons name="book-outline" color={color} size={size} />
                       )
                     }}
         />
@@ -46,28 +46,25 @@ function TabNavigator() {
                     component={GroceryList}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="list" color={color} size={size} />
+                        <Ionicons name="list-outline" color={color} size={size} />
                       )
                     }}
         />         
 
         <Tab.Screen name="Discover"
                     component={Discover}
-                    /*
-                    TODO:
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="" color={color} size={size} />
+                        <Ionicons name="globe-outline" color={color} size={size} />
                       )
                     }}
-                    */
         />
 
         <Tab.Screen name="Account"
                     component={Account}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" color={color} size={size} />
+                        <Ionicons name="person-outline" color={color} size={size} />
                       )
                     }}
         />        

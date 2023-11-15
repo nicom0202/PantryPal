@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, } from 'react-native';
 import { viewStyle, buttonStyle, textStyle } from '../STYLES/styles.js';
+import addRecipe from './addRecipe.js';
+import { v4 as uuidv4 } from 'uuid'; 
 const DiscoverModal = ({
     modalVisible, 
     selectedRecipe, 
@@ -12,7 +14,11 @@ const DiscoverModal = ({
     const handleAddDiscoverRecipe = () => {
        //TODO:
        //make new id and discoverID for recipe
-       //add to recipeModal in RecipeBook
+       selectedRecipe.id = uuidv4();
+       selectedRecipe.discoverID = Math.random();
+       addRecipe(selectedRecipe);
+       setModalVisible(false);
+        setSelectedRecipe(null);
     };
 
     return (

@@ -26,7 +26,7 @@ const LogoutButton = () => {
 
   return (
     <TouchableOpacity style={[LoginStyles.button, LoginStyles.buttonOutline]} onPress={handleSignOut}>
-          <Ionicons name="log-out" color={COLORS.brightGreen} size={SIZES.xLarge} />
+          <Ionicons name="log-out-outline" color={COLORS.brightGreen} size={SIZES.xLarge} />
           <Text style={[LoginStyles.buttonOutlineText]}>Logout</Text>
     </TouchableOpacity>
   );
