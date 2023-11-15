@@ -13,10 +13,10 @@ const GetIngredients = async (RecipeModalArray) => {
           // check if in the dictionary, if so add quantity, if not add to dictionary
           if (ingredient && ingredient.name && ingredient.quantity) {
             if (ingredientsList[ingredient.name]) {
-              ingredientsList[ingredient.name] += ingredient.quantity;
+              ingredientsList[ingredient.name] += Number(ingredient.quantity);
             } 
             else {
-              ingredientsList[ingredient.name] = ingredient.quantity;
+              ingredientsList[ingredient.name] = Number(ingredient.quantity);
             }
           }
         });
