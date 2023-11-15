@@ -20,9 +20,9 @@ export default function GroceryList({ route }) {
       try {        
         // const { selectedRecipes } = route.params;
         RecipeModalArray = selectedRecipes;
-        // Ingredients is a dictionary mapping of the ingredient name to the quantity from selected recipes
+// Ingredients is a dictionary mapping of the ingredient name to the quantity from selected recipes
         const ingredients = await GetIngredients(RecipeModalArray);
-        // console.log("\n\n\nIngredients:", ingredients);
+// console.log("\n\n\nIngredients:", ingredients);
         setIngredientsForUsers(ingredients);
       } catch (error) {
         console.error("Error fetching ingredients:", error);
@@ -46,24 +46,24 @@ export default function GroceryList({ route }) {
     });
   };
 
-  return (
-    <View style={containerStyle.container}>
-      {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
-        // console.log("Ingredient:", ingredientsForUsers),
-      {/* Clear Button */}
-      <Pressable onPress={handleClearList}>
-        <Text> Clear</Text>
-      </Pressable>
+return (
+  <View style={containerStyle.container}>
+    {/* Clear Button */}
+    <Pressable onPress={handleClearList}>
+      <Text>Clear</Text>
+    </Pressable>
 
-      {/* Checkbox List*/}
-      {ingredientsForUsers.map((ingredient, index) => (
-        <CheckBox
-          key={index}
-          onPress={() => handleCheckboxChange(ingredient)}
-          title={`${ingredient} - ${quantity} cup(s)`} // Displaying name and quantity
-          isChecked={selectedIngredients[ingredient] || false}
-        />
-      ))}
-    </View>
-  );
+    {/* Checkbox List*/}
+    {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
+      <CheckBox
+        key={index}
+        onPress={() => handleCheckboxChange(ingredient)}
+        title={`${ingredient} - ${quantity} cup(s)`} // Displaying name and quantity
+        isChecked={selectedIngredients[ingredient] || false}
+      />
+    ))}
+  </View>
+);
+
 }
+
