@@ -2,11 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView, Pressable, Text } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
-import RecipeModal from '../../COMPONENTS/RecipeModal.js';
-import ClickableBox from '../../COMPONENTS/ClickableBox.js';
+import RecipeModal from '../../COMPONENTS/recipeModal.js';
+import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle, buttonStyle, textStyle, } from '../../STYLES/styles.js';
 import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes.js';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 
 const RecipeBook = () => {
@@ -76,10 +76,9 @@ const RecipeBook = () => {
         if (selectMode) {
             setSelectMode(false);
             setModalVisible(false);
-            // Call a function to generate the list with the selected recipes (selectedRecipes)
-            console.log("Selected Recipes Array:", selectedRecipes);
             //navigate to grocerylist
-            navigation.navigate('GroceryList', { selectedRecipes });
+            console.log("Navigating to Grocery List with params:", selectedRecipes);
+            navigation.navigate('RecipeBook', { screen: 'Grocery List',  params: { selectedRecipes } });
             // Clear the selectedRecipes array
             setSelectedRecipes([]);
 

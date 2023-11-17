@@ -14,7 +14,7 @@ import Login from "./screens/Login";
 import Discover from "./screens/Discover";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator(); // Adding Stack Navigator
+const Stack = createStackNavigator();
 
 
 function TabNavigator() {
