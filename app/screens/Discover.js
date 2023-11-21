@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Pressable, Text } from 'react-native';
-import DiscoverModal from '../../COMPONENTS/DiscoverModal.js';
-import ClickableBox from '../../COMPONENTS/ClickableBox.js';
+import DiscoverModal from '../../COMPONENTS/discoverModal.js';
+import ClickableBox from '../../COMPONENTS/clickableBox.js';
 import { gridStyle } from '../../STYLES/styles.js';
 import pullDiscoverRecipes from '../../INTERFACE/PullDiscoverRecipes.js';
 import { buttonStyle, textStyle, } from '../../STYLES/styles.js';

@@ -12,9 +12,10 @@ import GroceryList from "./screens/GroceryList";
 import Account from "./screens/Account";
 import Login from "./screens/Login";
 import Discover from "./screens/Discover";
+import Image from "./screens/Image";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator(); // Adding Stack Navigator
+const Stack = createStackNavigator();
 
 
 function TabNavigator() {
@@ -67,7 +68,15 @@ function TabNavigator() {
                         <Ionicons name="person-outline" color={color} size={size} />
                       )
                     }}
-        />        
+        />
+        <Tab.Screen name="Image"
+                    component={Image}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="person-outline" color={color} size={size} />
+                      )
+                    }}
+        />         
       </Tab.Navigator>
   );
 }
