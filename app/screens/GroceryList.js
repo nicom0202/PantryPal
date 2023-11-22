@@ -19,7 +19,7 @@ export default function GroceryList({ route }) {
             console.log(selectedRecipes)
 
             RecipeModalArray = selectedRecipes;
-    // Ingredients is a dictionary mapping of the ingredient name to the quantity from selected recipes
+            // Ingredients is a dictionary mapping of the ingredient name to the quantity from selected recipes
             const ingredients = await GetIngredients(RecipeModalArray);
             setIngredientsForUsers(ingredients);
         } catch (error) {
@@ -29,6 +29,7 @@ export default function GroceryList({ route }) {
         fetchData();
     }, [route.params]);
 
+    // Prompts user to confirm they want to clear the grocery list.
     const confirmClearList = () => {
         Alert.alert("Clear Grocery List", "All grocery list items will be cleared. Continue?", [
             {
@@ -40,6 +41,7 @@ export default function GroceryList({ route }) {
         ]);
     }
 
+    // Clears grocery list.
     const handleClearList = () => {
         setIngredientsForUsers([]);
         setSelectedIngredients({});
