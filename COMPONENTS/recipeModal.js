@@ -167,7 +167,7 @@ const RecipeModal = ({
                     </Pressable>
 
 
-                    <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
+                    <ScrollView contentContainerStyle={ViewStyle.scrollViewContent}>
                         {/* Image box while editing, show image otherwise */}
                         {isEditing ? (
                             <SafeAreaView>
