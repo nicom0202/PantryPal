@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import RecipeModal from '../../COMPONENTS/recipeModal.js';
 import ClickableBox from '../../COMPONENTS/clickableBox.js';
-import { gridStyle, buttonStyle, textStyle, } from '../../STYLES/styles.js';
+import { GridStyle, ButtonStyle, TextStyle, } from '../../STYLES/styles.js';
 import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes.js';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
@@ -94,23 +94,23 @@ const RecipeBook = () => {
                 {/* SELECT/CHECKOUT BUTTON */}
                 {selectMode ? (
                     <Pressable 
-                        style={buttonStyle.selectGroceries}
+                        style={ButtonStyle.selectGroceries}
                         onPress={handleCheckout} 
                     > 
-                        <Text style={textStyle.light}> 
+                        <Text style={TextStyle.light}> 
                             Checkout - Send to Grocery List
                         </Text>
                     </Pressable>
                 ) : (
                     <Pressable 
-                        style={buttonStyle.selectGroceries}
+                        style={ButtonStyle.selectGroceries}
                         onPress={handleSelectMode} 
                     > 
-                        <Text style={textStyle.light}>Select Recipes</Text>
+                        <Text style={TextStyle.light}>Select Recipes</Text>
                     </Pressable>
                 )}
             </View>
-            <View style={[gridStyle.grid]}>
+            <View style={[GridStyle.grid]}>
                 {/* Modal that displays recipe information */}
                 <RecipeModal
                     modalVisible={modalVisible}

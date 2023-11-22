@@ -2,9 +2,9 @@
 // Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "./theme";
 
-const containerStyle = StyleSheet.create({
+const ContainerStyle = StyleSheet.create({
     container: {
         width: "100%",
         fontSize: SIZES.medium,
@@ -12,7 +12,7 @@ const containerStyle = StyleSheet.create({
     },
 });
 
-const textStyle = StyleSheet.create({
+const TextStyle = StyleSheet.create({
     title: {
         fontSize: SIZES.xLarge,
         textAlign: "center",
@@ -32,7 +32,7 @@ const textStyle = StyleSheet.create({
     },
 });
     
-const gridStyle = StyleSheet.create({
+const GridStyle = StyleSheet.create({
     grid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -43,7 +43,7 @@ const gridStyle = StyleSheet.create({
 });
 
 /* Modal styles */
-const viewStyle = StyleSheet.create({
+const ViewStyle = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
@@ -71,7 +71,22 @@ const viewStyle = StyleSheet.create({
     },
 });
 
-const buttonStyle = StyleSheet.create({
+const ButtonStyle = StyleSheet.create({
+    colorFill: {
+        backgroundColor: COLORS.brightGreen,
+        width: '100%',
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+
+    colorOutline: {
+        backgroundColor: COLORS.lightWhite,
+        marginTop: 5,
+        borderColor: COLORS.brightGreen,
+        borderWidth: 2,
+    },
+    
     close: {
         position: 'absolute',
         top: 10,
@@ -79,7 +94,7 @@ const buttonStyle = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'red',
+        backgroundColor: COLORS.fadedRed,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -156,7 +171,7 @@ const buttonStyle = StyleSheet.create({
     },
 });
 
-const checkBoxStyle = StyleSheet.create({
+const CheckBoxStyle = StyleSheet.create({
     container: { 
         justifyContent: "flex-start", 
         alignItems: "center", 
@@ -173,7 +188,7 @@ const checkBoxStyle = StyleSheet.create({
     }, 
 });
 
-const textInputStyle = StyleSheet.create({
+const TextInputStyle = StyleSheet.create({
     inputRecipeName: {
       height: 40,
       margin: 12,
@@ -241,12 +256,12 @@ const LoginStyles = StyleSheet.create({
 });
 
   export {
-    containerStyle,
-    textStyle,
-    gridStyle,
-    viewStyle,
-    buttonStyle,
-    checkBoxStyle,
-    textInputStyle,
+    ContainerStyle,
+    TextStyle,
+    GridStyle,
+    ViewStyle,
+    ButtonStyle,
+    CheckBoxStyle,
+    TextInputStyle,
     LoginStyles,
 };

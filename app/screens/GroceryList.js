@@ -3,7 +3,7 @@ import { View, Text, Pressable, Alert } from 'react-native';
 import { auth } from "../../firebase";
 import CheckBox from "../../COMPONENTS/checkBox.js";
 import GetIngredients from "../../INTERFACE/GetUserIngredients";
-import { containerStyle } from '../../STYLES/styles.js';
+import { ContainerStyle } from '../../STYLES/styles.js';
 
 export default function GroceryList({ route }) {
     const [ingredientsForUsers, setIngredientsForUsers] = useState({});
@@ -55,7 +55,7 @@ export default function GroceryList({ route }) {
     };
 
     return (
-    <View style={containerStyle.container}>
+    <View style={ContainerStyle.container}>
         {/* Clear Button */}
         <Pressable onPress={confirmClearList}>
         <Text>Clear Grocery List</Text>

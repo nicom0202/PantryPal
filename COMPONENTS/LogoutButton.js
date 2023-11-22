@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/core';
 import { getAuth, signOut } from 'firebase/auth';
 import { LoginStyles, LogoutStyles } from '../STYLES/styles.js';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../CONSTANTS/theme.js';
+import { COLORS, SIZES } from '../STYLES/theme.js';
 
 const LogoutButton = () => {
   const navigation = useNavigation();
