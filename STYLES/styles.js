@@ -54,7 +54,7 @@ const ViewStyle = StyleSheet.create({
         width: "90%",
         height: "70%",
         margin: 10,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.lightWhite,
         borderRadius: 20,
         padding: 20,
         shadowColor: '#000',
@@ -105,7 +105,7 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'red',
+        backgroundColor: COLORS.fadedRed,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
@@ -116,7 +116,7 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
@@ -127,7 +127,7 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
@@ -138,7 +138,7 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'blue',
+        backgroundColor: COLORS.fadedBlue,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
@@ -150,7 +150,7 @@ const ButtonStyle = StyleSheet.create({
         height: 50,
         borderRadius: 30,
         padding: 0,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
@@ -162,7 +162,7 @@ const ButtonStyle = StyleSheet.create({
         height: 50,
         borderRadius: 30,
         padding: 0,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
