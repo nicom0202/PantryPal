@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, } from 'react-native';
-import { viewStyle, buttonStyle, textStyle } from '../STYLES/styles.js';
+import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
 import addRecipe from '../INTERFACE/AddRecipe.js';
 import { v4 as uuidv4 } from 'uuid'; 
 const DiscoverModal = ({
@@ -27,29 +27,29 @@ const DiscoverModal = ({
             transparent={true}
             visible={modalVisible}
         >
-            <View style={viewStyle.centeredView}>
-                <View style={viewStyle.modalView}>
+            <View style={ViewStyle.centeredView}>
+                <View style={ViewStyle.modalView}>
                     {/* Close button (top right) */}
                     <Pressable
-                        style={buttonStyle.close}
+                        style={ButtonStyle.close}
                         hitSlop={15}
                         onPress={() => {
                             setModalVisible(false);
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Text style={textStyle.body}>X</Text>
+                        <Text style={TextStyle.body}>X</Text>
                     </Pressable>
 
-                    <View style={viewStyle.scrollViewContent}>
-                        <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                    <View style={ViewStyle.scrollViewContent}>
+                        <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
 
-                        <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                        <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
 
                         <View>
-                            <Text style={textStyle.body}>Ingredients:</Text>
+                            <Text style={TextStyle.body}>Ingredients:</Text>
                             {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                <Text key={index} style={textStyle.body}>
+                                <Text key={index} style={TextStyle.body}>
                                     {ingredient.name}: {ingredient.quantity}
                                 </Text>
                             )) : ''}
@@ -57,10 +57,10 @@ const DiscoverModal = ({
                         {/* TODO: ADD MORE FIELDS TO SHOW BELOW LIKE COOKTIME, LIKES, IMAGE*/}
                     </View>
                     <Pressable
-                        style={buttonStyle.saveRecipe}
+                        style={ButtonStyle.saveRecipe}
                         onPress={handleAddDiscoverRecipe}
                         >
-                        <Text style={textStyle.body}>Add</Text>
+                        <Text style={TextStyle.body}>Add</Text>
                     </Pressable>
                     {/* Pass addedRecipe to RecipeModal */}
                 </View>

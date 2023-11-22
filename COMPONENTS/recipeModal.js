@@ -3,7 +3,6 @@ import addRecipe from '../INTERFACE/AddRecipe.js';
 import deleteRecipe from '../INTERFACE/DeleteRecipe.js';
 import IngredientFlatList from './IngredientFlatList.js';
 import addToDiscover from '../INTERFACE/AddToDiscover.js';
-
 import { 
     View, 
     Text, 
@@ -16,9 +15,14 @@ import {
     TouchableWithoutFeedback,
     Image
 } from 'react-native';
-import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
+import { ViewStyle, ButtonStyle, TextStyle, TextInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
+
 import SimpleAddImageButton from './AddImageButton.js';
+
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SIZES } from '../STYLES/theme.js';
+
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -147,20 +151,21 @@ const RecipeModal = ({
             transparent={true}
             visible={modalVisible}
         >
-            <View style={viewStyle.centeredView}>
-                <View style={viewStyle.modalView}>
+            <View style={ViewStyle.centeredView}>
+                <View style={ViewStyle.modalView}>
                     {/* Close button (top right) -- TODO save editing? alert */}
                     <Pressable
-                        style={buttonStyle.close}
-                        hitSlop={15}
+                        style={ButtonStyle.close}
+                        hitSlop={20}
                         onPress={() => {
                             saveEditing();
                             setModalVisible(false);
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Text style={textStyle.body}>X</Text>
+                    <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
+
 
                     <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
                         {/* Image box while editing, show image otherwise */}
@@ -182,13 +187,12 @@ const RecipeModal = ({
                                 </View>
                             )
                         )}
-
                         {/* Recipe Name Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[textInputStyle.inputRecipeName]} 
+                                    style={[TextInputStyle.inputRecipeName]} 
                                     value={selectedRecipe ? selectedRecipe.name : ''}
                                     onChangeText={text => updateRecipeName(text)}
                                     placeholder="Recipe Name"
@@ -197,7 +201,7 @@ const RecipeModal = ({
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                            <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
                         )}
 
                         {/* Recipe Ingredients Text Box while editing, Text otherwise */}
@@ -205,7 +209,7 @@ const RecipeModal = ({
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[textInputStyle.inputRecipeInstructions]} 
+                                    style={[TextInputStyle.inputRecipeInstructions]} 
                                     value={selectedRecipe ? selectedRecipe.instructions : ''}
                                     onChangeText={text => updateRecipeInstructions(text)}
                                     placeholder="Recipe Instructions"
@@ -215,7 +219,7 @@ const RecipeModal = ({
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                            <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
                         )}
 
                         {/* Ingredients list */}
@@ -227,9 +231,9 @@ const RecipeModal = ({
                             />
                         ) : (
                             <View>
-                                <Text style={textStyle.body}>Ingredients:</Text>
+                                <Text style={TextStyle.body}>Ingredients:</Text>
                                 {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                    <Text key={index} style={textStyle.body}>
+                                    <Text key={index} style={TextStyle.body}>
                                         {ingredient.name}: {ingredient.quantity}
                                     </Text>
                                 )) : ''}
@@ -239,33 +243,33 @@ const RecipeModal = ({
 
                     {isEditing ? (
                         <Pressable
-                            style={buttonStyle.saveRecipe}
+                            style={ButtonStyle.saveRecipe}
                             onPress={saveEditing}
                         >
-                            <Text style={textStyle.body}>Save</Text>
+                            <Text style={TextStyle.body}>Save</Text>
                         </Pressable>
                     ) : (
                         <Pressable
-                            style={buttonStyle.editRecipe}
+                            style={ButtonStyle.editRecipe}
                             onPress={startEditing}
                         >
-                            <Text style={textStyle.body}>Edit</Text>
+                            <Text style={TextStyle.body}>Edit</Text>
                         </Pressable>
                     )}
 
                     {isEditing ? (
                         <Pressable
-                            style={buttonStyle.deleteRecipe}
+                            style={ButtonStyle.deleteRecipe}
                             onPress={handleDeleteRecipe}
                         >
-                            <Text style={textStyle.body}>Delete Recipe</Text>
+                            <Text style={TextStyle.body}>Delete Recipe</Text>
                         </Pressable>
                     ) : (
                         <Pressable
-                            style={buttonStyle.sendRecipeToDiscover}
+                            style={ButtonStyle.sendRecipeToDiscover}
                             onPress={sendToDiscover}
                         >
-                            <Text style={textStyle.light}>Publish</Text>
+                            <Text style={TextStyle.light}>Publish</Text>
                         </Pressable>
                     )}
 

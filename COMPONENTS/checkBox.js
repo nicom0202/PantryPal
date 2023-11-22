@@ -6,20 +6,20 @@
 import { Pressable, Text, View } from "react-native";
 import * as React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { checkBoxStyle } from "../STYLES/styles.js"
+import { CheckBoxStyle } from "../STYLES/styles.js"
 
 const CheckBox = (props) => {
     const iconName = props.isChecked ?
     "checkbox-marked" : "checkbox-blank-outline";
 
     return (
-        <View style={checkBoxStyle.container}>
+        <View style={CheckBoxStyle.container}>
             <Pressable onPress={props.onPress}>
                 <MaterialCommunityIcons
                     name={iconName} size={24} color="#000"
                 />
             </Pressable>
-            <Text style={checkBoxStyle.title}>
+            <Text style={CheckBoxStyle.title}>
                 {props.title}
             </Text>
         </View>
