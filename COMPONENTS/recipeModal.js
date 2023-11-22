@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
-import SimpleAddImageButton from './simpleAddImage.js';
+import SimpleAddImageButton from './AddImageButton.js';
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -56,36 +56,37 @@ const RecipeModal = ({
         }
     };
 
-    /* Alerts the user to confirm before deleting recipe */
-    const handleDeleteRecipe = () => {
-        Alert.alert(
-            "Confirm Delete",
-            "Are you sure you want to delete this recipe?",
-            [
-            {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-            },
-            {
-                text: "Delete",
-                onPress: () => {              
-                    /* remove the recipe from list of recipes and close modal */
-                    if (selectedRecipe) {
-                        const updatedRecipes = recipes.filter(
-                            recipe => recipe.id !== selectedRecipe.id);
-                        deleteRecipe(selectedRecipe)
-                        setRecipes(updatedRecipes);
-                        setModalVisible(false);
-                        setSelectedRecipe(null);
-                        setIsEditing(false);
-                    }
+        /* Alerts the user to confirm before deleting recipe */
+        const handleDeleteRecipe = () => {
+            Alert.alert(
+                "Confirm Delete",
+                "Are you sure you want to delete this recipe?",
+                [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
                 },
-            },
-            ]
-        );
-    };    
-   
+                {
+                    text: "Delete",
+                    onPress: () => {              
+                        /* remove the recipe from list of recipes and close modal */
+                        if (selectedRecipe) {
+                            const updatedRecipes = recipes.filter(
+                                recipe => recipe.id !== selectedRecipe.id);
+                            // TODO: DELETE RECIPE FROM FIREBASE!!!!!!!!!
+                            deleteRecipe(selectedRecipe)
+                            setRecipes(updatedRecipes);
+                            setModalVisible(false);
+                            setSelectedRecipe(null);
+                            setIsEditing(false);
+                        }
+                    },
+                },
+                ]
+            );
+        };    
+    
     /* Alerts the user to confirm before publishing recipe */
     const sendToDiscover = () => {
         Alert.alert(
