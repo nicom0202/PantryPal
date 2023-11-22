@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Pressable, Text } from 'react-native';
+import { View, ScrollView, Pressable, Text, Image } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
 import RecipeModal from '../../COMPONENTS/recipeModal.js';
@@ -25,6 +25,8 @@ const RecipeBook = () => {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectMode, setSelectMode] = useState(false);
+    const [modalImage, setModalImage] = useState(null); // New state to handle individual modal images
+
 
     // Use useFocusEffect to call pullSavedRecipes when the screen comes into focus
     useFocusEffect(
@@ -47,6 +49,8 @@ const RecipeBook = () => {
         } else {
             setModalVisible(true);
             setSelectedRecipe(recipe);
+            // Set the image for the specific modal
+            setModalImage(recipe.image || null);
         }
     };
 
@@ -60,7 +64,8 @@ const RecipeBook = () => {
             ingredients: [{ name: "", quantity: "" }], 
             instructions: "", 
             cookTime: 0, 
-            discoverID: randomDiscoverID
+            discoverID: randomDiscoverID,
+            image_path: "" //this saves the path in the firebase bucket to the image, need to update pullSavedRecipes to pull this image for a particular recipe
         };
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
@@ -122,6 +127,8 @@ const RecipeBook = () => {
                     setSelectedRecipe={setSelectedRecipe}
                     setIsEditing={setIsEditing}
                     selectedModal={modalVisible}
+                    selectedImage={modalImage} // Pass down the specific image for this modal
+                    handleImageSelected={(imageUri) => setModalImage(imageUri)} // Update the specific image for this modal
                 />
 
                 {/* Clickable boxes that displays each recipe */}
@@ -134,6 +141,24 @@ const RecipeBook = () => {
                         onClick={() => handleRecipeInteraction(recipe)}
                     />
                 ))}
+
+
+
+                
+                {/*
+                        {recipes.map((recipe) => (
+                            <ClickableBox
+                                key={recipe.id}
+                                content={recipe.image ? <Image source={{ uri: recipe.image }} style={{ width: '100%', height: '100%' }} /> : recipe.name}
+                                highlighted={selectedRecipes.includes(recipe)}
+                                onClick={() => handleRecipeInteraction(recipe)}
+                            />
+                        ))}
+                */}
+
+
+
+
                 {/* Clickable box to add a recipe */}
                 <ClickableBox
                     content={"Add Recipe"}

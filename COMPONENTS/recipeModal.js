@@ -13,11 +13,16 @@ import {
     Alert,
     Keyboard,
     TouchableWithoutFeedback,
+    Image
 } from 'react-native';
 import { ViewStyle, ButtonStyle, TextStyle, TextInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import SimpleAddImageButton from './AddImageButton.js';
+
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
+
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -30,7 +35,10 @@ const RecipeModal = ({
     setModalVisible,
     setSelectedRecipe,
     setIsEditing,
+    selectedImage, // Use the specific image prop
+    handleImageSelected, // Use the specific handler for updating the image
 }) => {
+
     const startEditing = () => {
         setIsEditing(true);
     };
@@ -43,6 +51,7 @@ const RecipeModal = ({
                 /* Create a copy of the recipes array and update the name of the selected recipe */
                 const updatedRecipes = [...recipes];
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
+                updatedRecipes[recipeIndex].image = selectedImage;
                 setRecipes(updatedRecipes);
                 addRecipe(updatedRecipes[recipeIndex])
             }
@@ -51,36 +60,37 @@ const RecipeModal = ({
         }
     };
 
-    /* Alerts the user to confirm before deleting recipe */
-    const handleDeleteRecipe = () => {
-        Alert.alert(
-            "Confirm Delete",
-            "Are you sure you want to delete this recipe?",
-            [
-            {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-            },
-            {
-                text: "Delete",
-                onPress: () => {              
-                    /* remove the recipe from list of recipes and close modal */
-                    if (selectedRecipe) {
-                        const updatedRecipes = recipes.filter(
-                            recipe => recipe.id !== selectedRecipe.id);
-                        deleteRecipe(selectedRecipe)
-                        setRecipes(updatedRecipes);
-                        setModalVisible(false);
-                        setSelectedRecipe(null);
-                        setIsEditing(false);
-                    }
+        /* Alerts the user to confirm before deleting recipe */
+        const handleDeleteRecipe = () => {
+            Alert.alert(
+                "Confirm Delete",
+                "Are you sure you want to delete this recipe?",
+                [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
                 },
-            },
-            ]
-        );
-    };    
-   
+                {
+                    text: "Delete",
+                    onPress: () => {              
+                        /* remove the recipe from list of recipes and close modal */
+                        if (selectedRecipe) {
+                            const updatedRecipes = recipes.filter(
+                                recipe => recipe.id !== selectedRecipe.id);
+                            // TODO: DELETE RECIPE FROM FIREBASE!!!!!!!!!
+                            deleteRecipe(selectedRecipe)
+                            setRecipes(updatedRecipes);
+                            setModalVisible(false);
+                            setSelectedRecipe(null);
+                            setIsEditing(false);
+                        }
+                    },
+                },
+                ]
+            );
+        };    
+    
     /* Alerts the user to confirm before publishing recipe */
     const sendToDiscover = () => {
         Alert.alert(
@@ -133,6 +143,7 @@ const RecipeModal = ({
     const handleDismissKeyboard = () => {
         Keyboard.dismiss(); // This will dismiss the keyboard when you tap away from the TextInput
     };
+    
 
     return (
         <Modal
@@ -155,7 +166,27 @@ const RecipeModal = ({
                     <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
 
-                    <ScrollView contentContainerStyle={ViewStyle.scrollViewContent}>
+
+                    <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
+                        {/* Image box while editing, show image otherwise */}
+                        {isEditing ? (
+                            <SafeAreaView>
+                                <SimpleAddImageButton 
+                                    onImageSelected={handleImageSelected} 
+                                    currentImage={selectedRecipe ? selectedRecipe.image : null} 
+                                    selectedRecipe={selectedRecipe}
+                                />
+                            </SafeAreaView>
+                        ) : (
+                            selectedImage && (
+                                <View style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
+                                    <Image
+                                        source={{ uri: selectedImage }}
+                                        style={{ width: '100%', height: '100%' }}
+                                    />
+                                </View>
+                            )
+                        )}
                         {/* Recipe Name Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
