@@ -53,7 +53,7 @@ const ImageScreen = () => {
         });
         
         try {
-            const storageRef = ref(storage, `images/image-${Date.now()}`);
+            const storageRef = ref(storage, `images/image-${Date.now()}`); // THIS HOLDS THE PATH TO FIREBASE 
             await uploadBytes(storageRef, blob);
 
             blob.close();

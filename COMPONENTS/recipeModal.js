@@ -14,9 +14,11 @@ import {
     Alert,
     Keyboard,
     TouchableWithoutFeedback,
+    Image
 } from 'react-native';
 import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
+import SimpleAddImageButton from './simpleAddImage.js';
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -29,7 +31,10 @@ const RecipeModal = ({
     setModalVisible,
     setSelectedRecipe,
     setIsEditing,
+    selectedImage, // Use the specific image prop
+    handleImageSelected, // Use the specific handler for updating the image
 }) => {
+
     const startEditing = () => {
         setIsEditing(true);
     };
@@ -42,6 +47,7 @@ const RecipeModal = ({
                 /* Create a copy of the recipes array and update the name of the selected recipe */
                 const updatedRecipes = [...recipes];
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
+                updatedRecipes[recipeIndex].image = selectedImage;
                 setRecipes(updatedRecipes);
                 addRecipe(updatedRecipes[recipeIndex])
             }
@@ -132,6 +138,7 @@ const RecipeModal = ({
     const handleDismissKeyboard = () => {
         Keyboard.dismiss(); // This will dismiss the keyboard when you tap away from the TextInput
     };
+    
 
     return (
         <Modal
@@ -155,6 +162,26 @@ const RecipeModal = ({
                     </Pressable>
 
                     <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
+                        {/* Image box while editing, show image otherwise */}
+                        {isEditing ? (
+                            <SafeAreaView>
+                                <SimpleAddImageButton 
+                                    onImageSelected={handleImageSelected} 
+                                    currentImage={selectedRecipe ? selectedRecipe.image : null} 
+                                    selectedRecipe={selectedRecipe}
+                                />
+                            </SafeAreaView>
+                        ) : (
+                            selectedImage && (
+                                <View style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
+                                    <Image
+                                        source={{ uri: selectedImage }}
+                                        style={{ width: '100%', height: '100%' }}
+                                    />
+                                </View>
+                            )
+                        )}
+
                         {/* Recipe Name Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
