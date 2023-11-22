@@ -5,9 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Import 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
-import { COLORS } from '../../CONSTANTS/theme'
+import { COLORS } from '../../STYLES/theme'
 import { LoginStyles } from '../../STYLES/styles';
-import LogoutButton from '../../COMPONENTS/LogoutButton.js'; // Import the LogoutButton component
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
