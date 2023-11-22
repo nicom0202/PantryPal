@@ -49,7 +49,7 @@ const DiscoverModal = ({
                         <View>
                             <Text style={TextStyle.body}>Ingredients:</Text>
                             {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                <Text key={index} style={textStyle.body}>
+                                <Text key={index} style={TextStyle.body}>
                                     {ingredient.name}: {ingredient.quantity}
                                 </Text>
                             )) : ''}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { COLORS } from '../STYLES/theme';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -14,7 +15,7 @@ const ClickableBox = ({ content, onClick, highlighted }) => {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: highlighted ? 'yellow' : 'transparent', // Highlight when 'highlighted' is true
+    backgroundColor: highlighted ? COLORS.fadedOrange : 'transparent', // Highlight when 'highlighted' is true
   };
 
   return (

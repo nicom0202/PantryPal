@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 import { ViewStyle, ButtonStyle, TextStyle, TextInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SIZES } from '../STYLES/theme.js';
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -143,14 +145,14 @@ const RecipeModal = ({
                     {/* Close button (top right) -- TODO save editing? alert */}
                     <Pressable
                         style={ButtonStyle.close}
-                        hitSlop={15}
+                        hitSlop={20}
                         onPress={() => {
                             saveEditing();
                             setModalVisible(false);
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Text style={TextStyle.body}>X</Text>
+                    <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
 
                     <ScrollView contentContainerStyle={ViewStyle.scrollViewContent}>
@@ -200,7 +202,7 @@ const RecipeModal = ({
                             <View>
                                 <Text style={TextStyle.body}>Ingredients:</Text>
                                 {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                    <Text key={index} style={textStyle.body}>
+                                    <Text key={index} style={TextStyle.body}>
                                         {ingredient.name}: {ingredient.quantity}
                                     </Text>
                                 )) : ''}
