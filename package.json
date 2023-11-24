@@ -42,7 +42,12 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "expo-auth-session": "~5.0.2",
+    "expo-crypto": "~12.4.1",
+    "expo-web-browser": "~12.3.2",
+    "expo-random": "~13.2.0",
+    "expo-updates": "~0.18.17"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

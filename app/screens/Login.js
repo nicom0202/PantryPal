@@ -9,113 +9,113 @@ import { COLORS } from '../../STYLES/theme'
 import { LoginStyles } from '../../STYLES/styles';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
 
-  const navigation = useNavigation()
+	const navigation = useNavigation()
 
-  // Create Pantry Pal account through Firebase
-  useEffect(() => {
-    const auth = getAuth(firebaseApp);
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('RecipeBook');  // Navigate to Home screen
-      }
-    });
+	// Create Pantry Pal account through Firebase
+	useEffect(() => {
+		const auth = getAuth(firebaseApp);
+		const unsubscribe = auth.onAuthStateChanged(user => {
+		if (user) {
+			navigation.navigate('RecipeBook');  // Navigate to Home screen
+		}
+		});
 
-    return () => unsubscribe(); // Cleanup the subscription on component unmount
-  }, [navigation]);
-  
+		return () => unsubscribe(); // Cleanup the subscription on component unmount
+	}, [navigation]);
+	
 
-  const handleSignUp = () => {
-    const auth = getAuth(firebaseApp);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        AddUserToDB(auth.currentUser.email);
-        const user = userCredential.user;
-        // Set user token in AsyncStorage
-        AsyncStorage.setItem('userToken', 'user_token_here')
-          .then(() => {
-            navigation.navigate('RecipeBook');
-          })
-          .catch((error) => {
-            console.log('Error setting user token:', error);
-          });
-      })
-      .catch((error) => {
-        console.log('Error signing up:', error);
-        // Handle error as needed
-      });
-  };
+	const handleSignUp = () => {
+		const auth = getAuth(firebaseApp);
+		createUserWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			AddUserToDB(auth.currentUser.email);
+			const user = userCredential.user;
+			// Set user token in AsyncStorage
+			AsyncStorage.setItem('userToken', 'user_token_here')
+			.then(() => {
+				navigation.navigate('RecipeBook');
+			})
+			.catch((error) => {
+				console.log('Error setting user token:', error);
+			});
+		})
+		.catch((error) => {
+			console.log('Error signing up:', error);
+			// Handle error as needed
+		});
+	};
 
-  const handleLogin = () => {
-    const auth = getAuth(firebaseApp);
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // Set user token in AsyncStorage
-        AsyncStorage.setItem('userToken', 'user_token_here')
-          .then(() => {
-            navigation.navigate('RecipeBook');
-          })
-          .catch((error) => {
-            console.log('Error setting user token:', error);
-          });
-      })
-      .catch((error) => {
-        console.log('Error signing in:', error);
-        // Handle error as needed
-      });
-  }
+	const handleLogin = () => {
+		const auth = getAuth(firebaseApp);
+		signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			const user = userCredential.user;
+			// Set user token in AsyncStorage
+			AsyncStorage.setItem('userToken', 'user_token_here')
+			.then(() => {
+				navigation.navigate('RecipeBook');
+			})
+			.catch((error) => {
+				console.log('Error setting user token:', error);
+			});
+		})
+		.catch((error) => {
+			console.log('Error signing in:', error);
+			// Handle error as needed
+		});
+	}
 
 
-  return (
-    <KeyboardAvoidingView
-      style={LoginStyles.container}
-      behavior="padding"
-    >
-      <View>
-        <Image source={require('../../ASSETS/pantrypal.png')}
-               style={{width: 325, height: 200}}
-        />
-      </View>
+	return (
+		<KeyboardAvoidingView
+		style={LoginStyles.container}
+		behavior="padding"
+		>
+		<View>
+			<Image source={require('../../ASSETS/pantrypal.png')}
+				style={{width: 325, height: 200}}
+			/>
+		</View>
 
-      <View style={LoginStyles.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          style={LoginStyles.input}
-          placeholderTextColor={COLORS.fadedGreen}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={LoginStyles.input}
-          secureTextEntry
-          placeholderTextColor={COLORS.fadedGreen}
-        />
-      </View>
+		<View style={LoginStyles.inputContainer}>
+			<TextInput
+			placeholder="Email"
+			value={email}
+			onChangeText={text => setEmail(text)}
+			style={LoginStyles.input}
+			placeholderTextColor={COLORS.fadedGreen}
+			/>
+			<TextInput
+			placeholder="Password"
+			value={password}
+			onChangeText={text => setPassword(text)}
+			style={LoginStyles.input}
+			secureTextEntry
+			placeholderTextColor={COLORS.fadedGreen}
+			/>
+		</View>
 
-      <View style={LoginStyles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={LoginStyles.button}
-        >
-          <Text style={LoginStyles.buttonText}>Login</Text>
-        </TouchableOpacity>
+		<View style={LoginStyles.buttonContainer}>
+			<TouchableOpacity
+			onPress={handleLogin}
+			style={LoginStyles.button}
+			>
+			<Text style={LoginStyles.buttonText}>Login</Text>
+			</TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={handleSignUp}
-          style={[LoginStyles.button, LoginStyles.buttonOutline]}
-        >
-          <Text style={LoginStyles.buttonOutlineText}>Register</Text>
-        </TouchableOpacity>
+			<TouchableOpacity
+			onPress={handleSignUp}
+			style={[LoginStyles.button, LoginStyles.buttonOutline]}
+			>
+			<Text style={LoginStyles.buttonOutlineText}>Register</Text>
+			</TouchableOpacity>
 
-      </View>
-    </KeyboardAvoidingView>
-  )
+		</View>
+		</KeyboardAvoidingView>
+	)
 }
 
 export default LoginScreen
