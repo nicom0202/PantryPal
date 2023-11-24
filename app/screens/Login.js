@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
-import { Image, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
@@ -13,7 +13,8 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('')
 
   const navigation = useNavigation()
-  
+
+  // Create Pantry Pal account through Firebase
   useEffect(() => {
     const auth = getAuth(firebaseApp);
     const unsubscribe = auth.onAuthStateChanged(user => {

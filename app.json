@@ -4,20 +4,13 @@
     "web": {
       "bundler": "metro"
     },
-    "android": {
-      "googleServicesFile": "./google-services.json"
-    },
-    "ios": {
-      "googleServicesFile": "./GoogleService-Info.plist"
-    },
     "plugins": [
       "expo-router",
       [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
-        },
-      "@react-native-google-signin/google-signin"
+        }
       ]
     ],
     "name": "PantryPal",
