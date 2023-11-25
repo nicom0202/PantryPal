@@ -8,7 +8,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
 import { COLORS, SIZES } from '../../STYLES/theme'
-import { LoginStyles } from '../../STYLES/styles';
+import { ContainerStyle, TextStyle, ButtonStyle } from '../../STYLES/styles';
 import { Ionicons } from '@expo/vector-icons';
 
 WebBrowser.maybeCompleteAuthSession();	// Listener for Google sign-in
@@ -99,59 +99,52 @@ const LoginScreen = () => {
 	}
 
 	return (
-		<KeyboardAvoidingView
-		style={LoginStyles.container}
-		behavior="padding"
-		>
-		<View>
-			<Image source={require('../../ASSETS/pantrypal.png')}
-				style={{width: 325, height: 200}}
-			/>
-		</View>
+		<KeyboardAvoidingView style={ContainerStyle.defaultContainer} behavior="padding">
+			
+			{/* App Logo */}
+			<View>
+				<Image source={require('../../ASSETS/pantrypal.png')} style={{width: 325, height: 200}}/>
+			</View>
+	
+			{/* Email/Password Input */}
+			<View style={ContainerStyle.inputContainer}>
+				<TextInput
+					placeholder="Email"
+					value={email}
+					onChangeText={text => setEmail(text)}
+					style={TextStyle.input}
+					placeholderTextColor={COLORS.fadedGreen}
+				/>
+				<TextInput
+					placeholder="Password"
+					value={password}
+					onChangeText={text => setPassword(text)}
+					style={TextStyle.input}
+					secureTextEntry
+					placeholderTextColor={COLORS.fadedGreen}
+				/>
+			</View>
 
-		<View style={LoginStyles.inputContainer}>
-			<TextInput
-			placeholder="Email"
-			value={email}
-			onChangeText={text => setEmail(text)}
-			style={LoginStyles.input}
-			placeholderTextColor={COLORS.fadedGreen}
-			/>
-			<TextInput
-			placeholder="Password"
-			value={password}
-			onChangeText={text => setPassword(text)}
-			style={LoginStyles.input}
-			secureTextEntry
-			placeholderTextColor={COLORS.fadedGreen}
-			/>
-		</View>
+			{/* Login Buttons */}
+			<View style={ContainerStyle.buttonContainer}>
+			
+				{/* Login */}
+				<TouchableOpacity onPress={handleLogin} style={ButtonStyle.colorFill}>
+					<Text style={ButtonStyle.colorFillText}>Login</Text>
+				</TouchableOpacity>
+				
+				{/* Register */}
+				<TouchableOpacity onPress={handleSignUp} style={[ButtonStyle.colorOutline]}>
+					<Text style={ButtonStyle.colorOutlineText}>Register</Text>
+				</TouchableOpacity>
 
-		<View style={LoginStyles.buttonContainer}>
-			<TouchableOpacity
-				onPress={handleLogin}
-				style={LoginStyles.button}
-			>
-			<Text style={LoginStyles.buttonText}>Login</Text>
-			</TouchableOpacity>
+				{/* Google Sign-In */}
+				<TouchableOpacity onPress={() => { promptAsync(); }} style={ButtonStyle.googleLogin}>
+					<Text style={ButtonStyle.googleLoginText}>Sign-In with Google</Text>
+				</TouchableOpacity>
+			
+			</View>
 
-			<TouchableOpacity
-				onPress={handleSignUp}
-				style={[LoginStyles.button, LoginStyles.buttonOutline]}
-			>
-			<Text style={LoginStyles.buttonOutlineText}>Register</Text>
-			</TouchableOpacity>
-
-			{/* Google Sign-In */}
-			<TouchableOpacity
-				onPress={() => { promptAsync(); }}
-				style={LoginStyles.button}
-			>
-				<Ionicons name="logo-google" color={COLORS.lightWhite} size={SIZES.medium} />
-				<Text style={LoginStyles.buttonText}>Sign-In with Google</Text>
-			</TouchableOpacity>
-
-		</View>
 		</KeyboardAvoidingView>
 	)
 }
