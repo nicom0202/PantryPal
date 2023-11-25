@@ -139,8 +139,8 @@ const LoginScreen = () => {
 				</TouchableOpacity>
 
 				{/* Google Sign-In */}
-				<TouchableOpacity onPress={() => { promptAsync(); }} style={ButtonStyle.googleLogin}>
-					<Text style={ButtonStyle.googleLoginText}>Sign-In with Google</Text>
+				<TouchableOpacity onPress={() => { promptAsync(); }} style={ButtonStyle.colorFillBlue}>
+					<Text style={ButtonStyle.colorFillText}>Sign-In with Google</Text>
 				</TouchableOpacity>
 			
 			</View>

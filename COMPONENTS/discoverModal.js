@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
 import addRecipe from '../INTERFACE/AddRecipe.js';
 import { v4 as uuidv4 } from 'uuid'; 
@@ -32,13 +34,13 @@ const DiscoverModal = ({
                     {/* Close button (top right) */}
                     <Pressable
                         style={ButtonStyle.close}
-                        hitSlop={15}
+                        hitSlop={20}
                         onPress={() => {
                             setModalVisible(false);
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Text style={TextStyle.body}>X</Text>
+                        <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
 
                     <View style={ViewStyle.scrollViewContent}>
@@ -57,10 +59,10 @@ const DiscoverModal = ({
                         {/* TODO: ADD MORE FIELDS TO SHOW BELOW LIKE COOKTIME, LIKES, IMAGE*/}
                     </View>
                     <Pressable
-                        style={ButtonStyle.saveRecipe}
+                        style={ButtonStyle.addRecipe}
                         onPress={handleAddDiscoverRecipe}
                         >
-                        <Text style={TextStyle.body}>Add</Text>
+                        <Text style={ButtonStyle.colorFillText}>Add to Recipe Book</Text>
                     </Pressable>
                     {/* Pass addedRecipe to RecipeModal */}
                 </View>

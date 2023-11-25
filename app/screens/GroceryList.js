@@ -4,7 +4,7 @@ import { auth } from "../../firebase";
 import CheckBox from "../../COMPONENTS/checkBox.js";
 import GetIngredients from "../../INTERFACE/GetUserIngredients";
 import { ContainerStyle, ButtonStyle } from '../../STYLES/styles.js';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 export default function GroceryList({ route }) {
     const [ingredientsForUsers, setIngredientsForUsers] = useState({});
@@ -59,13 +59,13 @@ export default function GroceryList({ route }) {
     <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
         {/* Clear Button */}
         <View style={ContainerStyle.buttonContainer}>
-            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.colorFill}>
+            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.colorFillBlue}>
                 <Text style={ButtonStyle.colorFillText}>Clear Grocery List</Text>
             </TouchableOpacity>
         </View>
 
         {/* Checkbox List*/}
-        <View style={[{alignSelf: 'baseline'}]}>
+        <ScrollView style={[{width: '100%', padding: 10, margin: 10, alignSelf: 'baseline'}]}>
             {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
                 <CheckBox
                     key={index}
@@ -74,7 +74,7 @@ export default function GroceryList({ route }) {
                     isChecked={selectedIngredients[ingredient] || false}
                 />
             ))}
-        </View>
+        </ScrollView>
     </View>
     );
 }
