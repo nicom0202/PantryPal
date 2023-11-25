@@ -267,7 +267,7 @@ const RecipeModal = ({
                         </Pressable>
                     ) : (
                         <Pressable
-                            style={ButtonStyle.sendRecipeToDiscover}
+                            style={ButtonStyle.publishRecipe}
                             onPress={sendToDiscover}
                         >
                             <Text style={ButtonStyle.colorFillText}>Publish</Text>

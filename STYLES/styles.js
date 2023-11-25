@@ -95,6 +95,7 @@ const ViewStyle = StyleSheet.create({
 });
 
 const ButtonStyle = StyleSheet.create({
+    // General Buttons
     colorFill: {
         alignItems: 'center',
         backgroundColor: COLORS.brightGreen,
@@ -135,6 +136,7 @@ const ButtonStyle = StyleSheet.create({
         fontWeight: '700',
         fontSize: SIZES.medium,
     },
+    // Recipe Book
     close: {
         position: 'absolute',
         top: 10,
@@ -148,16 +150,27 @@ const ButtonStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    deleteRecipe: {
+    editRecipe: {
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: COLORS.fadedRed,
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 185, // Center the button horizontally
+        left: 40, // Center the button horizontally
+    },
+    publishRecipe: {
+        width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: COLORS.fadedBlue,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 215, // Center the button horizontally
     },
     saveRecipe: {
         width: 125,
@@ -170,8 +183,20 @@ const ButtonStyle = StyleSheet.create({
         bottom: 10, // Adjust this value to control the vertical position
         left: 40, // Center the button horizontally
     },
-    editRecipe: {
+    deleteRecipe: {
         width: 125,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: COLORS.fadedRed,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 215, // Center the button horizontally
+    },
+    // Discover
+    addRecipe: {
+        width: 180,
         height: 40,
         borderRadius: 30,
         backgroundColor: COLORS.brightGreen,
@@ -179,42 +204,7 @@ const ButtonStyle = StyleSheet.create({
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 40, // Center the button horizontally
-    },
-    sendRecipeToDiscover: {
-        width: 125,
-        height: 40,
-        borderRadius: 30,
-        backgroundColor: COLORS.fadedBlue,
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        bottom: 10, // Adjust this value to control the vertical position
-        left: 185, // Center the button horizontally
-    },
-    selectGroceries: {
-        width: 375,
-        height: 50,
-        borderRadius: 30,
-        padding: 0,
-        backgroundColor: COLORS.brightGreen,
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        top: 20, // Adjust this value to control the vertical position
-        left: 8, // Center the button horizontally
-    },
-    newDiscoverRecipes: {
-        width: 375,
-        height: 50,
-        borderRadius: 30,
-        padding: 0,
-        backgroundColor: COLORS.brightGreen,
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        top: 20, // Adjust this value to control the vertical position
-        left: 8, // Center the button horizontally
+        left: 100,
     },
 });
 
