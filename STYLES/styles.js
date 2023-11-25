@@ -5,10 +5,21 @@ import { StyleSheet } from "react-native";
 import { COLORS, SIZES } from "./theme";
 
 const ContainerStyle = StyleSheet.create({
-    container: {
-        width: "100%",
+    defaultContainer: {
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    inputContainer: {
+        width: '80%',
+    },
+    buttonContainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
     },
 });
 
@@ -25,6 +36,14 @@ const TextStyle = StyleSheet.create({
     light: {
         fontSize: SIZES.medium,
         color: COLORS.lightWhite,
+    },
+    input: {
+        color: COLORS.fadedGreen,
+        backgroundColor: COLORS.lightWhite,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5,
     },
     modalText: {
         margin: 15,
@@ -73,20 +92,50 @@ const ViewStyle = StyleSheet.create({
 
 const ButtonStyle = StyleSheet.create({
     colorFill: {
+        alignItems: 'center',
         backgroundColor: COLORS.brightGreen,
         width: '100%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-    },
-
-    colorOutline: {
-        backgroundColor: COLORS.lightWhite,
-        marginTop: 5,
+        margin: 5,
+        padding: 10,
         borderColor: COLORS.brightGreen,
         borderWidth: 2,
+        borderRadius: 10,
     },
-    
+    colorFillText: {
+        color: COLORS.lightWhite,
+        fontWeight: '700',
+        fontSize: SIZES.medium,
+    },
+    colorOutline: {
+        alignItems: 'center',
+        backgroundColor: COLORS.lightWhite,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.brightGreen,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+    colorOutlineText: {
+        color: COLORS.brightGreen,
+        fontWeight: '700',
+        fontSize: SIZES.medium,
+    },
+    googleLogin: {
+        alignItems: 'center',
+        backgroundColor: COLORS.fadedBlue,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.fadedBlue,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+    googleLoginText: {
+        color: COLORS.lightWhite,
+        fontWeight: '700',
+        fontSize: SIZES.medium,
+    },
     close: {
         position: 'absolute',
         top: 10,
