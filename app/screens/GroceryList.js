@@ -3,7 +3,8 @@ import { View, Text, Pressable, Alert } from 'react-native';
 import { auth } from "../../firebase";
 import CheckBox from "../../COMPONENTS/checkBox.js";
 import GetIngredients from "../../INTERFACE/GetUserIngredients";
-import { ContainerStyle } from '../../STYLES/styles.js';
+import { ContainerStyle, ButtonStyle } from '../../STYLES/styles.js';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function GroceryList({ route }) {
     const [ingredientsForUsers, setIngredientsForUsers] = useState({});
@@ -55,21 +56,25 @@ export default function GroceryList({ route }) {
     };
 
     return (
-    <View style={ContainerStyle.container}>
+    <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
         {/* Clear Button */}
-        <Pressable onPress={confirmClearList}>
-        <Text>Clear Grocery List</Text>
-        </Pressable>
+        <View style={ContainerStyle.buttonContainer}>
+            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.colorFill}>
+                <Text style={ButtonStyle.colorFillText}>Clear Grocery List</Text>
+            </TouchableOpacity>
+        </View>
 
         {/* Checkbox List*/}
-        {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
-        <CheckBox
-            key={index}
-            onPress={() => handleCheckboxChange(ingredient)}
-            title={`${ingredient} - ${quantity} cup(s)`} // Displaying name and quantity
-            isChecked={selectedIngredients[ingredient] || false}
-        />
-        ))}
+        <View style={[{alignSelf: 'baseline'}]}>
+            {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
+                <CheckBox
+                    key={index}
+                    onPress={() => handleCheckboxChange(ingredient)}
+                    title={`${ingredient} - ${quantity} cup(s)`}    // Displaying name and quantity
+                    isChecked={selectedIngredients[ingredient] || false}
+                />
+            ))}
+        </View>
     </View>
     );
 }

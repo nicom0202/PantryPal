@@ -37,6 +37,11 @@ const TextStyle = StyleSheet.create({
         fontSize: SIZES.medium,
         color: COLORS.lightWhite,
     },
+    bold: {
+        fontSize: SIZES.medium,
+        fontWeight: '700',
+        color: COLORS.smokeBlack,
+    },
     input: {
         color: COLORS.fadedGreen,
         backgroundColor: COLORS.lightWhite,
