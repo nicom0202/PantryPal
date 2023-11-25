@@ -22,6 +22,7 @@ import SimpleAddImageButton from './AddImageButton.js';
 
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
+import { Button } from 'react-native-web';
 
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
@@ -163,7 +164,7 @@ const RecipeModal = ({
                             setSelectedRecipe(null);
                         }}
                     >
-                    <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
+                        <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
 
 
@@ -192,11 +193,11 @@ const RecipeModal = ({
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[TextInputStyle.inputRecipeName]} 
-                                    value={selectedRecipe ? selectedRecipe.name : ''}
-                                    onChangeText={text => updateRecipeName(text)}
-                                    placeholder="Recipe Name"
-                                    placeholderTextColor="grey"
+                                        style={[TextInputStyle.inputRecipeName]} 
+                                        value={selectedRecipe ? selectedRecipe.name : ''}
+                                        onChangeText={text => updateRecipeName(text)}
+                                        placeholder="Recipe Name"
+                                        placeholderTextColor={COLORS.ashGray}
                                     />
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
@@ -209,12 +210,12 @@ const RecipeModal = ({
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[TextInputStyle.inputRecipeInstructions]} 
-                                    value={selectedRecipe ? selectedRecipe.instructions : ''}
-                                    onChangeText={text => updateRecipeInstructions(text)}
-                                    placeholder="Recipe Instructions"
-                                    placeholderTextColor="grey"
-                                    multiline={true}
+                                        style={[TextInputStyle.inputRecipeInstructions]} 
+                                        value={selectedRecipe ? selectedRecipe.instructions : ''}
+                                        onChangeText={text => updateRecipeInstructions(text)}
+                                        placeholder="Recipe Instructions"
+                                        placeholderTextColor={COLORS.ashGray}
+                                        multiline={true}
                                     />
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
@@ -246,14 +247,14 @@ const RecipeModal = ({
                             style={ButtonStyle.saveRecipe}
                             onPress={saveEditing}
                         >
-                            <Text style={TextStyle.body}>Save</Text>
+                            <Text style={ButtonStyle.colorFillText}>Save</Text>
                         </Pressable>
                     ) : (
                         <Pressable
                             style={ButtonStyle.editRecipe}
                             onPress={startEditing}
                         >
-                            <Text style={TextStyle.body}>Edit</Text>
+                            <Text style={ButtonStyle.colorFillText}>Edit</Text>
                         </Pressable>
                     )}
 
@@ -262,14 +263,14 @@ const RecipeModal = ({
                             style={ButtonStyle.deleteRecipe}
                             onPress={handleDeleteRecipe}
                         >
-                            <Text style={TextStyle.body}>Delete Recipe</Text>
+                            <Text style={ButtonStyle.colorFillText}>Delete Recipe</Text>
                         </Pressable>
                     ) : (
                         <Pressable
                             style={ButtonStyle.sendRecipeToDiscover}
                             onPress={sendToDiscover}
                         >
-                            <Text style={TextStyle.light}>Publish</Text>
+                            <Text style={ButtonStyle.colorFillText}>Publish</Text>
                         </Pressable>
                     )}
 
