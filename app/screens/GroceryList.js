@@ -59,8 +59,8 @@ export default function GroceryList({ route }) {
     <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
         {/* Clear Button */}
         <View style={ContainerStyle.buttonContainer}>
-            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.select}>
-                <Text style={ButtonStyle.selectText}>Clear Grocery List</Text>
+            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.colorFillBlue}>
+                <Text style={ButtonStyle.colorFillText}>Clear Grocery List</Text>
             </TouchableOpacity>
         </View>
 

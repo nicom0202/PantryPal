@@ -40,8 +40,8 @@ const Discover = () => {
         <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
             <View style={ContainerStyle.buttonContainer}>
                 {/* Refresh Button (Gather New Recipes) */}
-                <Pressable onPress={handleNewDiscoverRecipes} style={ButtonStyle.select}> 
-                    <Text style={ButtonStyle.selectText}>Find New Recipes</Text>
+                <Pressable onPress={handleNewDiscoverRecipes} style={ButtonStyle.colorFillBlue}> 
+                    <Text style={ButtonStyle.colorFillText}>Find New Recipes</Text>
                 </Pressable>
             </View>
 

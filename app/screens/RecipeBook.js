@@ -98,12 +98,12 @@ const RecipeBook = () => {
             <View style={ContainerStyle.buttonContainer}>
                 {/* Select/Checkout Button */}
                 {selectMode ? (
-                    <Pressable onPress={handleCheckout} style={ButtonStyle.select}> 
-                        <Text style={ButtonStyle.selectText}>Checkout</Text>
+                    <Pressable onPress={handleCheckout} style={ButtonStyle.colorFillBlue}> 
+                        <Text style={ButtonStyle.colorFillText}>Checkout</Text>
                     </Pressable>
                 ) : (
-                    <Pressable onPress={handleSelectMode} style={ButtonStyle.select}> 
-                        <Text style={ButtonStyle.selectText}>Select Recipes</Text>
+                    <Pressable onPress={handleSelectMode} style={ButtonStyle.colorFillBlue}> 
+                        <Text style={ButtonStyle.colorFillText}>Select Recipes</Text>
                     </Pressable>
                 )}
             </View>
