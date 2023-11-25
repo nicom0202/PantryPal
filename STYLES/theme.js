@@ -5,8 +5,7 @@ const COLORS = {
     brightGreen: "#68A357",     // logo, tab bar, headers
     fadedGreen: "#6F8F72",      // active tab, general buttons
     fadedRed: "#DB5461",        // close/cancel buttons
-    fadedBlue: "#2F6690",       // open/confirm buttons
-    fadedOrange: "#F79F79",
+    fadedBlue: "#2F6690",       // select buttons
     smokeBlack: "#1A1A1A",      // default background
     lightWhite: "#FAFAFA",      // default text
 };

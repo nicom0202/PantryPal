@@ -15,7 +15,7 @@ const ClickableBox = ({ content, onClick, highlighted }) => {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: highlighted ? COLORS.fadedOrange : 'transparent', // Highlight when 'highlighted' is true
+    backgroundColor: highlighted ? COLORS.fadedGreen : 'transparent', // Highlight when 'highlighted' is true
   };
 
   return (
