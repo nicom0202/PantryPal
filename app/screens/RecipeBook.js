@@ -65,7 +65,7 @@ const RecipeBook = () => {
             instructions: "", 
             cookTime: 0, 
             discoverID: randomDiscoverID,
-            image_path: "" //this saves the path in the firebase bucket to the image, need to update pullSavedRecipes to pull this image for a particular recipe
+            image: "" //this saves the path in the firebase bucket to the image, need to update pullSavedRecipes to pull this image for a particular recipe
         };
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
@@ -149,12 +149,21 @@ const RecipeBook = () => {
 
                     {/* Clickable box to add a recipe */}
                     <ClickableBox
-                        content={"Add Recipe"}
-                        onClick={handleAddRecipe}
+                        key={recipe.id}
+                        content={recipe.name}
+                        // Check if the recipe is in the selectedRecipes array
+                        highlighted={selectedRecipes.includes(recipe)} // Add this prop
+                        onClick={() => handleRecipeInteraction(recipe)}
                     />
-                </View>
-            </ScrollView>
-        </View>
+                ))}
+
+                {/* Clickable box to add a recipe */}
+                <ClickableBox
+                    content={"Add Recipe"}
+                    onClick={handleAddRecipe}
+                />
+            </View>
+        </ScrollView>
     );
 }
 

@@ -17,11 +17,11 @@ import {
 } from 'react-native';
 import { ViewStyle, ButtonStyle, TextStyle, TextInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
-
 import SimpleAddImageButton from './AddImageButton.js';
-
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
+import { ref, deleteObject } from "firebase/storage";
+import { storage } from "../firebase.js";
 import { Button } from 'react-native-web';
 
 
@@ -79,8 +79,19 @@ const RecipeModal = ({
                         if (selectedRecipe) {
                             const updatedRecipes = recipes.filter(
                                 recipe => recipe.id !== selectedRecipe.id);
-                            // TODO: DELETE RECIPE FROM FIREBASE!!!!!!!!!
-                            deleteRecipe(selectedRecipe)
+                            //DELETE IMAGE FROM SELECTED RECIPE IN FIREBASE STORAGE
+                            const deleteImage = async (image) => {
+                                if (image) {
+                                    const deleteRef = ref(storage, image);
+                                    try {
+                                        await deleteObject(deleteRef);
+                                    } catch (error) {
+                                        console.error(`Error: ${error}`);
+                                    }
+                                }
+                            };
+                            deleteImage(selectedRecipe.image);
+                            deleteRecipe(selectedRecipe);
                             setRecipes(updatedRecipes);
                             setModalVisible(false);
                             setSelectedRecipe(null);

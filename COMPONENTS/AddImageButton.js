@@ -21,17 +21,11 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
         });
 
         if (!result.canceled) {
-            setImage(result.assets[0].uri);
             const uploadURL = await uploadImageAsync(result.assets[0].uri);
-            onImageSelected(result.assets[0].uri);
-
-            // Update the image_path in the selectedRecipe
-            const userDocRef = doc(db, "Users", auth.currentUser.email);
-            const userRecipesRef = collection(userDocRef, "Recipes");
-            const userRecipesDocRef = doc(userRecipesRef, selectedRecipe.id);
-            const existingData = (await getDoc(userRecipesDocRef)).data();
-            existingData[image_path] = uploadURL;
-            await updateDoc(userRecipesDocRef, existingData);
+            selectedRecipe.image = uploadURL;
+            console.log(uploadURL);
+            setImage(uploadURL);
+            onImageSelected(uploadURL);
         }
     };
 
@@ -67,16 +61,9 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
             const deleteRef = ref(storage, image);
             try {
                 await deleteObject(deleteRef);
+                selectedRecipe.image = "";
                 setImage(null);
                 onImageSelected(null);
-
-                // Update the image_path in the selectedRecipe
-                const userDocRef = doc(db, "Users", auth.currentUser.email);
-                const userRecipesRef = collection(userDocRef, "Recipes");
-                const userRecipesDocRef = doc(userRecipesRef, selectedRecipe.id);
-                const existingData = (await getDoc(userRecipesDocRef)).data();
-                existingData[image_path] = uploadURL;
-                await updateDoc(userRecipesDocRef, existingData);
             } catch (error) {
                 console.error(`Error: ${error}`);
             }
