@@ -129,33 +129,13 @@ const RecipeBook = () => {
                     {recipes.map((recipe) => (
                         <ClickableBox
                             key={recipe.id}
-                            content={recipe.image ? recipe.image : recipe.name}
+                            //content={recipe.image ? recipe.image : recipe.name}
+                            content = {recipe.name}
                             // Check if the recipe is in the selectedRecipes array
                             highlighted={selectedRecipes.includes(recipe)} // Add this prop
                             onClick={() => handleRecipeInteraction(recipe)}
                         />
                     ))}
-
-                    {/*
-                            {recipes.map((recipe) => (
-                                <ClickableBox
-                                    key={recipe.id}
-                                    content={recipe.image ? <Image source={{ uri: recipe.image }} style={{ width: '100%', height: '100%' }} /> : recipe.name}
-                                    highlighted={selectedRecipes.includes(recipe)}
-                                    onClick={() => handleRecipeInteraction(recipe)}
-                                />
-                            ))}
-                    */}
-
-                    {/* Clickable box to add a recipe */}
-                    <ClickableBox
-                        key={recipe.id}
-                        content={recipe.name}
-                        // Check if the recipe is in the selectedRecipes array
-                        highlighted={selectedRecipes.includes(recipe)} // Add this prop
-                        onClick={() => handleRecipeInteraction(recipe)}
-                    />
-                ))}
 
                 {/* Clickable box to add a recipe */}
                 <ClickableBox
@@ -164,6 +144,7 @@ const RecipeBook = () => {
                 />
             </View>
         </ScrollView>
+        </View>
     );
 }
 
