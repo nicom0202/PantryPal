@@ -2,8 +2,13 @@ import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { Image, KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+
+// Part of Google Sign-In
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential } from 'firebase/auth';
+import { authForGoogle } from '../../firebase';
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
@@ -15,29 +20,34 @@ WebBrowser.maybeCompleteAuthSession();	// Listener for Google sign-in
 
 const LoginScreen = () => {
 	// Create account through Google
-	const [accessToken, setAccessToken] = React.useState(null);
-	const [user, setUser] = React.useState(null);
-	const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-		clientId: "766684397920-4qbpfp9osp3jlnuupd50u1pacfctt90l.apps.googleusercontent.com",		// Web Client ID
+	const [userInfo, setUserInfo] = React.useState();
+	const [request, response, promptAsync] = Google.useAuthRequest({
+		webClientId: "766684397920-4qbpfp9osp3jlnuupd50u1pacfctt90l.apps.googleusercontent.com",
 		iosClientId: "766684397920-j775npmsmd1gj0dnkmv5rgq3q2buemgp.apps.googleusercontent.com",
-		androidClientId: "766684397920-u7cs8bettfqoj41c8npfpb8civ8cq7q5.apps.googleusercontent.com"
+		androidClientId: "766684397920-u7cs8bettfqoj41c8npfpb8civ8cq7q5.apps.googleusercontent.com",
 	});
 
-	React.useEffect( () => {
-		if (response?.type === "success") {
-			setAccessToken(response.authentication.accessToken);
-			accessToken && fetchUserInfo();
-		} 
-	}, [response, accessToken]);	// Run this useEffect whenever response or accessToken change
+	React.useEffect(() => {
+		if (response?.type == "success") {
+			const { id_token } = response.params;
+			const credential = GoogleAuthProvider.credential(id_token);
+			signInWithCredential(authForGoogle, credential);
+		}
+	}, [response]);
 
-	async function fetchUserInfo() {
-		let response = await fetch("https://googleapis.com/userinfo/v2/me", {
-			headers: {
-				Authorization: `Bearer ${accessToken}` }
+	React.useEffect(() => {
+		const unsub = onAuthStateChanged(authForGoogle, async (user) => {
+			if (user) {
+				console.log(JSON.stringify(user), null, 2);
+				setUserInfo(user);
+			}
+			else {
+				console.log("User not authenticated.");
+			}
 		});
-		const useInfo = await response.json();
-		setUser(useInfo);
-	}
+
+		return () => unsub();
+	}, []);
 
 	// Create account through Firebase
 	const [email, setEmail] = useState('')

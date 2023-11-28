@@ -218,10 +218,10 @@ const CheckBoxStyle = StyleSheet.create({
         marginHorizontal: 5, 
     }, 
     title: { 
-        fontSize: 16, 
-        color: "#000", 
+        fontSize: SIZES.medium, 
+        color: COLORS.smokeBlack, 
         marginLeft: 5, 
-        fontWeight: "600", 
+        fontWeight: "700", 
     }, 
 });
 
