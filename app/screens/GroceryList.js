@@ -70,7 +70,7 @@ export default function GroceryList({ route }) {
                 <CheckBox
                     key={index}
                     onPress={() => handleCheckboxChange(ingredient)}
-                    title={`${ingredient} - ${quantity} cup(s)`}    // Displaying name and quantity
+                    title={`${ingredient} - ${quantity} gram(s)`}    // Displaying name and quantity
                     isChecked={selectedIngredients[ingredient] || false}
                 />
             ))}
