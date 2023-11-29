@@ -4,6 +4,16 @@
     "web": {
       "bundler": "metro"
     },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.PantryPal.PantryPal"
+    },
+    "android": {
+      "package": "com.PantryPal.PantryPal",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
     "plugins": [
       "expo-router",
       [
@@ -14,6 +24,14 @@
       ]
     ],
     "name": "PantryPal",
-    "slug": "PantryPal"
+    "slug": "PantryPal",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "38526409-00e6-4b33-a477-e6f68c4378f0"
+      }
+    }
   }
 }

@@ -3,7 +3,6 @@ import addRecipe from '../INTERFACE/AddRecipe.js';
 import deleteRecipe from '../INTERFACE/DeleteRecipe.js';
 import IngredientFlatList from './IngredientFlatList.js';
 import addToDiscover from '../INTERFACE/AddToDiscover.js';
-
 import { 
     View, 
     Text, 
@@ -14,9 +13,17 @@ import {
     Alert,
     Keyboard,
     TouchableWithoutFeedback,
+    Image
 } from 'react-native';
-import { viewStyle, buttonStyle, textStyle, textInputStyle } from '../STYLES/styles.js';
+import { ViewStyle, ButtonStyle, TextStyle, TextInputStyle } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
+import SimpleAddImageButton from './AddImageButton.js';
+import { Ionicons } from '@expo/vector-icons';
+import { COLORS, SIZES } from '../STYLES/theme.js';
+import { ref, deleteObject } from "firebase/storage";
+import { storage } from "../firebase.js";
+import { Button } from 'react-native-web';
+
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -29,7 +36,10 @@ const RecipeModal = ({
     setModalVisible,
     setSelectedRecipe,
     setIsEditing,
+    selectedImage, // Use the specific image prop
+    handleImageSelected, // Use the specific handler for updating the image
 }) => {
+
     const startEditing = () => {
         setIsEditing(true);
     };
@@ -42,6 +52,7 @@ const RecipeModal = ({
                 /* Create a copy of the recipes array and update the name of the selected recipe */
                 const updatedRecipes = [...recipes];
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
+                updatedRecipes[recipeIndex].image = selectedImage;
                 setRecipes(updatedRecipes);
                 addRecipe(updatedRecipes[recipeIndex])
             }
@@ -50,36 +61,48 @@ const RecipeModal = ({
         }
     };
 
-    /* Alerts the user to confirm before deleting recipe */
-    const handleDeleteRecipe = () => {
-        Alert.alert(
-            "Confirm Delete",
-            "Are you sure you want to delete this recipe?",
-            [
-            {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-            },
-            {
-                text: "Delete",
-                onPress: () => {              
-                    /* remove the recipe from list of recipes and close modal */
-                    if (selectedRecipe) {
-                        const updatedRecipes = recipes.filter(
-                            recipe => recipe.id !== selectedRecipe.id);
-                        deleteRecipe(selectedRecipe)
-                        setRecipes(updatedRecipes);
-                        setModalVisible(false);
-                        setSelectedRecipe(null);
-                        setIsEditing(false);
-                    }
+        /* Alerts the user to confirm before deleting recipe */
+        const handleDeleteRecipe = () => {
+            Alert.alert(
+                "Confirm Delete",
+                "Are you sure you want to delete this recipe?",
+                [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel",
                 },
-            },
-            ]
-        );
-    };    
-   
+                {
+                    text: "Delete",
+                    onPress: () => {              
+                        /* remove the recipe from list of recipes and close modal */
+                        if (selectedRecipe) {
+                            const updatedRecipes = recipes.filter(
+                                recipe => recipe.id !== selectedRecipe.id);
+                            //DELETE IMAGE FROM SELECTED RECIPE IN FIREBASE STORAGE
+                            const deleteImage = async (image) => {
+                                if (image) {
+                                    const deleteRef = ref(storage, image);
+                                    try {
+                                        await deleteObject(deleteRef);
+                                    } catch (error) {
+                                        console.error(`Error: ${error}`);
+                                    }
+                                }
+                            };
+                            deleteImage(selectedRecipe.image);
+                            deleteRecipe(selectedRecipe);
+                            setRecipes(updatedRecipes);
+                            setModalVisible(false);
+                            setSelectedRecipe(null);
+                            setIsEditing(false);
+                        }
+                    },
+                },
+                ]
+            );
+        };    
+    
     /* Alerts the user to confirm before publishing recipe */
     const sendToDiscover = () => {
         Alert.alert(
@@ -132,6 +155,7 @@ const RecipeModal = ({
     const handleDismissKeyboard = () => {
         Keyboard.dismiss(); // This will dismiss the keyboard when you tap away from the TextInput
     };
+    
 
     return (
         <Modal
@@ -139,37 +163,57 @@ const RecipeModal = ({
             transparent={true}
             visible={modalVisible}
         >
-            <View style={viewStyle.centeredView}>
-                <View style={viewStyle.modalView}>
+            <View style={ViewStyle.centeredView}>
+                <View style={ViewStyle.modalView}>
                     {/* Close button (top right) -- TODO save editing? alert */}
                     <Pressable
-                        style={buttonStyle.close}
-                        hitSlop={15}
+                        style={ButtonStyle.close}
+                        hitSlop={20}
                         onPress={() => {
                             saveEditing();
                             setModalVisible(false);
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Text style={textStyle.body}>X</Text>
+                        <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
                     </Pressable>
 
-                    <ScrollView contentContainerStyle={viewStyle.scrollViewContent}>
+
+                    <ScrollView contentContainerStyle={ViewStyle.scrollViewContent}>
+                        {/* Image box while editing, show image otherwise */}
+                        {isEditing ? (
+                            <SafeAreaView>
+                                <SimpleAddImageButton 
+                                    onImageSelected={handleImageSelected} 
+                                    currentImage={selectedRecipe ? selectedRecipe.image : null} 
+                                    selectedRecipe={selectedRecipe}
+                                />
+                            </SafeAreaView>
+                        ) : (
+                            selectedImage && (
+                                <View style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
+                                    <Image
+                                        source={{ uri: selectedImage }}
+                                        style={{ width: '100%', height: '100%' }}
+                                    />
+                                </View>
+                            )
+                        )}
                         {/* Recipe Name Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[textInputStyle.inputRecipeName]} 
-                                    value={selectedRecipe ? selectedRecipe.name : ''}
-                                    onChangeText={text => updateRecipeName(text)}
-                                    placeholder="Recipe Name"
-                                    placeholderTextColor="grey"
+                                        style={[TextInputStyle.inputRecipeName]} 
+                                        value={selectedRecipe ? selectedRecipe.name : ''}
+                                        onChangeText={text => updateRecipeName(text)}
+                                        placeholder="Recipe Name"
+                                        placeholderTextColor={COLORS.ashGray}
                                     />
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                            <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
                         )}
 
                         {/* Recipe Ingredients Text Box while editing, Text otherwise */}
@@ -177,17 +221,17 @@ const RecipeModal = ({
                             <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
                                 <SafeAreaView>
                                     <TextInput
-                                    style={[textInputStyle.inputRecipeInstructions]} 
-                                    value={selectedRecipe ? selectedRecipe.instructions : ''}
-                                    onChangeText={text => updateRecipeInstructions(text)}
-                                    placeholder="Recipe Instructions"
-                                    placeholderTextColor="grey"
-                                    multiline={true}
+                                        style={[TextInputStyle.inputRecipeInstructions]} 
+                                        value={selectedRecipe ? selectedRecipe.instructions : ''}
+                                        onChangeText={text => updateRecipeInstructions(text)}
+                                        placeholder="Recipe Instructions"
+                                        placeholderTextColor={COLORS.ashGray}
+                                        multiline={true}
                                     />
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={textStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                            <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
                         )}
 
                         {/* Ingredients list */}
@@ -199,9 +243,9 @@ const RecipeModal = ({
                             />
                         ) : (
                             <View>
-                                <Text style={textStyle.body}>Ingredients:</Text>
+                                <Text style={TextStyle.body}>Ingredients:</Text>
                                 {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                    <Text key={index} style={textStyle.body}>
+                                    <Text key={index} style={TextStyle.body}>
                                         {ingredient.name}: {ingredient.quantity}
                                     </Text>
                                 )) : ''}
@@ -211,33 +255,33 @@ const RecipeModal = ({
 
                     {isEditing ? (
                         <Pressable
-                            style={buttonStyle.saveRecipe}
+                            style={ButtonStyle.saveRecipe}
                             onPress={saveEditing}
                         >
-                            <Text style={textStyle.body}>Save</Text>
+                            <Text style={ButtonStyle.colorFillText}>Save</Text>
                         </Pressable>
                     ) : (
                         <Pressable
-                            style={buttonStyle.editRecipe}
+                            style={ButtonStyle.editRecipe}
                             onPress={startEditing}
                         >
-                            <Text style={textStyle.body}>Edit</Text>
+                            <Text style={ButtonStyle.colorFillText}>Edit</Text>
                         </Pressable>
                     )}
 
                     {isEditing ? (
                         <Pressable
-                            style={buttonStyle.deleteRecipe}
+                            style={ButtonStyle.deleteRecipe}
                             onPress={handleDeleteRecipe}
                         >
-                            <Text style={textStyle.body}>Delete Recipe</Text>
+                            <Text style={ButtonStyle.colorFillText}>Delete Recipe</Text>
                         </Pressable>
                     ) : (
                         <Pressable
-                            style={buttonStyle.sendRecipeToDiscover}
+                            style={ButtonStyle.publishRecipe}
                             onPress={sendToDiscover}
                         >
-                            <Text style={textStyle.light}>Publish</Text>
+                            <Text style={ButtonStyle.colorFillText}>Publish</Text>
                         </Pressable>
                     )}
 

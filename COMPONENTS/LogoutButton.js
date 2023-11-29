@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { getAuth, signOut } from 'firebase/auth';
-import { LoginStyles, LogoutStyles } from '../STYLES/styles.js';
+import { ButtonStyle } from '../STYLES/styles.js';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../CONSTANTS/theme.js';
+import { COLORS, SIZES } from '../STYLES/theme.js';
 
 const LogoutButton = () => {
   const navigation = useNavigation();
@@ -25,9 +25,9 @@ const LogoutButton = () => {
   };
 
   return (
-    <TouchableOpacity style={[LoginStyles.button, LoginStyles.buttonOutline]} onPress={handleSignOut}>
+    <TouchableOpacity style={ButtonStyle.colorOutline} onPress={handleSignOut}>
           <Ionicons name="log-out-outline" color={COLORS.brightGreen} size={SIZES.xLarge} />
-          <Text style={[LoginStyles.buttonOutlineText]}>Logout</Text>
+          <Text style={[ButtonStyle.colorOutlineText]}>Logout</Text>
     </TouchableOpacity>
   );
 };

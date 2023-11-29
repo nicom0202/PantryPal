@@ -23,7 +23,7 @@ const addRecipe = async (recipeData) => {
                 console.log("Recipe updated in the user's 'Recipes' subcollection.");
             } else {
                 // Add a new recipe to the Recipes subcollection with recipeData.id as document name
-                const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), reicpeData);
+                const newRecipeDocRef = await setDoc(doc(userRecipesRef, recipeData.id), recipeData);
 
                 console.log("New recipe added to the user's 'Recipes' subcollection with custom document name.");
             }

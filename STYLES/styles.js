@@ -2,17 +2,28 @@
 // Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "../CONSTANTS/theme";
+import { COLORS, SIZES } from "./theme";
 
-const containerStyle = StyleSheet.create({
-    container: {
-        width: "100%",
+const ContainerStyle = StyleSheet.create({
+    defaultContainer: {
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    inputContainer: {
+        width: '80%',
+    },
+    buttonContainer: {
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40,
     },
 });
 
-const textStyle = StyleSheet.create({
+const TextStyle = StyleSheet.create({
     title: {
         fontSize: SIZES.xLarge,
         textAlign: "center",
@@ -22,9 +33,18 @@ const textStyle = StyleSheet.create({
         fontSize: SIZES.medium,
         color: COLORS.smokeBlack,
     },
-    light: {
+    bold: {
         fontSize: SIZES.medium,
-        color: COLORS.lightWhite,
+        fontWeight: '700',
+        color: COLORS.smokeBlack,
+    },
+    input: {
+        color: COLORS.fadedGreen,
+        backgroundColor: COLORS.lightWhite,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5,
     },
     modalText: {
         margin: 15,
@@ -32,8 +52,9 @@ const textStyle = StyleSheet.create({
     },
 });
     
-const gridStyle = StyleSheet.create({
+const GridStyle = StyleSheet.create({
     grid: {
+        flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
@@ -43,7 +64,7 @@ const gridStyle = StyleSheet.create({
 });
 
 /* Modal styles */
-const viewStyle = StyleSheet.create({
+const ViewStyle = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
@@ -54,7 +75,9 @@ const viewStyle = StyleSheet.create({
         width: "90%",
         height: "70%",
         margin: 10,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.lightWhite,
+        borderColor: COLORS.smokeBlack,
+        borderWidth: 2,
         borderRadius: 20,
         padding: 20,
         shadowColor: '#000',
@@ -71,92 +94,121 @@ const viewStyle = StyleSheet.create({
     },
 });
 
-const buttonStyle = StyleSheet.create({
+const ButtonStyle = StyleSheet.create({
+    // General Buttons
+    colorFill: {
+        alignItems: 'center',
+        backgroundColor: COLORS.brightGreen,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.brightGreen,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+    colorFillBlue: {
+        alignItems: 'center',
+        backgroundColor: COLORS.fadedBlue,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.fadedBlue,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+    colorFillText: {
+        color: COLORS.lightWhite,
+        fontWeight: '700',
+        fontSize: SIZES.medium,
+    },
+    colorOutline: {
+        alignItems: 'center',
+        backgroundColor: COLORS.lightWhite,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.brightGreen,
+        borderWidth: 2,
+        borderRadius: 10,
+    },
+    colorOutlineText: {
+        color: COLORS.brightGreen,
+        fontWeight: '700',
+        fontSize: SIZES.medium,
+    },
+    // Recipe Book
     close: {
         position: 'absolute',
         top: 10,
         right: 10,
         width: 40,
         height: 40,
-        borderRadius: 30,
-        backgroundColor: 'red',
+        borderColor: COLORS.smokeBlack,
+        borderWidth: 2,
+        borderRadius: 20,
+        backgroundColor: COLORS.fadedRed,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    open: {
-        backgroundColor: '#F194FF',
-    },
-    deleteRecipe: {
-        width: 125,
-        height: 40,
-        borderRadius: 30,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        bottom: 10, // Adjust this value to control the vertical position
-        left: 185, // Center the button horizontally
-    },
-    saveRecipe: {
-        width: 125,
-        height: 40,
-        borderRadius: 30,
-        backgroundColor: 'green',
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        bottom: 10, // Adjust this value to control the vertical position
-        left: 40, // Center the button horizontally
     },
     editRecipe: {
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
         left: 40, // Center the button horizontally
     },
-    sendRecipeToDiscover: {
+    publishRecipe: {
         width: 125,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'blue',
+        backgroundColor: COLORS.fadedBlue,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 185, // Center the button horizontally
+        left: 215, // Center the button horizontally
     },
-    selectGroceries: {
-        width: 375,
-        height: 50,
+    saveRecipe: {
+        width: 125,
+        height: 40,
         borderRadius: 30,
-        padding: 0,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
-        top: 20, // Adjust this value to control the vertical position
-        left: 8, // Center the button horizontally
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 40, // Center the button horizontally
     },
-    newDiscoverRecipes: {
-        width: 375,
-        height: 50,
+    deleteRecipe: {
+        width: 125,
+        height: 40,
         borderRadius: 30,
-        padding: 0,
-        backgroundColor: 'green',
+        backgroundColor: COLORS.fadedRed,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
-        top: 20, // Adjust this value to control the vertical position
-        left: 8, // Center the button horizontally
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 215, // Center the button horizontally
+    },
+    // Discover
+    addRecipe: {
+        width: 180,
+        height: 40,
+        borderRadius: 30,
+        backgroundColor: COLORS.brightGreen,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 100,
     },
 });
 
-const checkBoxStyle = StyleSheet.create({
+const CheckBoxStyle = StyleSheet.create({
     container: { 
         justifyContent: "flex-start", 
         alignItems: "center", 
@@ -166,14 +218,14 @@ const checkBoxStyle = StyleSheet.create({
         marginHorizontal: 5, 
     }, 
     title: { 
-        fontSize: 16, 
-        color: "#000", 
+        fontSize: SIZES.medium, 
+        color: COLORS.smokeBlack, 
         marginLeft: 5, 
-        fontWeight: "600", 
+        fontWeight: "700", 
     }, 
 });
 
-const textInputStyle = StyleSheet.create({
+const TextInputStyle = StyleSheet.create({
     inputRecipeName: {
       height: 40,
       margin: 12,
@@ -188,65 +240,12 @@ const textInputStyle = StyleSheet.create({
     },
 });
 
-/* Login/Logout/Sign up styles */
-const LoginStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    inputContainer: {
-      width: '80%',
-    },
-    input: {
-      backgroundColor: COLORS.lightWhite,
-      paddingHorizontal: 15,
-      paddingVertical: 10,
-      borderRadius: 10,
-      marginTop: 5,
-    },
-    buttonContainer: {
-      width: '60%',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 40,
-    },
-    button: {
-      backgroundColor: COLORS.brightGreen,
-      width: '100%',
-      padding: 15,
-      borderRadius: 10,
-      alignItems: 'center',
-    },
-    buttonOutline: {
-      backgroundColor: COLORS.lightWhite,
-      marginTop: 5,
-      borderColor: COLORS.brightGreen,
-      borderWidth: 2,
-    },
-    buttonText: {
-      color: COLORS.lightWhite,
-      fontWeight: '700',
-      fontSize: 16,
-    },
-    buttonOutlineText: {
-      color: COLORS.brightGreen,
-      fontWeight: '700',
-      fontSize: 16,
-    },
-    errorMessage: {
-      color: 'red',
-      marginTop: 10,
-    },
-});
-
-  export {
-    containerStyle,
-    textStyle,
-    gridStyle,
-    viewStyle,
-    buttonStyle,
-    checkBoxStyle,
-    textInputStyle,
-    LoginStyles,
+export {
+    ContainerStyle,
+    TextStyle,
+    GridStyle,
+    ViewStyle,
+    ButtonStyle,
+    CheckBoxStyle,
+    TextInputStyle,
 };
