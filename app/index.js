@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../STYLES/theme";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -36,7 +36,16 @@ function TabNavigator() {
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="book-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="book-account-outline" color={color} size={size} />
+                      )
+                    }}
+        />       
+
+        <Tab.Screen name="Discover"
+                    component={Discover}
+                    options={{
+                      tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="book-search-outline" color={color} size={size} />
                       )
                     }}
         />
@@ -45,25 +54,16 @@ function TabNavigator() {
                     component={GroceryList}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="list-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="format-list-checkbox" color={color} size={size} />
                       )
                     }}
-        />         
-
-        <Tab.Screen name="Discover"
-                    component={Discover}
-                    options={{
-                      tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="globe-outline" color={color} size={size} />
-                      )
-                    }}
-        />
+        />  
 
         <Tab.Screen name="Account"
                     component={Account}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="account-cog-outline" color={color} size={size} />
                       )
                     }}
         />      

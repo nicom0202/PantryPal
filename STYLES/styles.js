@@ -104,7 +104,7 @@ const ButtonStyle = StyleSheet.create({
         padding: 10,
         borderColor: COLORS.brightGreen,
         borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 25,
     },
     colorFillBlue: {
         alignItems: 'center',
@@ -114,7 +114,7 @@ const ButtonStyle = StyleSheet.create({
         padding: 10,
         borderColor: COLORS.fadedBlue,
         borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 25,
     },
     colorFillText: {
         color: COLORS.lightWhite,
@@ -129,7 +129,7 @@ const ButtonStyle = StyleSheet.create({
         padding: 10,
         borderColor: COLORS.brightGreen,
         borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 25,
     },
     colorOutlineText: {
         color: COLORS.brightGreen,
@@ -153,7 +153,7 @@ const ButtonStyle = StyleSheet.create({
     editRecipe: {
         width: 125,
         height: 40,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
@@ -164,7 +164,7 @@ const ButtonStyle = StyleSheet.create({
     publishRecipe: {
         width: 125,
         height: 40,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: COLORS.fadedBlue,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
@@ -175,7 +175,7 @@ const ButtonStyle = StyleSheet.create({
     saveRecipe: {
         width: 125,
         height: 40,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
@@ -186,7 +186,7 @@ const ButtonStyle = StyleSheet.create({
     deleteRecipe: {
         width: 125,
         height: 40,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: COLORS.fadedRed,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
@@ -198,7 +198,7 @@ const ButtonStyle = StyleSheet.create({
     addRecipe: {
         width: 180,
         height: 40,
-        borderRadius: 30,
+        borderRadius: 25,
         backgroundColor: COLORS.brightGreen,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
