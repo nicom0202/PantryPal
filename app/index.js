@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { COLORS, SIZES } from "../STYLES/theme";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -24,7 +24,7 @@ function TabNavigator() {
           headerStyle: {backgroundColor : COLORS.brightGreen, height: 70},
           headerTitleStyle: {fontSize: SIZES.xLarge, color: COLORS.lightWhite},
           headerStatusBarHeight: 0,
-          tabBarLabelStyle: {fontSize: SIZES.xSmall},
+          tabBarShowLabel: false,
           tabBarInactiveBackgroundColor: COLORS.brightGreen,
           tabBarInactiveTintColor: COLORS.lightWhite,
           tabBarActiveBackgroundColor: COLORS.fadedGreen,
@@ -36,7 +36,7 @@ function TabNavigator() {
                     component={RecipeBook}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="book-account-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="book-account-outline" color={color} size={SIZES.xxLarge} />
                       )
                     }}
         />       
@@ -45,7 +45,7 @@ function TabNavigator() {
                     component={Discover}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="book-search-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="book-search-outline" color={color} size={SIZES.xxLarge} />
                       )
                     }}
         />
@@ -54,7 +54,7 @@ function TabNavigator() {
                     component={GroceryList}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="format-list-checkbox" color={color} size={size} />
+                        <MaterialCommunityIcons name="cart-check" color={color} size={SIZES.xxLarge} />
                       )
                     }}
         />  
@@ -63,7 +63,7 @@ function TabNavigator() {
                     component={Account}
                     options={{
                       tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account-cog-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="account-cog-outline" color={color} size={SIZES.xxLarge} />
                       )
                     }}
         />      

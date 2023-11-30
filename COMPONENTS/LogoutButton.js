@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { getAuth, signOut } from 'firebase/auth';
 import { ButtonStyle } from '../STYLES/styles.js';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 
 const LogoutButton = () => {
@@ -26,7 +26,7 @@ const LogoutButton = () => {
 
   return (
     <TouchableOpacity style={ButtonStyle.colorOutline} onPress={handleSignOut}>
-          <Ionicons name="log-out-outline" color={COLORS.brightGreen} size={SIZES.xLarge} />
+          <MaterialCommunityIcons name="logout" color={COLORS.brightGreen} size={SIZES.xLarge} />
           <Text style={[ButtonStyle.colorOutlineText]}>Logout</Text>
     </TouchableOpacity>
   );

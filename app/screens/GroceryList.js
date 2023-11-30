@@ -67,7 +67,7 @@ export default function GroceryList({ route }) {
                 <Text style={ButtonStyle.colorFillText}>Clear Grocery List</Text>
             </TouchableOpacity>
         </View>
-
+        
         {/* Checkbox List*/}
         <ScrollView style={[
             {width: '100%', padding: 10, margin: 10, alignSelf: 'baseline'}]}>

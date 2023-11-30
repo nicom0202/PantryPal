@@ -17,6 +17,7 @@ const SIZES = {
     medium : 16,    // default text
     large: 18,
     xLarge: 24,     // headings
+    xxLarge: 32,
 };
 
 export { COLORS, SIZES };
