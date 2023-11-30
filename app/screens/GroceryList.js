@@ -36,7 +36,7 @@ export default function GroceryList({ route }) {
 
     // Prompts user to confirm they want to clear the grocery list.
     const confirmClearList = () => {
-        Alert.alert("Clear Grocery List", "All grocery list items will be cleared. Continue?", [
+        Alert.alert("Confirm Clear", "Are you sure you want to clear your entire grocery list?", [
             {
                 text: "Cancel", onPress: () => console.log("User canceled clearing grocery list."),
             },

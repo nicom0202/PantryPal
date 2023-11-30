@@ -12,6 +12,7 @@ const COLORS = {
 };
 
 const SIZES = {
+    xSmall: 12,
     small: 14,
     medium : 16,    // default text
     large: 18,
