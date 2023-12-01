@@ -12,10 +12,12 @@ const COLORS = {
 };
 
 const SIZES = {
+    xSmall: 12,
     small: 14,
     medium : 16,    // default text
     large: 18,
     xLarge: 24,     // headings
+    xxLarge: 32,
 };
 
 export { COLORS, SIZES };

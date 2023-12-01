@@ -9,21 +9,25 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 export default function GroceryList({ route }) {
     const [ingredientsForUsers, setIngredientsForUsers] = useState({});
     const [selectedIngredients, setSelectedIngredients] = useState({});
-    // Temporary array of selected recipes until we can get the selected recipes from the RecipeBook  
 
     useEffect(() => {
         const fetchData = async () => {
-        try {        
-            console.log("Got params:", route.params)
-            const { selectedRecipes } = route.params;
+        try {
+            if (route.params && route.params.selectedRecipes) {
+                const { selectedRecipes } = route.params;
+                console.log(selectedRecipes);
 
-            console.log(selectedRecipes)
+                RecipeModalArray = selectedRecipes;
 
-            RecipeModalArray = selectedRecipes;
-            // Ingredients is a dictionary mapping of the ingredient name to the quantity from selected recipes
-            const ingredients = await GetIngredients(RecipeModalArray);
-            setIngredientsForUsers(ingredients);
-        } catch (error) {
+                // Ingredients is a dictionary mapping of the ingredient 
+                // name to the quantity from selected recipes
+                const ingredients = await GetIngredients(RecipeModalArray);
+                setIngredientsForUsers(ingredients);
+            } else {
+                // Handle the case when selectedRecipes is null
+                console.log("selectedRecipes is null or undefined");
+            }
+        } catch (TypeError) {
             console.error("Error fetching ingredients:", error);
         }
         };
@@ -32,9 +36,11 @@ export default function GroceryList({ route }) {
 
     // Prompts user to confirm they want to clear the grocery list.
     const confirmClearList = () => {
-        Alert.alert("Clear Grocery List", "All grocery list items will be cleared. Continue?", [
+        Alert.alert("Confirm Clear", 
+        "Are you sure you want to clear your entire grocery list?", [
             {
-                text: "Cancel", onPress: () => console.log("User canceled clearing grocery list."),
+                text: "Cancel", 
+                onPress: () => console.log("User canceled clearing grocery list."),
             },
             {
                 text: "Continue", onPress: handleClearList,
@@ -56,21 +62,31 @@ export default function GroceryList({ route }) {
     };
 
     return (
-    <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
+    <View 
+        style={[ContainerStyle.defaultContainer, 
+        {justifyContent: 'flex-start'}]}
+    >
         {/* Clear Button */}
         <View style={ContainerStyle.buttonContainer}>
-            <TouchableOpacity onPress={confirmClearList} style={ButtonStyle.colorFillBlue}>
-                <Text style={ButtonStyle.colorFillText}>Clear Grocery List</Text>
+            <TouchableOpacity 
+                onPress={confirmClearList} 
+                style={ButtonStyle.colorFillBlue}
+            >
+                <Text style={ButtonStyle.colorFillText}>
+                    Clear Grocery List
+                </Text>
             </TouchableOpacity>
         </View>
-
+        
         {/* Checkbox List*/}
-        <ScrollView style={[{width: '100%', padding: 10, margin: 10, alignSelf: 'baseline'}]}>
+        <ScrollView style={[
+            {width: '100%', padding: 10, margin: 10, alignSelf: 'baseline'}]}>
             {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
                 <CheckBox
                     key={index}
                     onPress={() => handleCheckboxChange(ingredient)}
-                    title={`${ingredient} - ${quantity} cup(s)`}    // Displaying name and quantity
+                    // Displaying name and quantity
+                    title={`${ingredient} - ${quantity} gram(s)`}   
                     isChecked={selectedIngredients[ingredient] || false}
                 />
             ))}
