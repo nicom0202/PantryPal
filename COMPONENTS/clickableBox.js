@@ -23,7 +23,7 @@ const ClickableBox = ({ content, onClick, highlighted, isImage }) => {
             {isImage ? (
                 <Image 
                     source={{ uri: content }} 
-                    style={{ width: 130, height: 130 }}     
+                    style={{ width: 148, height: 148, borderRadius: 25}}     
                 />
             ) : (
                 <Text 
