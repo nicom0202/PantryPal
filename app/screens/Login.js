@@ -14,7 +14,6 @@ import { app as firebaseApp } from '../../firebase'; // Import the initialized F
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
 import { COLORS, SIZES } from '../../STYLES/theme'
 import { ContainerStyle, TextStyle, ButtonStyle } from '../../STYLES/styles';
-import { Ionicons } from '@expo/vector-icons';
 
 WebBrowser.maybeCompleteAuthSession();	// Listener for Google sign-in
 
@@ -145,7 +144,7 @@ const LoginScreen = () => {
 				
 				{/* Register */}
 				<TouchableOpacity onPress={handleSignUp} style={[ButtonStyle.colorOutline]}>
-					<Text style={ButtonStyle.colorOutlineText}>Register</Text>
+					<Text style={ButtonStyle.colorOutlineText}>Sign Up</Text>
 				</TouchableOpacity>
 
 				{/* Google Sign-In */}

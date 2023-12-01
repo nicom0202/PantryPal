@@ -22,8 +22,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "../firebase.js";
-import { Button } from 'react-native-web';
-
 
 const MAX_RECIPE_NAME_LENGTH = 32; // Set the maximum length for the recipe name
 
@@ -274,7 +272,7 @@ const RecipeModal = ({
                             style={ButtonStyle.deleteRecipe}
                             onPress={handleDeleteRecipe}
                         >
-                            <Text style={ButtonStyle.colorFillText}>Delete Recipe</Text>
+                            <Text style={ButtonStyle.colorFillText}>Delete</Text>
                         </Pressable>
                     ) : (
                         <Pressable
