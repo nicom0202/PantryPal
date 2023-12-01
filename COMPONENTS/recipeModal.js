@@ -204,42 +204,7 @@ const RecipeModal = ({
                         contentContainerStyle={ViewStyle.scrollViewContent}
                         automaticallyAdjustKeyboardInsets={true}
                         >
-                        {/* Image box while editing, show image otherwise */}
-                        {isEditing ? (
-                            <SafeAreaView>
-                                <SimpleAddImageButton 
-                                    onImageSelected={handleImageSelected} 
-                                    currentImage={selectedRecipe ? 
-                                        selectedRecipe.image : 
-                                        null} 
-                                    selectedRecipe={selectedRecipe}
-                                />
-                            </SafeAreaView>
-                        ) : (
-                            selectedImage && (
-                                <View 
-                                style={{ 
-                                    width: '100%', 
-                                    height: 300, 
-                                    borderRadius: 8, 
-                                    overflow: 'hidden', 
-                                    paddingHorizontal: 6,
-                                    marginBottom: 10, 
-                                    marginTop: 35
-                                }}>
-                                    <Image
-                                        source={{ uri: selectedImage }}
-                                        style={{ 
-                                            width: '100%', 
-                                            height: 300, 
-                                            borderRadius: 8, 
-                                            overflow: 'hidden', 
-                                            paddingHorizontal: 6,
-                                        }}
-                                    />
-                                </View>
-                            )
-                        )}
+
                         {/* Recipe Name Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback 
@@ -258,9 +223,43 @@ const RecipeModal = ({
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={TextStyle.body}>
+                            <Text 
+                                style={TextStyle.title}
+                            >
                                 {selectedRecipe ? selectedRecipe.name : ''}
                             </Text>
+                        )}
+
+                        {/* Image box while editing, show image otherwise */}
+                        {isEditing ? (
+                            <SafeAreaView>
+                                <SimpleAddImageButton 
+                                    onImageSelected={handleImageSelected} 
+                                    currentImage={selectedRecipe ? 
+                                        selectedRecipe.image : 
+                                        null} 
+                                    selectedRecipe={selectedRecipe}
+                                />
+                            </SafeAreaView>
+                        ) : (
+                            selectedImage && (
+                                <View 
+                                    style={{ 
+                                    width: 200, 
+                                    height: 200, 
+                                    borderRadius: 8, 
+                                    overflow: 'hidden', 
+                                    alignSelf: 'center',
+                                }}>
+                                    <Image
+                                        source={{ uri: selectedImage }}
+                                        style={{ 
+                                            width: '100%', 
+                                            height: '100%',
+                                        }}
+                                    />
+                                </View>
+                            )
                         )}
 
                         {/* Recipe Ingredients Text Box while editing, Text otherwise */}
@@ -282,9 +281,14 @@ const RecipeModal = ({
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
-                            <Text style={TextStyle.body}>
-                                {selectedRecipe ? selectedRecipe.instructions : ''}
-                            </Text>
+                            <View>
+                                <Text style={TextStyle.title}>
+                                    {'Recipe Instructions'}
+                                </Text>
+                                <Text style={TextStyle.instructions}>
+                                    {selectedRecipe ? selectedRecipe.instructions : ''}
+                                </Text>
+                            </View>
                         )}
 
                         {/* Ingredients list */}
@@ -296,13 +300,19 @@ const RecipeModal = ({
                             />
                         ) : (
                             <View>
-                                <Text style={TextStyle.body}>Ingredients:</Text>
-                                {selectedRecipe ? 
-                                selectedRecipe.ingredients.map((ingredient, index) => (
-                                    <Text key={index} style={TextStyle.body}>
-                                        {ingredient.name}: {ingredient.quantity}
-                                    </Text>
-                                )) : ''}
+                                <Text style={TextStyle.title}>
+                                    {'Recipe Ingredients'}
+                                </Text>
+                                <View style={TextStyle.ingredients}>
+                                    {selectedRecipe ? 
+                                        selectedRecipe.ingredients.map((ingredient, index) => (
+                                            ingredient.name ? (
+                                                <Text key={index} style={TextStyle.body}>
+                                                    {ingredient.name}: {ingredient.quantity}
+                                                </Text>
+                                            ) : null
+                                    )) : null}
+                                </View>
                             </View>
                         )}
                     </ScrollView>

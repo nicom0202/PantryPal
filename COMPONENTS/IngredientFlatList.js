@@ -98,7 +98,16 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
     };
   
     return (
-      <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View 
+        key={index} 
+        style={{ 
+          flexDirection: 'row', 
+          height: 40,
+          justifyContent: 'space-between',
+          borderColor: 'black',
+          borderWidth: 1,
+          borderStyle: 'solid', }}
+      >
         <TextInput
           style={styles.ingredientItem}
           value={item ? item.name : ''}
@@ -114,7 +123,13 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
           placeholderTextColor="grey"
           keyboardType="numeric"
         />
-        <Pressable onPress={handleDeleteIngredient}>
+        <Pressable 
+          onPress={handleDeleteIngredient}
+          style={{
+            justifyContent: 'center',
+            marginRight: 15
+            }}
+        >
           <Text>Delete</Text>
         </Pressable>
       </View>
