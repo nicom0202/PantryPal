@@ -70,7 +70,7 @@ export default function GroceryList({ route }) {
         <View style={ContainerStyle.buttonContainer}>
             <TouchableOpacity 
                 onPress={confirmClearList} 
-                style={ButtonStyle.colorFillRed}
+                style={ButtonStyle.colorFillYellow}
             >
                 <Text style={ButtonStyle.colorFillText}>
                     Clear Grocery List

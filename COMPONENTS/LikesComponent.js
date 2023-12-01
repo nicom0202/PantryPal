@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { SIZES } from '../STYLES/theme';
+import { COLORS, SIZES } from '../STYLES/theme';
 
 const LikesComponent = ({ likes }) => {
   return (
     <View style={styles.likesContainer}>
       <Text style={styles.likesCount}>{likes}</Text>
-      <MaterialCommunityIcons name="thumb-up" color={'blue'} size={SIZES.xxLarge} />
+      <MaterialCommunityIcons name="thumb-up" color={COLORS.brightBlue} size={SIZES.xLarge} />
     </View>
   );
 };
