@@ -153,10 +153,10 @@ const RecipeBook = () => {
                     {recipes.map((recipe) => (
                         <ClickableBox
                             key={recipe.id}
-                            //content={recipe.image ? recipe.image : recipe.name}
-                            content = {recipe.name}
+                            content={recipe.image ? recipe.image : recipe.name}
+                            isImage={recipe.image ? true : false}
                             // Check if the recipe is in the selectedRecipes array
-                            // Add this prop
+                            // Add this
                             highlighted={selectedRecipes.includes(recipe)}
                             onClick={() => handleRecipeInteraction(recipe)}
                         />
