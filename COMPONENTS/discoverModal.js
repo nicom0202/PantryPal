@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, Pressable, Image, } from 'react-native';
+import { View, Text, Modal, Pressable, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
 import addRecipe from '../INTERFACE/AddRecipe.js';
+import LikesComponent from './LikesComponent.js';
 import { v4 as uuidv4 } from 'uuid'; 
 const DiscoverModal = ({
     modalVisible, 
@@ -87,47 +88,60 @@ const DiscoverModal = ({
                         />
                     </Pressable>
 
-                    <View style={ViewStyle.scrollViewContent}>
+                    <ScrollView 
+                        contentContainerStyle={ViewStyle.scrollViewContent}
+                    >
+                        <Text 
+                            style={TextStyle.title}
+                        >
+                            {selectedRecipe ? selectedRecipe.name : ''}
+                        </Text>
+
                         { selectedImage ? (
                             <View 
                             style={{ 
-                                width: 240, 
-                                height: 240, 
+                                width: 200, 
+                                height: 200, 
                                 borderRadius: 8, 
-                                overflow: 'hidden' 
+                                overflow: 'hidden', 
+                                alignSelf: 'center',
                             }}>
                                 <Image
                                     source={{ uri: selectedImage }}
                                     style={{ 
                                         width: '100%', 
-                                        height: '100%'
+                                        height: '100%',
                                     }}
                                 />
                             </View>
                         ) : (<View></View>)}
 
-                        <Text style={TextStyle.body}>
-                            {selectedRecipe ? selectedRecipe.name : ''}
-                        </Text>
+                        {/* Recipe Likes */}
+                        <LikesComponent 
+                            likes={selectedRecipe ? selectedRecipe.likes : 0}    
+                        />
 
-                        <Text style={TextStyle.body}>
+                        {/* Recipe Instructions */}
+                        <Text style={TextStyle.title}>
+                            {'Recipe Instructions'}
+                        </Text>
+                        <Text style={TextStyle.instructions}>
                             {selectedRecipe ? selectedRecipe.instructions : ''}
                         </Text>
 
-                        <View>
-                            <Text style={TextStyle.body}>Ingredients:</Text>
+                        {/* Recipe Ingredients */}
+                        <Text style={TextStyle.title}>
+                            {'Recipe Ingredients'}
+                        </Text>
+                        <View style={TextStyle.ingredients}>
                             {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
                                 <Text key={index} style={TextStyle.body}>
                                     {ingredient.name}: {ingredient.quantity}
                                 </Text>
                             )) : ''}
                         </View>
-                        {/* TODO: ADD MORE FIELDS LIKE COOKTIME, IMAGE*/}
-
-                        <Text style={TextStyle.body}>
-                            Likes: {selectedRecipe ? selectedRecipe.likes : 0}
-                        </Text>
-                    </View>
+                        {/* TODO: ADD MORE FIELDS LIKE COOKTIME */}
+                    </ScrollView>
                     <Pressable
                         style={ButtonStyle.addRecipe}
                         onPress={handleAddDiscoverRecipe}
