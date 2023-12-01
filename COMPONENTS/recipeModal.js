@@ -26,6 +26,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "../firebase.js";
+import {
+    DISCOVER_COLLECTION_NAME,
+    USER_COLLECTION_NAME
+} from "../INTERFACE/CONSTANTS_FIREBASE.js";
 
 // Set the maximum length for the recipe name
 const MAX_RECIPE_NAME_LENGTH = 32;
@@ -60,7 +64,7 @@ const RecipeModal = ({
                 updatedRecipes[recipeIndex].name = selectedRecipe.name || "Recipe";
                 updatedRecipes[recipeIndex].image = selectedImage;
                 setRecipes(updatedRecipes);
-                addRecipe(updatedRecipes[recipeIndex], "user")
+                addRecipe(updatedRecipes[recipeIndex], USER_COLLECTION_NAME)
             }
             
             setIsEditing(false);
@@ -127,7 +131,7 @@ const RecipeModal = ({
                     onPress: () => {
                         /* Publish the recipe here */            
                         if (selectedRecipe) {
-                            addRecipe(selectedRecipe, "discover");
+                            addRecipe(selectedRecipe, DISCOVER_COLLECTION_NAME);
                             console.log("Recipe sent to Discover");
                         }
                     },
