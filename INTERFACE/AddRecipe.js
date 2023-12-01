@@ -58,11 +58,23 @@ const addRecipe = async (recipeData, addTo) => {
             }
         } else if (addTo === "discover") {
             const recipesCollectionRef = collection(db, "Discover");
+            
+            if (recipeData.discoverID) {
+                const userRecipesDocRef = doc(recipesCollectionRef, recipeData.id);
 
-            // Add a new document to the "Discover" collection
-            await setDoc(doc(recipesCollectionRef, recipeData.id), recipeData);
+                // Update the existing document in the Discover 
+                // collection
+                await setDoc(userRecipesDocRef, recipeData);
 
-            console.log("Recipe added to the 'Discover' collection.");
+                console.log(
+                    "Recipe updated in the 'Discover' collection."
+                    );
+            } else {
+                // Add a new document to the "Discover" collection
+                await setDoc(doc(recipesCollectionRef, recipeData.discoverID), recipeData);
+
+                console.log("Recipe added to the 'Discover' collection.");
+            }
         } else {
             console.error("Invalid 'addTo' parameter provided.");
         }

@@ -194,6 +194,17 @@ const ButtonStyle = StyleSheet.create({
         bottom: 10, // Adjust this value to control the vertical position
         left: 215, // Center the button horizontally
     },
+    likeRecipe: {
+        width: 125,
+        height: 40,
+        borderRadius: 25,
+        backgroundColor: COLORS.fadedRed,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 205, // Center the button horizontally
+    },
     // Discover
     addRecipe: {
         width: 180,
@@ -204,7 +215,7 @@ const ButtonStyle = StyleSheet.create({
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 100,
+        left: 15,
     },
 });
 

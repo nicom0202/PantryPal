@@ -18,6 +18,7 @@ const RecipeBook = () => {
     * isEditing: bool for recipes (true - editing, false - viewing)
     * selectedRecipes: recipes that are chosen for the grocery list
     * selectMode: true - selecting, false - not selecting
+    * modalImage: handles individual modal images
     */
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -25,10 +26,11 @@ const RecipeBook = () => {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectMode, setSelectMode] = useState(false);
-    const [modalImage, setModalImage] = useState(null); // New state to handle individual modal images
+    const [modalImage, setModalImage] = useState(null); 
 
 
-    // Use useFocusEffect to call pullSavedRecipes when the screen comes into focus
+    // Use useFocusEffect to call pullSavedRecipes 
+    // when the screen comes into focus
     useFocusEffect(
         useCallback(() => {
             // Clear current recipes
@@ -57,7 +59,7 @@ const RecipeBook = () => {
     /* Add a recipe with unique ID, open the modal for the newly added recipe */
     const handleAddRecipe = () => {
         const uniqueId = uuidv4();
-        const randomDiscoverID = Math.random(); // Just use uuidv4?
+        const randomDiscoverID = Math.random();
         const newRecipe = { 
             id: uniqueId, 
             name: "", 
@@ -65,7 +67,11 @@ const RecipeBook = () => {
             instructions: "", 
             cookTime: 0, 
             discoverID: randomDiscoverID,
-            image: "" //this saves the path in the firebase bucket to the image, need to update pullSavedRecipes to pull this image for a particular recipe
+            // saves the path in the firebase bucket to the image,
+            // need to update pullSavedRecipes to pull this image 
+            //for a particular recipe
+            image: "", 
+            likes: 0
         };
         const updatedRecipes = [...recipes, newRecipe];
         setRecipes(updatedRecipes);
@@ -82,8 +88,11 @@ const RecipeBook = () => {
             setSelectMode(false);
             setModalVisible(false);
             //navigate to grocerylist
-            console.log("Navigating to Grocery List with params:", selectedRecipes);
-            navigation.navigate('RecipeBook', { screen: 'Grocery List',  params: { selectedRecipes } });
+            console.log("Navigating to Grocery List with params:", 
+                        selectedRecipes);
+            navigation.navigate('RecipeBook', { 
+                screen: 'Grocery List',  
+                params: { selectedRecipes }});
             // Clear the selectedRecipes array
             setSelectedRecipes([]);
 
@@ -94,16 +103,29 @@ const RecipeBook = () => {
     };
 
     return (
-        <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
+        <View 
+            style={[ContainerStyle.defaultContainer, 
+            {justifyContent: 'flex-start'}]}
+        >
             <View style={ContainerStyle.buttonContainer}>
                 {/* Select/Checkout Button */}
                 {selectMode ? (
-                    <Pressable onPress={handleCheckout} style={ButtonStyle.colorFillBlue}> 
-                        <Text style={ButtonStyle.colorFillText}>Checkout</Text>
+                    <Pressable 
+                        onPress={handleCheckout}
+                        style={ButtonStyle.colorFillBlue}
+                    > 
+                        <Text style={ButtonStyle.colorFillText}>
+                            Checkout
+                        </Text>
                     </Pressable>
                 ) : (
-                    <Pressable onPress={handleSelectMode} style={ButtonStyle.colorFillBlue}> 
-                        <Text style={ButtonStyle.colorFillText}>Select Recipes</Text>
+                    <Pressable 
+                        onPress={handleSelectMode} 
+                        style={ButtonStyle.colorFillBlue}
+                    > 
+                        <Text style={ButtonStyle.colorFillText}>
+                            Select Recipes
+                        </Text>
                     </Pressable>
                 )}
             </View>
@@ -121,8 +143,10 @@ const RecipeBook = () => {
                         setSelectedRecipe={setSelectedRecipe}
                         setIsEditing={setIsEditing}
                         selectedModal={modalVisible}
-                        selectedImage={modalImage} // Pass down the specific image for this modal
-                        handleImageSelected={(imageUri) => setModalImage(imageUri)} // Update the specific image for this modal
+                        // Pass down the specific image for this modal
+                        selectedImage={modalImage} 
+                        // Update the specific image for this modal
+                        handleImageSelected={(imageUri) => setModalImage(imageUri)} 
                     />
 
                     {/* Clickable boxes that displays each recipe */}
@@ -132,7 +156,8 @@ const RecipeBook = () => {
                             //content={recipe.image ? recipe.image : recipe.name}
                             content = {recipe.name}
                             // Check if the recipe is in the selectedRecipes array
-                            highlighted={selectedRecipes.includes(recipe)} // Add this prop
+                            // Add this prop
+                            highlighted={selectedRecipes.includes(recipe)}
                             onClick={() => handleRecipeInteraction(recipe)}
                         />
                     ))}
