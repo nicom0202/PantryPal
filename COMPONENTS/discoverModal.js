@@ -3,6 +3,10 @@ import { View, Text, Modal, Pressable, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
+import {
+    DISCOVER_COLLECTION_NAME,
+    USER_COLLECTION_NAME,
+} from "../INTERFACE/CONSTANTS_FIREBASE";
 import addRecipe from '../INTERFACE/AddRecipe.js';
 import LikesComponent from './LikesComponent.js';
 import { v4 as uuidv4 } from 'uuid'; 
@@ -51,7 +55,7 @@ const DiscoverModal = ({
             setLikedRecipes(updatedLikedRecipes);
             console.log(updatedLikedRecipes);
             setRecipes(updatedRecipes);
-            addRecipe(updatedRecipes[recipeIndex], "discover");
+            addRecipe(updatedRecipes[recipeIndex], DISCOVER_COLLECTION_NAME);
             console.log(updatedRecipes[recipeIndex]);
         }
      };
@@ -59,7 +63,7 @@ const DiscoverModal = ({
     const handleAddDiscoverRecipe = () => {
        selectedRecipe.id = uuidv4();
        selectedRecipe.discoverID = Math.random();
-       addRecipe(selectedRecipe, "user");
+       addRecipe(selectedRecipe, USER_COLLECTION_NAME);
        setModalVisible(false);
        setSelectedRecipe(null);
     };
