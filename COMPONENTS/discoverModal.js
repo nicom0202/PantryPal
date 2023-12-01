@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, Image, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
 import {
@@ -85,8 +85,8 @@ const DiscoverModal = ({
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Ionicons 
-                            name="close-outline" 
+                        <MaterialCommunityIcons 
+                            name="close" 
                             color={COLORS.lightWhite} 
                             size={SIZES.xLarge}     
                         />

@@ -21,7 +21,7 @@ import {
 } from '../STYLES/styles.js';
 import { ScrollView } from 'react-native-gesture-handler';
 import SimpleAddImageButton from './AddImageButton.js';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "../firebase.js";
@@ -192,8 +192,8 @@ const RecipeModal = ({
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Ionicons 
-                            name="close-outline" 
+                        <MaterialCommunityIcons 
+                            name="close" 
                             color={COLORS.lightWhite} 
                             size={SIZES.xLarge} 
                         />
