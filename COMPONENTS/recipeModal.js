@@ -115,8 +115,7 @@ const RecipeModal = ({
     const sendToDiscover = () => {
         Alert.alert(
             "Confirm Publish",
-            "Are you sure you want to publish this recipe and",
-            "send it to the discover page?",
+            "Are you sure you want to publish this recipe and send it to the discover page?",
             [
                 {
                     text: "Cancel",
