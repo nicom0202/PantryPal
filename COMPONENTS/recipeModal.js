@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import addRecipe from '../INTERFACE/AddRecipe.js';
 import deleteRecipe from '../INTERFACE/DeleteRecipe.js';
 import IngredientFlatList from './IngredientFlatList.js';
@@ -221,15 +220,21 @@ const RecipeModal = ({
                                 <View 
                                 style={{ 
                                     width: '100%', 
-                                    height: '100%', 
+                                    height: 300, 
                                     borderRadius: 8, 
-                                    overflow: 'hidden' 
+                                    overflow: 'hidden', 
+                                    paddingHorizontal: 6,
+                                    marginBottom: 10, 
+                                    marginTop: 35
                                 }}>
                                     <Image
                                         source={{ uri: selectedImage }}
                                         style={{ 
                                             width: '100%', 
-                                            height: '100%'
+                                            height: 300, 
+                                            borderRadius: 8, 
+                                            overflow: 'hidden', 
+                                            paddingHorizontal: 6,
                                         }}
                                     />
                                 </View>

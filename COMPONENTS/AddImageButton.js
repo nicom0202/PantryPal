@@ -42,9 +42,11 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
         >
             <View
                 style={{
+                    width: '100%', 
+                    height: 300, 
+                    borderRadius: 8, 
+                    overflow: 'hidden', 
                     paddingHorizontal: 6,
-                    width: '100%',
-                    height: 200
                 }}
             >
                 {image ? (
