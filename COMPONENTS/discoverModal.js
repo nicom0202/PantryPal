@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, Pressable, } from 'react-native';
+import { View, Text, Modal, Pressable, Image, } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/theme.js';
 import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
@@ -13,7 +13,8 @@ const DiscoverModal = ({
     recipes,
     setRecipes,
     likedRecipes,
-    setLikedRecipes
+    setLikedRecipes,
+    selectedImage
 }) => {
     // Function to check if a recipe is liked
     const isRecipeLiked = (recipeID) => {
@@ -57,7 +58,7 @@ const DiscoverModal = ({
     const handleAddDiscoverRecipe = () => {
        selectedRecipe.id = uuidv4();
        selectedRecipe.discoverID = Math.random();
-       addRecipe(selectedRecipe, "discover");
+       addRecipe(selectedRecipe, "user");
        setModalVisible(false);
        setSelectedRecipe(null);
     };
@@ -87,6 +88,24 @@ const DiscoverModal = ({
                     </Pressable>
 
                     <View style={ViewStyle.scrollViewContent}>
+                        { selectedImage ? (
+                            <View 
+                            style={{ 
+                                width: 240, 
+                                height: 240, 
+                                borderRadius: 8, 
+                                overflow: 'hidden' 
+                            }}>
+                                <Image
+                                    source={{ uri: selectedImage }}
+                                    style={{ 
+                                        width: '100%', 
+                                        height: '100%'
+                                    }}
+                                />
+                            </View>
+                        ) : (<View></View>)}
+
                         <Text style={TextStyle.body}>
                             {selectedRecipe ? selectedRecipe.name : ''}
                         </Text>

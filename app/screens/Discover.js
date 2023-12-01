@@ -11,6 +11,7 @@ const Discover = () => {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [likedRecipes, setLikedRecipes] = useState([]);
+    const [modalImage, setModalImage] = useState(null); 
 
     // Call pullSavedRecipes after the component mounts
     useEffect(() => {
@@ -28,6 +29,8 @@ const Discover = () => {
     const handleRecipeInteraction = (recipe) => {
         setModalVisible(true);
         setSelectedRecipe(recipe);
+        // Set the image for the specific modal
+        setModalImage(recipe.image || null);
     };
 
     return (
@@ -61,13 +64,15 @@ const Discover = () => {
                         setSelectedRecipe={setSelectedRecipe}
                         likedRecipes={likedRecipes}
                         setLikedRecipes={setLikedRecipes}
+                        selectedImage={modalImage} 
                     />
                     {/* Clickable boxes that displays each recipe */}
                     {recipes.map((recipe) => (
                         <ClickableBox
                             key={recipe.id}
-                            content={recipe.image ? recipe.image : recipe.name}
                             onClick={() => handleRecipeInteraction(recipe)}
+                            content={recipe.image ? recipe.image : recipe.name}
+                            isImage={recipe.image ? true : false}
                         />
                     ))}
                 </View>
