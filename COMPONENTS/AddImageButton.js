@@ -1,8 +1,7 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image, Button } from "react-native";
 import React, { useState, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
-import { getDownloadURL, uploadBytes, ref, deleteObject,updateDoc, doc } from "firebase/storage";
-import { storage, db, auth } from "../firebase";
+import { uploadImageAsync, deleteImage } from "../INTERFACE/ImageUtils";
 
 const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe }) => {
     const [image, setImage] = useState(currentImage || null);
@@ -29,45 +28,8 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
         }
     };
 
-    const uploadImageAsync = async (uri) => {
-        const blob = await new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                resolve(xhr.response);
-            };
-            xhr.onerror = function (e) {
-                console.log(e);
-                reject(new TypeError("Network request failed"));
-            };
-            xhr.responseType = "blob";
-            xhr.open("GET", uri, true);
-            xhr.send(null);
-        });
-
-        try {
-            const storageRef = ref(storage, `images/image-${Date.now()}`);
-            await uploadBytes(storageRef, blob);
-
-            blob.close();
-            return await getDownloadURL(storageRef);
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            throw error;
-        }
-    };
-
-    const deleteImage = async () => {
-        if (image) {
-            const deleteRef = ref(storage, image);
-            try {
-                await deleteObject(deleteRef);
-                selectedRecipe.image = "";
-                setImage(null);
-                onImageSelected(null);
-            } catch (error) {
-                console.error(`Error: ${error}`);
-            }
-        }
+    const handleDeleteImage = () => {
+        deleteImage(image);
     };
 
     return (
@@ -89,7 +51,7 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
                     <>
                         <SafeAreaView>
                             <Button title="Delete this image"
-                                onPress={deleteImage}
+                                onPress={handleDeleteImage}
                             />
                         </SafeAreaView>
                         {image && (

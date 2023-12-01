@@ -191,10 +191,10 @@ const RecipeModal = ({
                             </SafeAreaView>
                         ) : (
                             selectedImage && (
-                                <View style={{ width: '100%', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
+                                <View style={{ width: '100%', height: 300, borderRadius: 8, overflow: 'hidden',marginTop: 30 }}>
                                     <Image
                                         source={{ uri: selectedImage }}
-                                        style={{ width: '100%', height: '100%' }}
+                                        style={{ width: '100%', height: 300 }}
                                     />
                                 </View>
                             )
