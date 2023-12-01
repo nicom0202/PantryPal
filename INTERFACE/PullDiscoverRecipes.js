@@ -13,7 +13,7 @@ async function getTenRandomRecipes(setRecipes) {
   const querySnapshot = await getDocs(q);
 
   querySnapshot.forEach(doc => {
-    const { name, ingredients, instructions, cookTime, discoverID, likes } = doc.data();
+    const { name, ingredients, instructions, cookTime, discoverID, likes, image } = doc.data();
     const newRecipe = {
       id: doc.id,
       name: name || "",
@@ -22,6 +22,7 @@ async function getTenRandomRecipes(setRecipes) {
       cookTime: cookTime || 0,
       discoverID: discoverID || 0,
       likes: likes || 0,
+      image: image || "",
     };
     randomRecipes.push(newRecipe);
   });
