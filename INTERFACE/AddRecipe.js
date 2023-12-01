@@ -1,5 +1,54 @@
 import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 import { db, auth } from "../firebase";
+import {
+    DISCOVER_COLLECTION_NAME,
+    USER_COLLECTION_NAME,
+    RECIPES_COLLECTION_NAME
+} from "./CONSTANTS_FIREBASE";
+
+const getUserRecipesRef = (userDocRef) => collection(userDocRef, RECIPES_COLLECTION_NAME);
+const getUserDocRef = () => doc(db, USER_COLLECTION_NAME, auth.currentUser.email);
+const getDiscoverCollectionRef = () => collection(db, DISCOVER_COLLECTION_NAME);
+
+const addOrUpdateRecipe = async (recipeData, docRef, isDiscoverCollection) => {
+    try {
+        const docSnapshot = await getDoc(docRef);
+
+        if (docSnapshot.exists()) {
+            const recipesRef = isDiscoverCollection
+                ? getDiscoverCollectionRef()
+                : getUserRecipesRef(docRef);
+
+            const recipeDocRef = recipeData.id
+                ? doc(recipesRef, recipeData.id)
+                : await setDoc(recipesRef, recipeData);
+
+            await setDoc(recipeDocRef, recipeData);
+            console.log(
+                `Recipe ${recipeData.id ? 'updated' : 'added'} in the ${isDiscoverCollection ? 'Discover' : "user's 'Recipes'"} collection.`
+            );
+        } else {
+            if (!isDiscoverCollection) {
+                await setDoc(docRef, /* Add user details if needed */ {});
+            }
+
+            const recipesRef = isDiscoverCollection
+                ? getDiscoverCollectionRef()
+                : getUserRecipesRef(docRef);
+
+            const recipeDocRef = await setDoc(
+                doc(recipesRef, recipeData.id || recipeData.discoverID),
+                recipeData
+            );
+
+            console.log(
+                `New ${isDiscoverCollection ? 'Discover' : "user"} document ${recipeData.id ? 'created with the recipe' : 'added to the collection'} in '${isDiscoverCollection ? 'Discover' : "Recipes'"}' subcollection with ${recipeData.id ? 'custom document name.' : 'custom document name.'}`
+            );
+        }
+    } catch (error) {
+        console.error("Error adding or updating recipe: ", error);
+    }
+};
 
 const addRecipe = async (recipeData, addTo) => {
     try {
@@ -8,76 +57,10 @@ const addRecipe = async (recipeData, addTo) => {
             return;
         }
 
-        if (addTo === "user") {
-            const userDocRef = doc(db, "Users", auth.currentUser.email);
-            const userDocSnapshot = await getDoc(userDocRef);
+        const isDiscoverCollection = addTo === DISCOVER_COLLECTION_NAME;
+        const docRef = isDiscoverCollection ? doc(getDiscoverCollectionRef(), recipeData.id) : getUserDocRef();
 
-            if (userDocSnapshot.exists()) {
-                const userRecipesRef = collection(userDocRef, "Recipes");
-
-                if (recipeData.id) {
-                    const userRecipesDocRef = doc(userRecipesRef, recipeData.id);
-
-                    // Update the existing document in the Recipes 
-                    // subcollection
-                    await setDoc(userRecipesDocRef, recipeData);
-
-                    console.log(
-                        "Recipe updated in the user's 'Recipes' subcollection."
-                        );
-                } else {
-                    // Add a new recipe to the Recipes subcollection with 
-                    // recipeData.id as document name
-                    const newRecipeDocRef = await setDoc(
-                        doc(userRecipesRef, recipeData.id), 
-                        recipeData
-                        );
-
-                    console.log("New recipe added to the user's 'Recipes'",
-                        "subcollection with custom document name."
-                        );
-                }
-            } else {
-                // If the user document doesn't exist, create a new user 
-                // document with the recipe in Recipes subcollection
-                const userDocData = {
-                    // Add user details if needed
-                };
-
-                await setDoc(userDocRef, userDocData);
-
-                const userRecipesRef = collection(userDocRef, "Recipes");
-                const newRecipeDocRef = await setDoc(
-                    doc(userRecipesRef, recipeData.id),
-                    recipeData
-                    );
-
-                console.log("New user document created with the recipe in",
-                "'Recipes' subcollection with custom document name."
-                );
-            }
-        } else if (addTo === "discover") {
-            const recipesCollectionRef = collection(db, "Discover");
-            
-            if (recipeData.discoverID) {
-                const userRecipesDocRef = doc(recipesCollectionRef, recipeData.id);
-
-                // Update the existing document in the Discover 
-                // collection
-                await setDoc(userRecipesDocRef, recipeData);
-
-                console.log(
-                    "Recipe updated in the 'Discover' collection."
-                    );
-            } else {
-                // Add a new document to the "Discover" collection
-                await setDoc(doc(recipesCollectionRef, recipeData.discoverID), recipeData);
-
-                console.log("Recipe added to the 'Discover' collection.");
-            }
-        } else {
-            console.error("Invalid 'addTo' parameter provided.");
-        }
+        await addOrUpdateRecipe(recipeData, docRef, isDiscoverCollection);
     } catch (error) {
         console.error("Error adding or updating recipe: ", error);
     }
