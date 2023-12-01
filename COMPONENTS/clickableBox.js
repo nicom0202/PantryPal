@@ -7,14 +7,13 @@ const ClickableBox = ({ content, onClick, highlighted, isImage }) => {
         width: 150,
         height: 150,
         borderWidth: 2,
-        borderColor: COLORS.smokeBlack,
+        borderColor: highlighted ? COLORS.brightYellow : COLORS.smokeBlack,
         padding: 10,
         margin: 10, 
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 25,
-        // Highlight when 'highlighted' is true
-        backgroundColor: highlighted ? COLORS.fadedGreen : 'transparent', 
+        backgroundColor: 'transparent', 
     };
 
     return (
@@ -23,11 +22,11 @@ const ClickableBox = ({ content, onClick, highlighted, isImage }) => {
             {isImage ? (
                 <Image 
                     source={{ uri: content }} 
-                    style={{ width: 148, height: 148, borderRadius: 25}}     
+                    style={{ width: 146, height: 146, borderRadius: 23}}     
                 />
             ) : (
                 <Text 
-                    style={[{fontSize: SIZES.medium, fontWeight: '700'}]}
+                    style={[{fontSize: SIZES.medium, fontWeight: 'bold'}]}
                 >
                     {content}
                 </Text>
