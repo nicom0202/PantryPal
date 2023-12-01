@@ -10,8 +10,49 @@ const DiscoverModal = ({
     selectedRecipe, 
     setModalVisible,
     setSelectedRecipe,
+    recipes,
+    setRecipes,
+    likedRecipes,
+    setLikedRecipes
 }) => {
-    
+    // Function to check if a recipe is liked
+    const isRecipeLiked = (recipeID) => {
+        return likedRecipes.some(recipe => recipe === recipeID);
+    };
+
+    const handleLikeRecipe = () => {
+        if (selectedRecipe) {
+            /* Find the index of the selected recipe */
+            const recipeIndex = recipes.findIndex(
+                recipe => recipe.discoverID === selectedRecipe.discoverID
+                );
+            const updatedRecipes = [...recipes];
+            let updatedLikedRecipes = [...likedRecipes];
+
+            /* Check if the recipe has been liked before */
+            const isLiked = likedRecipes.indexOf(selectedRecipe.discoverID);
+
+            if (recipeIndex != -1 && isLiked == -1) {
+                /* update the number of likes for the recipe */
+                updatedRecipes[recipeIndex].likes = selectedRecipe.likes + 1;
+
+                /* Remove the recipe from the liked recipes array */
+                updatedLikedRecipes = [...likedRecipes, selectedRecipe.discoverID];
+            } else {
+                /* update the number of likes for the recipe */
+                updatedRecipes[recipeIndex].likes = selectedRecipe.likes - 1;
+                
+                /* Remove the recipe from the liked recipes array */
+                updatedLikedRecipes = likedRecipes.filter(item => item != selectedRecipe.discoverID);
+            }
+
+            setLikedRecipes(updatedLikedRecipes);
+            console.log(updatedLikedRecipes);
+            setRecipes(updatedRecipes);
+            addRecipe(updatedRecipes[recipeIndex], "discover");
+            console.log(updatedRecipes[recipeIndex]);
+        }
+     };
 
     const handleAddDiscoverRecipe = () => {
        selectedRecipe.id = uuidv4();
@@ -62,7 +103,11 @@ const DiscoverModal = ({
                                 </Text>
                             )) : ''}
                         </View>
-                        {/* TODO: ADD MORE FIELDS LIKE COOKTIME, LIKES, IMAGE*/}
+                        {/* TODO: ADD MORE FIELDS LIKE COOKTIME, IMAGE*/}
+
+                        <Text style={TextStyle.body}>
+                            Likes: {selectedRecipe ? selectedRecipe.likes : 0}
+                        </Text>
                     </View>
                     <Pressable
                         style={ButtonStyle.addRecipe}
@@ -73,6 +118,26 @@ const DiscoverModal = ({
                         </Text>
                     </Pressable>
                     {/* Pass addedRecipe to RecipeModal */}
+
+                    {selectedRecipe && !isRecipeLiked(selectedRecipe.discoverID) ? (
+                        <Pressable
+                            style={ButtonStyle.likeRecipe}
+                            onPress={handleLikeRecipe}
+                            >
+                            <Text style={ButtonStyle.colorFillText}>
+                                Like
+                            </Text>
+                        </Pressable>
+                    ) : (
+                        <Pressable
+                            style={ButtonStyle.likeRecipe}
+                            onPress={handleLikeRecipe}
+                            >
+                            <Text style={ButtonStyle.colorFillText}>
+                                Remove Like
+                            </Text>
+                        </Pressable>
+                    )}
                 </View>
             </View>
         </Modal>

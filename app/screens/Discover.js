@@ -9,10 +9,8 @@ import { ButtonStyle, TextStyle, } from '../../STYLES/styles.js';
 const Discover = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [recipes, setRecipes] = useState([]);
-    const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [selectedRecipe, setSelectedRecipe] = useState(null);
-    const [selectMode, setSelectMode] = useState(false);
-
+    const [likedRecipes, setLikedRecipes] = useState([]);
 
     // Call pullSavedRecipes after the component mounts
     useEffect(() => {
@@ -21,27 +19,33 @@ const Discover = () => {
 
     const handleNewDiscoverRecipes = () =>{
         //delete all recipes currently in discoverModal
-        setRecipes([]); // Clear the recipes array by setting it to an empty array
+        // Clear the recipes array by setting it to an empty array
+        setRecipes([]); 
         pullDiscoverRecipes(setRecipes);
     };
 
     /* toggle the state of the modal when a recipe is clicked */
     const handleRecipeInteraction = (recipe) => {
-        if (selectMode) {
-            const updatedSelected = selectedRecipes.includes(recipe) ? selectedRecipes.filter(r => r !== recipe) : [...selectedRecipes, recipe];
-            setSelectedRecipes(updatedSelected);
-        } else {
-            setModalVisible(true);
-            setSelectedRecipe(recipe);
-        }
+        setModalVisible(true);
+        setSelectedRecipe(recipe);
     };
 
     return (
-        <View style={[ContainerStyle.defaultContainer, {justifyContent: 'flex-start'}]}>
+        <View 
+            style={[
+                ContainerStyle.defaultContainer, 
+                {justifyContent: 'flex-start'
+            }]}
+        >
             <View style={ContainerStyle.buttonContainer}>
                 {/* Refresh Button (Gather New Recipes) */}
-                <Pressable onPress={handleNewDiscoverRecipes} style={ButtonStyle.colorFillBlue}> 
-                    <Text style={ButtonStyle.colorFillText}>Find New Recipes</Text>
+                <Pressable 
+                    onPress={handleNewDiscoverRecipes} 
+                    style={ButtonStyle.colorFillBlue}
+                > 
+                    <Text style={ButtonStyle.colorFillText}>
+                        Find New Recipes
+                    </Text>
                 </Pressable>
             </View>
 
@@ -55,15 +59,14 @@ const Discover = () => {
                         setRecipes={setRecipes}
                         setModalVisible={setModalVisible}
                         setSelectedRecipe={setSelectedRecipe}
-                        selectedModal={modalVisible}
+                        likedRecipes={likedRecipes}
+                        setLikedRecipes={setLikedRecipes}
                     />
                     {/* Clickable boxes that displays each recipe */}
                     {recipes.map((recipe) => (
                         <ClickableBox
                             key={recipe.id}
                             content={recipe.image ? recipe.image : recipe.name}
-                            // Check if the recipe is in the selectedRecipes array
-                            highlighted={selectedRecipes.includes(recipe)} // Add this prop
                             onClick={() => handleRecipeInteraction(recipe)}
                         />
                     ))}
