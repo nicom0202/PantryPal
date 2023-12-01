@@ -14,13 +14,11 @@ const DiscoverModal = ({
     
 
     const handleAddDiscoverRecipe = () => {
-       //TODO:
-       //make new id and discoverID for recipe
        selectedRecipe.id = uuidv4();
        selectedRecipe.discoverID = Math.random();
-       addRecipe(selectedRecipe);
+       addRecipe(selectedRecipe, "discover");
        setModalVisible(false);
-        setSelectedRecipe(null);
+       setSelectedRecipe(null);
     };
 
     return (
@@ -40,13 +38,21 @@ const DiscoverModal = ({
                             setSelectedRecipe(null);
                         }}
                     >
-                        <Ionicons name="close-outline" color={COLORS.lightWhite} size={SIZES.xLarge} />
+                        <Ionicons 
+                            name="close-outline" 
+                            color={COLORS.lightWhite} 
+                            size={SIZES.xLarge}     
+                        />
                     </Pressable>
 
                     <View style={ViewStyle.scrollViewContent}>
-                        <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.name : ''}</Text>
+                        <Text style={TextStyle.body}>
+                            {selectedRecipe ? selectedRecipe.name : ''}
+                        </Text>
 
-                        <Text style={TextStyle.body}>{selectedRecipe ? selectedRecipe.instructions : ''}</Text>
+                        <Text style={TextStyle.body}>
+                            {selectedRecipe ? selectedRecipe.instructions : ''}
+                        </Text>
 
                         <View>
                             <Text style={TextStyle.body}>Ingredients:</Text>
@@ -56,13 +62,15 @@ const DiscoverModal = ({
                                 </Text>
                             )) : ''}
                         </View>
-                        {/* TODO: ADD MORE FIELDS TO SHOW BELOW LIKE COOKTIME, LIKES, IMAGE*/}
+                        {/* TODO: ADD MORE FIELDS LIKE COOKTIME, LIKES, IMAGE*/}
                     </View>
                     <Pressable
                         style={ButtonStyle.addRecipe}
                         onPress={handleAddDiscoverRecipe}
                         >
-                        <Text style={ButtonStyle.colorFillText}>Add to Recipe Book</Text>
+                        <Text style={ButtonStyle.colorFillText}>
+                            Add to Recipe Book
+                        </Text>
                     </Pressable>
                     {/* Pass addedRecipe to RecipeModal */}
                 </View>
