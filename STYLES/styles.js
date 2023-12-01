@@ -116,6 +116,16 @@ const ButtonStyle = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 25,
     },
+    colorFillRed: {
+        alignItems: 'center',
+        backgroundColor: COLORS.fadedRed,
+        width: '100%',
+        margin: 5,
+        padding: 10,
+        borderColor: COLORS.fadedRed,
+        borderWidth: 2,
+        borderRadius: 25,
+    },
     colorFillText: {
         color: COLORS.lightWhite,
         fontWeight: '700',
