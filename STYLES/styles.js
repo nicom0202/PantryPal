@@ -28,6 +28,23 @@ const TextStyle = StyleSheet.create({
         fontSize: SIZES.xLarge,
         textAlign: "center",
         color: COLORS.smokeBlack,
+        padding: 10
+    },
+    instructions: {
+        fontSize: SIZES.medium,
+        color: COLORS.smokeBlack,
+        padding: 10,
+        borderColor: 'black',
+        borderWidth: 1,
+        borderStyle: 'solid',
+    },
+    ingredients: {
+        fontSize: SIZES.medium,
+        color: COLORS.smokeBlack,
+        padding: 10,
+        borderColor: 'black',
+        borderWidth: 1,
+        borderStyle: 'solid',
     },
     body: {
         fontSize: SIZES.medium,
