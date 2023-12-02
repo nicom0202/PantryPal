@@ -168,6 +168,20 @@ const RecipeModal = ({
         }   
     };
 
+    /* Update the instructions of the selected recipe */
+    const updateRecipeCookTime = (newCookTime) => {
+        if (selectedRecipe) {
+            // Update the name directly in the selectedRecipe object
+            selectedRecipe.cookTime = newCookTime; 
+            const updatedRecipes = recipes.map((recipe) =>
+                recipe.id === selectedRecipe.id ? 
+                    { ...recipe, cookTime: newCookTime } : 
+                    recipe
+            );
+            setRecipes(updatedRecipes);
+        }   
+    };
+
     const handleDismissKeyboard = () => {
         // This will dismiss the keyboard when you tap away from the TextInput
         Keyboard.dismiss(); 
@@ -262,7 +276,39 @@ const RecipeModal = ({
                             )
                         )}
 
-                        {/* Recipe Ingredients Text Box while editing, Text otherwise */}
+                        {/* Cook Time Dropdown if editing, Text otherwise */}
+                        {isEditing ? (
+                            <TouchableWithoutFeedback 
+                                onPress={handleDismissKeyboard}
+                            >
+                                <SafeAreaView>      
+                                    <TextInput
+                                        style={[
+                                            TextInputStyle.inputRecipeCookTime
+                                        ]} 
+                                        value={
+                                            selectedRecipe && selectedRecipe.cooktime != 0 
+                                            ? selectedRecipe.cookTime
+                                            : 0
+                                        }
+                                        onChangeText={text => updateRecipeCookTime(text)}
+                                        placeholder="Cook Time (minutes)"
+                                        placeholderTextColor="grey"
+                                        keyboardType="numeric"
+                                    />
+                                </SafeAreaView>
+                            </TouchableWithoutFeedback>
+                        ) : (
+                            <View>
+                                <Text style={TextStyle.title}>
+                                    {"Total Cook Time: "}
+                                    {selectedRecipe ? selectedRecipe.cookTime : '0'} 
+                                    {" Minutes"}
+                                </Text>
+                            </View>
+                        )}
+
+                        {/* Recipe Instructions Text Box while editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback 
                                 onPress={handleDismissKeyboard}
