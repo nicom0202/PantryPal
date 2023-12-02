@@ -355,6 +355,7 @@ const RecipeModal = ({
                                             ingredient.name ? (
                                                 <Text key={index} style={TextStyle.body}>
                                                     {ingredient.name}: {ingredient.quantity}
+                                                    {" grams"}
                                                 </Text>
                                             ) : null
                                     )) : null}
