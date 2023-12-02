@@ -125,6 +125,10 @@ const DiscoverModal = ({
                             likes={selectedRecipe ? selectedRecipe.likes : 0}    
                         />
 
+                        <Text style={TextStyle.title}>
+                            Total Cook Time: {selectedRecipe ? selectedRecipe.cookTime : '0'} Minutes
+                        </Text>
+
                         {/* Recipe Instructions */}
                         <Text style={TextStyle.title}>
                             {'Recipe Instructions'}
