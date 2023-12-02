@@ -124,9 +124,11 @@ const DiscoverModal = ({
                         <LikesComponent 
                             likes={selectedRecipe ? selectedRecipe.likes : 0}    
                         />
-
+                            
                         <Text style={TextStyle.title}>
-                            Total Cook Time: {selectedRecipe ? selectedRecipe.cookTime : '0'} Minutes
+                            {"Total Cook Time: "}
+                            {selectedRecipe ? selectedRecipe.cookTime : '0'} 
+                            {" Minutes"}
                         </Text>
 
                         {/* Recipe Instructions */}
@@ -142,11 +144,14 @@ const DiscoverModal = ({
                             {'Recipe Ingredients'}
                         </Text>
                         <View style={TextStyle.ingredients}>
-                            {selectedRecipe ? selectedRecipe.ingredients.map((ingredient, index) => (
-                                <Text key={index} style={TextStyle.body}>
-                                    {ingredient.name}: {ingredient.quantity}
-                                </Text>
-                            )) : ''}
+                            {selectedRecipe ? 
+                                selectedRecipe.ingredients.map((ingredient, index) => (
+                                    ingredient.name ? (
+                                        <Text key={index} style={TextStyle.body}>
+                                            {ingredient.name}: {ingredient.quantity}
+                                        </Text>
+                                    ) : null
+                            )) : null}
                         </View>
                         {/* TODO: ADD MORE FIELDS LIKE COOKTIME */}
                     </ScrollView>

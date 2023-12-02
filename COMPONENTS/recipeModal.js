@@ -276,25 +276,34 @@ const RecipeModal = ({
                             )
                         )}
 
-                        {/* Recipe Cook Time Dropdown while editing, Text otherwise */}
+                        {/* Cook Time Dropdown if editing, Text otherwise */}
                         {isEditing ? (
                             <TouchableWithoutFeedback 
                                 onPress={handleDismissKeyboard}
                             >
                                 <SafeAreaView>      
                                     <TextInput
-                                    value={selectedRecipe ? selectedRecipe.cookTime : 0}
-                                    onChangeText={text => updateRecipeCookTime(text)}
-                                    placeholder="Cook Time"
-                                    placeholderTextColor="grey"
-                                    keyboardType="numeric"
+                                        style={[
+                                            TextInputStyle.inputRecipeCookTime
+                                        ]} 
+                                        value={
+                                            selectedRecipe && selectedRecipe.cooktime != 0 
+                                            ? selectedRecipe.cookTime
+                                            : 0
+                                        }
+                                        onChangeText={text => updateRecipeCookTime(text)}
+                                        placeholder="Cook Time (minutes)"
+                                        placeholderTextColor="grey"
+                                        keyboardType="numeric"
                                     />
                                 </SafeAreaView>
                             </TouchableWithoutFeedback>
                         ) : (
                             <View>
                                 <Text style={TextStyle.title}>
-                                    Total Cook Time: {selectedRecipe ? selectedRecipe.cookTime : '0'} Minutes
+                                    {"Total Cook Time: "}
+                                    {selectedRecipe ? selectedRecipe.cookTime : '0'} 
+                                    {" Minutes"}
                                 </Text>
                             </View>
                         )}
