@@ -1,7 +1,5 @@
-![Pantry Pal](https://github.com/nicom0202/PantryPal/blob/main/ASSETS/pantrypal.png?raw=true)
-
-
 # Pantry Pal
+![Pantry Pal](https://github.com/nicom0202/PantryPal/blob/main/ASSETS/pantrypal.png?raw=true)
 *Do you need a clean and intuitive way to store and view your favorite recipes? Do you have trouble writing a grocery list?*
 
 **Pantry Pal**:
