@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Pressable } from 'react-native';
+import { 
+  View, 
+  Text,
+  TextInput, 
+  Button, 
+  StyleSheet, 
+  Pressable 
+} from 'react-native';
 
 const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
-  const [localNames, setLocalNames] = useState(selectedRecipe.ingredients.map(ingredient => ingredient.name));
-  const [localQuantities, setLocalQuantities] = useState(selectedRecipe.ingredients.map(ingredient => ingredient.quantity));
+  const [localNames, setLocalNames] = useState(
+    selectedRecipe.ingredients.map(ingredient => ingredient.name));
+  const [localQuantities, setLocalQuantities] = useState(
+    selectedRecipe.ingredients.map(ingredient => ingredient.quantity));
 
   const handleIngredientNameChange = (index, newName) => {
     // Create a copy of the local state arrays
@@ -23,7 +32,11 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
       return ingredient;
     });
 
-    updateRecipesAndLocalState(updatedIngredients, updatedNames, localQuantities);
+    updateRecipesAndLocalState(
+      updatedIngredients, 
+      updatedNames, 
+      localQuantities
+    );
   };
 
   const handleIngredientQuantityChange = (index, newQuantity) => {
@@ -44,13 +57,23 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
       return ingredient;
     });
 
-    updateRecipesAndLocalState(updatedIngredients, localNames, updatedQuantities);
+    updateRecipesAndLocalState(
+      updatedIngredients, 
+      localNames, 
+      updatedQuantities
+    );
   };
 
-  const updateRecipesAndLocalState = (updatedIngredients, updatedNames, updatedQuantities) => {
+  const updateRecipesAndLocalState = (
+    updatedIngredients, 
+    updatedNames, 
+    updatedQuantities
+  ) => {
     // Create a copy of the recipes array with the updated ingredients
     const updatedRecipes = recipes.map((recipe) =>
-      recipe.id === selectedRecipe.id ? { ...recipe, ingredients: updatedIngredients } : recipe
+      recipe.id === selectedRecipe.id ? 
+      { ...recipe, ingredients: updatedIngredients } : 
+      recipe
     );
 
     // Update the recipes list using setRecipes
@@ -68,9 +91,12 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
     // Make sure to initialize the new ingredient's properties
     selectedRecipe.ingredients = [...selectedRecipe.ingredients, newIngredient];
 
-    // Create a copy of the recipes array and update the selected recipe's ingredients
+    // Create a copy of the recipes array and 
+    // update the selected recipe's ingredients
     const updatedRecipes = recipes.map((recipe) =>
-      recipe.id === selectedRecipe.id ? { ...recipe, ingredients: selectedRecipe.ingredients } : recipe
+      recipe.id === selectedRecipe.id ? 
+      { ...recipe, ingredients: selectedRecipe.ingredients } : 
+      recipe
     );
 
     // Update the recipes list using setRecipes
@@ -83,7 +109,8 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
 
   const renderIngredientItem = ({ item, index }) => {
     const handleDeleteIngredient = () => {
-      // Create a copy of the selected recipe's ingredients and remove the ingredient at the specified index
+      // Create a copy of the selected recipe's ingredients 
+      // and remove the ingredient at the specified index
       const updatedIngredients = [...selectedRecipe.ingredients];
       updatedIngredients.splice(index, 1);
   
@@ -119,7 +146,7 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
           style={styles.ingredientItem}
           value={item ? item.quantity : ''}
           onChangeText={(newQuantity) => handleIngredientQuantityChange(index, newQuantity)}
-          placeholder="Quantity"
+          placeholder="Quantity (grams)"
           placeholderTextColor="grey"
           keyboardType="numeric"
         />

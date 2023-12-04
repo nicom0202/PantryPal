@@ -21,6 +21,12 @@ const ContainerStyle = StyleSheet.create({
         alignItems: 'center',
         marginTop: 40,
     },
+    scrollView: {
+        width: '100%', 
+        padding: 10, 
+        margin: 10, 
+        alignSelf: 'baseline'
+    },
 });
 
 const TextStyle = StyleSheet.create({
@@ -197,7 +203,7 @@ const ButtonStyle = StyleSheet.create({
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 215, // Center the button horizontally
+        left: 180, // Center the button horizontally
     },
     saveRecipe: {
         width: 125,
@@ -219,7 +225,7 @@ const ButtonStyle = StyleSheet.create({
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 215, // Center the button horizontally
+        left: 180, // Center the button horizontally
     },
     likeRecipe: {
         width: 125,
@@ -272,6 +278,14 @@ const TextInputStyle = StyleSheet.create({
     },
     inputRecipeInstructions: {
         height: 200,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+    inputRecipeCookTime: {
+        height: 40,
+        width: 170,
+        alignSelf: 'center',
         margin: 12,
         borderWidth: 1,
         padding: 10,
