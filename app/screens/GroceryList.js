@@ -19,8 +19,7 @@ export default function GroceryList({ route }) {
 
                 RecipeModalArray = selectedRecipes;
 
-                // Ingredients is a dictionary mapping of the ingredient 
-                // name to the quantity from selected recipes
+                // Ingredients is map: name-->quantity from selected recipes
                 const ingredients = await GetIngredients(RecipeModalArray);
                 setIngredientsForUsers(ingredients);
             } else {
@@ -79,8 +78,7 @@ export default function GroceryList({ route }) {
         </View>
         
         {/* Checkbox List*/}
-        <ScrollView style={[
-            {width: '100%', padding: 10, margin: 10, alignSelf: 'baseline'}]}>
+        <ScrollView style={ContainerStyle.scrollView}>
             {Object.entries(ingredientsForUsers).map(([ingredient, quantity], index) => (
                 <CheckBox
                     key={index}
