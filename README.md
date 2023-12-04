@@ -1,14 +1,16 @@
-# Expo Router Example
+# Pantry Pal
+![Pantry Pal](https://github.com/nicom0202/PantryPal/blob/main/ASSETS/pantrypal.png?raw=true)
+*Do you need a clean and intuitive way to store and view your favorite recipes? Do you have trouble writing a grocery list?*
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+**Pantry Pal**:
+- Makes storing recipes clean and easy!
+- Automates writing a grocery list!
+- Allows you to share and discover recipes from other users!
 
-## 🚀 How to use
+## Opening The App Using Expo Go
 
-```sh
-npx create-expo-app -e with-router
-```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+1. Download Expo Go on your smartphone.
+2. Clone this repository.
+3. Open `PantryPal` and run `npm install`.
+4. Run `npx expo start`.
+5. Scan the QR code using the Camera app (iOS) or the Expo Go app (Android).
