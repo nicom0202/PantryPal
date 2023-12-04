@@ -10,7 +10,7 @@ export default function Account() {
             
             {/* App Details */}
             <Text style={TextStyle.bold}> Pantry Pal </Text>
-            <Text style={TextStyle.bold}> Version 0.4 </Text>
+            <Text style={TextStyle.bold}> Version 1.0 </Text>
             
             {/* User Details */}
             <Text> {'\n'} Account: {auth.currentUser.email} </Text>
