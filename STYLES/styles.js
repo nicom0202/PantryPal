@@ -21,6 +21,12 @@ const ContainerStyle = StyleSheet.create({
         alignItems: 'center',
         marginTop: 40,
     },
+    scrollView: {
+        width: '100%', 
+        padding: 10, 
+        margin: 10, 
+        alignSelf: 'baseline'
+    },
 });
 
 const TextStyle = StyleSheet.create({
