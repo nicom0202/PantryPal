@@ -9,11 +9,13 @@ import * as Google from "expo-auth-session/providers/google";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithCredential } from 'firebase/auth';
 import { authForGoogle } from '../../firebase';
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
 import { COLORS } from '../../STYLES/Theme'
 import { ContainerStyle, TextStyle, ButtonStyle } from '../../STYLES/Styles';
+import { handleFirebaseSignIn } from '../../INTERFACE/LoginFirebase';
+import { handleFirebaseSignUp } from '../../INTERFACE/SignUpFirebase';
 
 WebBrowser.maybeCompleteAuthSession();	// Listener for Google sign-in
 
@@ -67,52 +69,49 @@ const LoginScreen = () => {
 	
 
 	const handleSignUp = () => {
-		const auth = getAuth(firebaseApp);
-		createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
+		handleFirebaseSignUp(
+		  email,
+		  password,
+		  userCredential => {
+			console.log('User signed up:', userCredential);
 			AddUserToDB(auth.currentUser.email);
-			const user = userCredential.user;
-			// Set user token in AsyncStorage
 			AsyncStorage.setItem('userToken', 'user_token_here')
-			.then(() => {
-				navigation.navigate('RecipeBook');
-			})
-			.catch((error) => {
-				console.log('Error setting user token:', error);
-			});
-		})
-		.catch((error) => {
-			console.log('Error signing up:', error);
+			  .then(() => navigation.navigate('RecipeBook'))
+			  .catch(error => console.log('Error setting user token:', error));
+		  },
+		  error => {
 			// Handle error as needed
-		});
-	};
-
-	const handleLogin = () => {
-		const auth = getAuth(firebaseApp);
-		signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			const user = userCredential.user;
-			// Set user token in AsyncStorage
+		  }
+		);
+	  };
+	
+	  const handleLogin = () => {
+		handleFirebaseSignIn(
+		  email,
+		  password,
+		  userCredential => {
+			console.log('User signed up:', userCredential);
 			AsyncStorage.setItem('userToken', 'user_token_here')
-			.then(() => {
-				navigation.navigate('RecipeBook');
-			})
-			.catch((error) => {
-				console.log('Error setting user token:', error);
-			});
-		})
-		.catch((error) => {
-			console.log('Error signing in:', error);
+			  .then(() => navigation.navigate('RecipeBook'))
+			  .catch(error => console.log('Error setting user token:', error));
+		  },
+		  error => {
 			// Handle error as needed
-		});
-	}
+		  }
+		);
+	  };
 
 	return (
-		<KeyboardAvoidingView style={ContainerStyle.defaultContainer} behavior="padding">
+		<KeyboardAvoidingView 
+			style={ContainerStyle.defaultContainer} 
+			behavior="padding">
 			
 			{/* App Logo */}
 			<View>
-				<Image source={require('../../ASSETS/pantrypal.png')} style={{width: 325, height: 200}}/>
+				<Image 
+					source={require('../../ASSETS/pantrypal.png')} 
+					style={{width: 325, height: 200}}
+				/>
 			</View>
 	
 			{/* Email/Password Input */}
@@ -138,17 +137,26 @@ const LoginScreen = () => {
 			<View style={ContainerStyle.buttonContainer}>
 			
 				{/* Login */}
-				<TouchableOpacity onPress={handleLogin} style={ButtonStyle.colorFill}>
+				<TouchableOpacity 
+					onPress={handleLogin} 
+					style={ButtonStyle.colorFill}
+				>
 					<Text style={ButtonStyle.colorFillText}>Login</Text>
 				</TouchableOpacity>
 				
 				{/* Register */}
-				<TouchableOpacity onPress={handleSignUp} style={[ButtonStyle.colorOutline]}>
+				<TouchableOpacity 
+					onPress={handleSignUp} 
+					style={[ButtonStyle.colorOutline]}
+				>
 					<Text style={ButtonStyle.colorOutlineText}>Sign Up</Text>
 				</TouchableOpacity>
 
 				{/* Google Sign-In */}
-				<TouchableOpacity onPress={() => { promptAsync(); }} style={ButtonStyle.colorFillBlue}>
+				<TouchableOpacity 
+					onPress={() => { promptAsync(); }} 
+					style={ButtonStyle.colorFillBlue}
+				>
 					<Text style={ButtonStyle.colorFillText}>Sign-In with Google</Text>
 				</TouchableOpacity>
 			

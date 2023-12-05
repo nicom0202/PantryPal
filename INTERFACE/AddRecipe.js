@@ -25,7 +25,8 @@ const addOrUpdateRecipe = async (recipeData, docRef, isDiscoverCollection) => {
 
             await setDoc(recipeDocRef, recipeData);
             console.log(
-                `Recipe ${recipeData.id ? 'updated' : 'added'} in the ${isDiscoverCollection ? 'Discover' : "user's 'Recipes'"} collection.`
+                `Recipe ${recipeData.id ? 'updated' : 'added'} in the`, 
+                `${isDiscoverCollection ? 'Discover' : "user's 'Recipes'"} collection.`
             );
         } else {
             if (!isDiscoverCollection) {
@@ -42,7 +43,10 @@ const addOrUpdateRecipe = async (recipeData, docRef, isDiscoverCollection) => {
             );
 
             console.log(
-                `New ${isDiscoverCollection ? 'Discover' : "user"} document ${recipeData.id ? 'created with the recipe' : 'added to the collection'} in '${isDiscoverCollection ? 'Discover' : "Recipes'"}' subcollection with ${recipeData.id ? 'custom document name.' : 'custom document name.'}`
+                `New ${isDiscoverCollection ? 'Discover' : "user"} document`, 
+                `${recipeData.id ? 'created with the recipe' : 'added to the collection'}`, 
+                `in '${isDiscoverCollection ? 'Discover' : "Recipes'"}'`, 
+                `subcollection with ${recipeData.id ? 'custom document name.' : 'custom document name.'}`
             );
         }
     } catch (error) {

@@ -16,7 +16,9 @@ const CheckBox = (props) => {
         <View style={CheckBoxStyle.container}>
             <Pressable onPress={props.onPress}>
                 <MaterialCommunityIcons
-                    name={iconName} size={24} color="#000"
+                    name={iconName} 
+                    size={24} 
+                    color="#000"
                 />
             </Pressable>
             <Text style={CheckBoxStyle.title}>

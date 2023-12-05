@@ -49,13 +49,17 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
                 {image ? (
                     <>
                         <SafeAreaView>
-                            <Button title="Delete this image"
+                            <Button 
+                                title="Delete this image"
                                 onPress={handleDeleteImage}
                             />
                         </SafeAreaView>
                         {image && (
-                            <View style={{ width: '100%', height: '80%', borderRadius: 8, overflow: 'hidden' }}>
-                                <Image source={{ uri: image }} style={ImageStyles.image} />
+                            <View style={ImageStyles.imagePreview}>
+                                <Image 
+                                    source={{ uri: image }} 
+                                    style={ImageStyles.image} 
+                                />
                             </View>
                         )}
                     </>
@@ -70,8 +74,9 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
                             </Text>
                         </TouchableOpacity>
                         <SafeAreaView>
-                            <Button title="Delete this image"
-                                    onPress={deleteImage}
+                            <Button 
+                                title="Delete this image"
+                                onPress={deleteImage}
                             />
                         </SafeAreaView>
                     </>
