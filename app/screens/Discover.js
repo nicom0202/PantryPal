@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Pressable, Text } from 'react-native';
-import DiscoverModal from '../../COMPONENTS/discoverModal.js';
-import ClickableBox from '../../COMPONENTS/clickableBox.js';
-import { ContainerStyle, GridStyle } from '../../STYLES/styles.js';
-import pullDiscoverRecipes from '../../INTERFACE/PullDiscoverRecipes.js';
-import { ButtonStyle, TextStyle, } from '../../STYLES/styles.js';
+import DiscoverModal from '../../COMPONENTS/DiscoverModal';
+import ClickableBox from '../../COMPONENTS/ClickableBox';
+import { ContainerStyle, GridStyle, ButtonStyle } from '../../STYLES/Styles';
+import pullDiscoverRecipes from '../../INTERFACE/PullDiscoverRecipes';
 
 const Discover = () => {
     const [modalVisible, setModalVisible] = useState(false);

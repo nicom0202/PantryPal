@@ -1,4 +1,4 @@
-import {doc, setDoc, getDoc} from "firebase/firestore"
+import {doc, setDoc } from "firebase/firestore"
 import { db } from "../firebase";  // Import the initialized Firebase app
 
 

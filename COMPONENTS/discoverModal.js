@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, Pressable, Image, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../STYLES/theme.js';
-import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/styles.js';
+import { COLORS, SIZES } from '../STYLES/Theme';
+import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/Styles';
 import {
     DISCOVER_COLLECTION_NAME,
     USER_COLLECTION_NAME,
 } from "../INTERFACE/CONSTANTS_FIREBASE";
-import addRecipe from '../INTERFACE/AddRecipe.js';
-import LikesComponent from './LikesComponent.js';
+import addRecipe from '../INTERFACE/AddRecipe';
+import LikesComponent from './LikesComponent';
 import { v4 as uuidv4 } from 'uuid'; 
 const DiscoverModal = ({
     modalVisible, 

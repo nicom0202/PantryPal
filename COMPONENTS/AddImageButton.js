@@ -1,8 +1,8 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, Button, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, Image, Button } from "react-native";
 import React, { useState, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import { uploadImageAsync, deleteImage } from "../INTERFACE/ImageUtils";
-import { ImageStyles } from "../STYLES/styles";
+import { ImageStyles } from "../STYLES/Styles";
 
 const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe }) => {
     const [image, setImage] = useState(currentImage || null);

@@ -12,8 +12,8 @@ import { authForGoogle } from '../../firebase';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app as firebaseApp } from '../../firebase'; // Import the initialized Firebase app
 import AddUserToDB from '../../INTERFACE/AddUserToDatabase';
-import { COLORS, SIZES } from '../../STYLES/theme'
-import { ContainerStyle, TextStyle, ButtonStyle } from '../../STYLES/styles';
+import { COLORS } from '../../STYLES/Theme'
+import { ContainerStyle, TextStyle, ButtonStyle } from '../../STYLES/Styles';
 
 WebBrowser.maybeCompleteAuthSession();	// Listener for Google sign-in
 

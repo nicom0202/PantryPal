@@ -2,7 +2,7 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { COLORS, SIZES } from "../STYLES/theme";
+import { COLORS, SIZES } from "../STYLES/Theme";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // SCREENS

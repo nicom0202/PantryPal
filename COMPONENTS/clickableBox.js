@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
-import { COLORS, SIZES } from '../STYLES/theme';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { COLORS, SIZES } from '../STYLES/Theme';
 
 const ClickableBox = ({ content, onClick, highlighted, isImage }) => {
     const boxStyles = {

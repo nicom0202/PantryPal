@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { View, Text, Pressable, Alert } from 'react-native';
-import { auth } from "../../firebase";
-import CheckBox from "../../COMPONENTS/checkBox.js";
+import { View, Text, Alert } from 'react-native';
+import CheckBox from "../../COMPONENTS/CheckBox";
 import GetIngredients from "../../INTERFACE/GetUserIngredients";
-import { ContainerStyle, ButtonStyle } from '../../STYLES/styles.js';
+import { ContainerStyle, ButtonStyle } from '../../STYLES/Styles';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 export default function GroceryList({ route }) {

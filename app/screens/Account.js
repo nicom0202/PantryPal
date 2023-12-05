@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { auth } from '../../firebase';
 import LogoutButton from '../../COMPONENTS/LogoutButton';
-import { ContainerStyle, TextStyle } from '../../STYLES/styles';
+import { ContainerStyle, TextStyle } from '../../STYLES/Styles';
 
 export default function Account() {
 
