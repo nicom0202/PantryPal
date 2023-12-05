@@ -73,6 +73,12 @@ const TextStyle = StyleSheet.create({
         margin: 15,
         textAlign: 'center',
     },
+    errorText: {
+        color: 'red',
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 10,
+      },
 });
     
 const GridStyle = StyleSheet.create({

@@ -53,6 +53,7 @@ const LoginScreen = () => {
 	// Create account through Firebase
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [error, setError] = useState('');
 
 	const navigation = useNavigation()
 
@@ -74,13 +75,14 @@ const LoginScreen = () => {
 		  password,
 		  userCredential => {
 			console.log('User signed up:', userCredential);
+			setError('');
 			AddUserToDB(auth.currentUser.email);
 			AsyncStorage.setItem('userToken', 'user_token_here')
 			  .then(() => navigation.navigate('RecipeBook'))
 			  .catch(error => console.log('Error setting user token:', error));
 		  },
 		  error => {
-			// Handle error as needed
+			setError("Invalid email and/or password");
 		  }
 		);
 	  };
@@ -91,12 +93,14 @@ const LoginScreen = () => {
 		  password,
 		  userCredential => {
 			console.log('User signed up:', userCredential);
+			setError('');
 			AsyncStorage.setItem('userToken', 'user_token_here')
 			  .then(() => navigation.navigate('RecipeBook'))
 			  .catch(error => console.log('Error setting user token:', error));
 		  },
 		  error => {
 			// Handle error as needed
+			setError("Wrong email and/or password");
 		  }
 		);
 	  };
@@ -113,6 +117,12 @@ const LoginScreen = () => {
 					style={{width: 325, height: 200}}
 				/>
 			</View>
+			{/* Display error message */}
+			{error !== '' && (
+				<View style={ContainerStyle.errorContainer}>
+					<Text style={TextStyle.errorText}>{error}</Text>
+				</View>
+			)}
 	
 			{/* Email/Password Input */}
 			<View style={ContainerStyle.inputContainer}>
