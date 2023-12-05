@@ -10,7 +10,7 @@ const LikesComponent = ({ likes }) => {
       <Text style={LikesStyles.likesCount}>{likes}</Text>
       <MaterialCommunityIcons 
           name="thumb-up" 
-          color={COLORS.brightBlue} 
+          color={COLORS.brightGreen} 
           size={SIZES.xLarge} 
       />
     </View>
