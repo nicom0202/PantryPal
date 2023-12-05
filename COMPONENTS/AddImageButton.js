@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, Button } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, Image, Button, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import { uploadImageAsync, deleteImage } from "../INTERFACE/ImageUtils";
+import { ImageStyles } from "../STYLES/styles";
 
 const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe }) => {
     const [image, setImage] = useState(currentImage || null);
@@ -29,26 +30,22 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
     };
 
     const handleDeleteImage = () => {
-        deleteImage(image);
+        try{
+            if(image){
+                deleteImage(image);
+                selectedRecipe.image = "";
+                setImage(null);
+                onImageSelected(null);
+            }
+        } catch (error){
+            console.error('Error in deleteImage:', error);
+            throw error;
+        }
     };
 
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}
-        >
-            <View
-                style={{
-                    width: 200, 
-                    height: 200, 
-                    borderRadius: 8, 
-                    overflow: 'hidden', 
-                    paddingHorizontal: 6,
-                }}
-            >
+        <SafeAreaView style={ImageStyles.container}>
+             <View style={ImageStyles.imageContainer}>
                 {image ? (
                     <>
                         <SafeAreaView>
@@ -58,7 +55,7 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
                         </SafeAreaView>
                         {image && (
                             <View style={{ width: '100%', height: '80%', borderRadius: 8, overflow: 'hidden' }}>
-                                <Image source={{ uri: image }} style={{ width: '100%', height: '100%' }} />
+                                <Image source={{ uri: image }} style={ImageStyles.image} />
                             </View>
                         )}
                     </>
@@ -66,26 +63,9 @@ const SimpleAddImageButton = ({ onImageSelected, currentImage, selectedRecipe })
                     <>
                         <TouchableOpacity
                             onPress={pickImage}
-                            style={{
-                                width: '100%',
-                                height: 90,
-                                borderStyle: 'dashed',
-                                borderWidth: 2,
-                                borderColor: 'darkgray',
-                                borderRadius: 8,
-                                backgroundColor: 'lightgray',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginTop: 30
-                            }}
+                            style={ImageStyles.uploadButton}
                         >
-                            <Text
-                                style={{
-                                    fontSize: 20,
-                                    color: 'gray',
-                                    fontWeight: 'bold'
-                                }}
-                            >
+                            <Text style={ImageStyles.uploadButtonText}>
                                 Pick an image
                             </Text>
                         </TouchableOpacity>

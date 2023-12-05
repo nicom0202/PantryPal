@@ -292,6 +292,47 @@ const TextInputStyle = StyleSheet.create({
     },
 });
 
+const ImageStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    imageContainer: {
+        width: 200,
+        height: 200,
+        borderRadius: 8,
+        overflow: 'hidden',
+        paddingHorizontal: 6,
+    },
+    imagePreview: {
+        width: '100%',
+        height: '80%',
+        borderRadius: 8,
+        overflow: 'hidden',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+    uploadButton: {
+        width: '100%',
+        height: 90,
+        borderStyle: 'dashed',
+        borderWidth: 2,
+        borderColor: 'darkgray',
+        borderRadius: 8,
+        backgroundColor: 'lightgray',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30,
+    },
+    uploadButtonText: {
+        fontSize: 20,
+        color: 'gray',
+        fontWeight: 'bold'
+    },
+});
 export {
     ContainerStyle,
     TextStyle,
@@ -300,4 +341,5 @@ export {
     ButtonStyle,
     CheckBoxStyle,
     TextInputStyle,
+    ImageStyles,
 };
