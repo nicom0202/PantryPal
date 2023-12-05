@@ -280,8 +280,8 @@ const RecipeModal = ({
                                         ]} 
                                         value={
                                             selectedRecipe && selectedRecipe.cooktime != 0 
-                                            ? selectedRecipe.cookTime
-                                            : 0
+                                            ? String(selectedRecipe.cookTime)
+                                            : '0'
                                         }
                                         onChangeText={text => updateRecipeCookTime(text)}
                                         placeholder="Cook Time (minutes)"
