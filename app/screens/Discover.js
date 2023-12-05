@@ -72,6 +72,7 @@ const Discover = () => {
                             onClick={() => handleRecipeInteraction(recipe)}
                             content={recipe.image ? recipe.image : recipe.name}
                             isImage={recipe.image ? true : false}
+                            recipeName={recipe.name}
                         />
                     ))}
                 </View>

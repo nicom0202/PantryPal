@@ -21,11 +21,20 @@ const ClickableBox = ({ content, onClick, highlighted, isImage, recipeName }) =>
         <View style={boxStyles}>
             {isImage ? (
                 <View>
-                <Text style={{alignItems: 'center', justifyContent: 'center',}}>{recipeName}</Text>
-                <Image 
-                    source={{ uri: content }} 
-                    style={{ width: 146, height: 130, borderRadius: 23}}     
-                />
+                    <Text 
+                        style={{
+                            alignSelf: 'center',
+                            justifyContent: 'center',
+                            fontSize: SIZES.medium, 
+                            fontWeight: 'bold'
+                        }}
+                    >
+                        {recipeName}
+                    </Text>
+                    <Image 
+                        source={{ uri: content }} 
+                        style={{ width: 146, height: 127, borderRadius: 23}}     
+                    />
                 </View>
             ) : (
                 <Text 
