@@ -198,12 +198,12 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 25,
-        backgroundColor: COLORS.fadedBlue,
+        backgroundColor: COLORS.brightBlue,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 180, // Center the button horizontally
+        left: 220, // Center the button horizontally
     },
     saveRecipe: {
         width: 125,
@@ -220,27 +220,16 @@ const ButtonStyle = StyleSheet.create({
         width: 125,
         height: 40,
         borderRadius: 25,
-        backgroundColor: COLORS.fadedRed,
+        backgroundColor: COLORS.brightRed,
         alignItems: 'center',
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 180, // Center the button horizontally
-    },
-    likeRecipe: {
-        width: 125,
-        height: 40,
-        borderRadius: 25,
-        backgroundColor: COLORS.fadedRed,
-        alignItems: 'center',
-        justifyContent: 'center', // Center the button content vertically
-        position: 'absolute', // Position the button absolutely within modalView
-        bottom: 10, // Adjust this value to control the vertical position
-        left: 205, // Center the button horizontally
+        left: 220, // Center the button horizontally
     },
     // Discover
-    addRecipe: {
-        width: 180,
+    likeRecipe: {
+        width: 125,
         height: 40,
         borderRadius: 25,
         backgroundColor: COLORS.brightGreen,
@@ -248,7 +237,18 @@ const ButtonStyle = StyleSheet.create({
         justifyContent: 'center', // Center the button content vertically
         position: 'absolute', // Position the button absolutely within modalView
         bottom: 10, // Adjust this value to control the vertical position
-        left: 15,
+        left: 40, // Center the button horizontally
+    },
+    addRecipe: {
+        width: 125,
+        height: 40,
+        borderRadius: 25,
+        backgroundColor: COLORS.brightBlue,
+        alignItems: 'center',
+        justifyContent: 'center', // Center the button content vertically
+        position: 'absolute', // Position the button absolutely within modalView
+        bottom: 10, // Adjust this value to control the vertical position
+        left: 220,
     },
 });
 

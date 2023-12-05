@@ -160,7 +160,7 @@ const DiscoverModal = ({
                         onPress={handleAddDiscoverRecipe}
                         >
                         <Text style={ButtonStyle.colorFillText}>
-                            Add to Recipe Book
+                            Save
                         </Text>
                     </Pressable>
                     {/* Pass addedRecipe to RecipeModal */}
