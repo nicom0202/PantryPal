@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { IngredientFlatListStyles } from '../STYLES/Styles';
 import { 
   View, 
   Text,
   TextInput, 
   Button, 
-  StyleSheet, 
   Pressable 
 } from 'react-native';
 
@@ -127,23 +127,17 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
     return (
       <View 
         key={index} 
-        style={{ 
-          flexDirection: 'row', 
-          height: 40,
-          justifyContent: 'space-between',
-          borderColor: 'black',
-          borderWidth: 1,
-          borderStyle: 'solid', }}
+        style={IngredientFlatListStyles.box}
       >
         <TextInput
-          style={styles.ingredientItem}
+          style={IngredientFlatListStyles.ingredientItem}
           value={item ? item.name : ''}
           onChangeText={(newName) => handleIngredientNameChange(index, newName)}
           placeholder="Ingredient Name"
           placeholderTextColor="grey"
         />
         <TextInput
-          style={styles.ingredientItem}
+          style={IngredientFlatListStyles.ingredientItem}
           value={item ? item.quantity : ''}
           onChangeText={(newQuantity) => handleIngredientQuantityChange(index, newQuantity)}
           placeholder="Quantity (grams)"
@@ -152,10 +146,7 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
         />
         <Pressable 
           onPress={handleDeleteIngredient}
-          style={{
-            justifyContent: 'center',
-            marginRight: 15
-            }}
+          style={IngredientFlatListStyles.deletePos}
         >
           <Text>Delete</Text>
         </Pressable>
@@ -174,24 +165,5 @@ const IngredientFlatList = ({ recipes, selectedRecipe, setRecipes }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  ingredientContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  ingredientItem: {
-    flex: 1,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'grey',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    height: 40,
-  },
-});
 
 export default IngredientFlatList;

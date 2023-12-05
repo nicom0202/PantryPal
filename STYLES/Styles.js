@@ -366,6 +366,37 @@ const LikesStyles = StyleSheet.create({
     }
 });
 
+const IngredientFlatListStyles = StyleSheet.create({
+    box : {
+        flexDirection: 'row', 
+        height: 40,
+        justifyContent: 'space-between',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderStyle: 'solid',
+    },
+    ingredientContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 10,
+    },
+    ingredientItem: {
+        flex: 1,
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: 'grey',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        height: 40,
+    },
+    deletePos: {
+        justifyContent: 'center',
+        marginRight: 15
+    }
+  });
+
 export {
     ContainerStyle,
     TextStyle,
@@ -376,5 +407,6 @@ export {
     TextInputStyle,
     ImageStyles,
     LikesStyles,
-    RecipeModalImageStyle
+    RecipeModalImageStyle,
+    IngredientFlatListStyles
 };

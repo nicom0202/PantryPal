@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import RecipeModal from '../../COMPONENTS/RecipeModal';
 import ClickableBox from '../../COMPONENTS/ClickableBox';
-import { GridStyle, ButtonStyle, TextStyle, ContainerStyle, } from '../../STYLES/Styles';
+import { GridStyle, ButtonStyle, ContainerStyle, } from '../../STYLES/Styles';
 import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
