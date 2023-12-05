@@ -155,6 +155,7 @@ const RecipeBook = () => {
                             key={recipe.id}
                             content={recipe.image ? recipe.image : recipe.name}
                             isImage={recipe.image ? true : false}
+                            recipeName={recipe.name}
                             // Check if the recipe is in the selectedRecipes array
                             // Add this
                             highlighted={selectedRecipes.includes(recipe)}
