@@ -36,7 +36,11 @@ function TabNavigator() {
                         component={RecipeBook}
                         options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="book-account-outline" color={color} size={SIZES.xxLarge} />
+                            <MaterialCommunityIcons 
+                                name="book-account-outline" 
+                                color={color} 
+                                size={SIZES.xxLarge} 
+                            />
                         )
                         }}
             />       
@@ -45,7 +49,11 @@ function TabNavigator() {
                         component={Discover}
                         options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="book-search-outline" color={color} size={SIZES.xxLarge} />
+                            <MaterialCommunityIcons 
+                                name="book-search-outline" 
+                                color={color} 
+                                size={SIZES.xxLarge} 
+                            />
                         )
                         }}
             />
@@ -54,7 +62,11 @@ function TabNavigator() {
                         component={GroceryList}
                         options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="cart-check" color={color} size={SIZES.xxLarge} />
+                            <MaterialCommunityIcons 
+                                name="cart-check" 
+                                color={color} 
+                                size={SIZES.xxLarge} 
+                            />
                         )
                         }}
             />  
@@ -63,7 +75,11 @@ function TabNavigator() {
                         component={Account}
                         options={{
                         tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account-cog-outline" color={color} size={SIZES.xxLarge} />
+                            <MaterialCommunityIcons 
+                                name="account-cog-outline" 
+                                color={color} 
+                                size={SIZES.xxLarge} 
+                            />
                         )
                         }}
             />      
