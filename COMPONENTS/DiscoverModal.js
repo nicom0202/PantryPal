@@ -1,7 +1,7 @@
 import { View, Text, Modal, Pressable, Image, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../STYLES/Theme';
-import { ViewStyle, ButtonStyle, TextStyle } from '../STYLES/Styles';
+import { ViewStyle, ButtonStyle, TextStyle, RecipeModalImageStyle } from '../STYLES/Styles';
 import {
     DISCOVER_COLLECTION_NAME,
     USER_COLLECTION_NAME,
@@ -102,19 +102,10 @@ const DiscoverModal = ({
 
                         { selectedImage ? (
                             <View 
-                            style={{ 
-                                width: 200, 
-                                height: 200, 
-                                borderRadius: 8, 
-                                overflow: 'hidden', 
-                                alignSelf: 'center',
-                            }}>
+                            style={RecipeModalImageStyle.selectedImageStyle}>
                                 <Image
                                     source={{ uri: selectedImage }}
-                                    style={{ 
-                                        width: '100%', 
-                                        height: '100%',
-                                    }}
+                                    style={RecipeModalImageStyle.imageView}
                                 />
                             </View>
                         ) : (<View></View>)}
