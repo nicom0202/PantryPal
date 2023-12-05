@@ -352,6 +352,20 @@ const LikesStyles = StyleSheet.create({
     },
   });
 
+  const RecipeModalImageStyle = StyleSheet.create({
+    imageView : {
+        width: '100%', 
+        height: '100%',
+    },
+    selectedImageStyle : {
+        width: 200, 
+        height: 200, 
+        borderRadius: 8, 
+        overflow: 'hidden', 
+        alignSelf: 'center',
+    }
+});
+
 export {
     ContainerStyle,
     TextStyle,
@@ -361,5 +375,6 @@ export {
     CheckBoxStyle,
     TextInputStyle,
     ImageStyles,
-    LikesStyles
+    LikesStyles,
+    RecipeModalImageStyle
 };

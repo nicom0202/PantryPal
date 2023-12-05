@@ -17,7 +17,8 @@ import {
     ViewStyle, 
     ButtonStyle, 
     TextStyle, 
-    TextInputStyle 
+    TextInputStyle,
+    RecipeModalImageStyle 
 } from '../STYLES/Styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import SimpleAddImageButton from './AddImageButton';
@@ -258,19 +259,10 @@ const RecipeModal = ({
                         ) : (
                             selectedImage && (
                                 <View 
-                                    style={{ 
-                                    width: 200, 
-                                    height: 200, 
-                                    borderRadius: 8, 
-                                    overflow: 'hidden', 
-                                    alignSelf: 'center',
-                                }}>
+                                    style={RecipeModalImageStyle.selectedImageStyle}>
                                     <Image
                                         source={{ uri: selectedImage }}
-                                        style={{ 
-                                            width: '100%', 
-                                            height: '100%',
-                                        }}
+                                        style={RecipeModalImageStyle.imageView}
                                     />
                                 </View>
                             )
@@ -403,3 +395,6 @@ const RecipeModal = ({
 };
 
 export default RecipeModal;
+
+
+
