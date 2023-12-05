@@ -2,7 +2,7 @@
 // Reusable stylesheet for the front-end
 
 import { StyleSheet } from "react-native";
-import { COLORS, SIZES } from "./theme";
+import { COLORS, SIZES } from "./Theme";
 
 const ContainerStyle = StyleSheet.create({
     defaultContainer: {

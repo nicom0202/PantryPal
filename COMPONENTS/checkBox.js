@@ -6,7 +6,7 @@
 import { Pressable, Text, View } from "react-native";
 import * as React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { CheckBoxStyle } from "../STYLES/styles.js"
+import { CheckBoxStyle } from "../STYLES/Styles.js"
 
 const CheckBox = (props) => {
     const iconName = props.isChecked ?

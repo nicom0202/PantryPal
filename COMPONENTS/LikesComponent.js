@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../STYLES/theme';
+import { COLORS, SIZES } from '../STYLES/Theme';
 
 const LikesComponent = ({ likes }) => {
   return (

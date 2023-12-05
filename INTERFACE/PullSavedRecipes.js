@@ -1,5 +1,5 @@
 import { db, auth } from "../firebase";
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, getDocs } from 'firebase/firestore';
 import {
   USER_COLLECTION_NAME,
   RECIPES_COLLECTION_NAME

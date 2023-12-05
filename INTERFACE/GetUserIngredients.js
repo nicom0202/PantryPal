@@ -1,6 +1,3 @@
-import { collection, query, getDocs } from "firebase/firestore";
-import { db } from "../firebase";  // Import the initialized Firebase app
-
 // The RecipeModalArray is an array of Recipes that the user has selected
 const GetIngredients = async (RecipeModalArray) => {
   const ingredientsList = {};

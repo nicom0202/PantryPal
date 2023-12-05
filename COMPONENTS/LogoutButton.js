@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { getAuth, signOut } from 'firebase/auth';
-import { ButtonStyle } from '../STYLES/styles.js';
+import { ButtonStyle } from '../STYLES/Styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../STYLES/theme.js';
+import { COLORS, SIZES } from '../STYLES/Theme';
 
 const LogoutButton = () => {
   const navigation = useNavigation();

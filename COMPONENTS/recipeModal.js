@@ -1,6 +1,6 @@
-import addRecipe from '../INTERFACE/AddRecipe.js';
-import deleteRecipe from '../INTERFACE/DeleteRecipe.js';
-import IngredientFlatList from './IngredientFlatList.js';
+import addRecipe from '../INTERFACE/AddRecipe';
+import deleteRecipe from '../INTERFACE/DeleteRecipe';
+import IngredientFlatList from './IngredientFlatList';
 import { 
     View, 
     Text, 
@@ -18,17 +18,17 @@ import {
     ButtonStyle, 
     TextStyle, 
     TextInputStyle 
-} from '../STYLES/styles.js';
+} from '../STYLES/Styles';
 import { ScrollView } from 'react-native-gesture-handler';
-import SimpleAddImageButton from './AddImageButton.js';
+import SimpleAddImageButton from './AddImageButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS, SIZES } from '../STYLES/theme.js';
+import { COLORS, SIZES } from '../STYLES/Theme';
 import { ref, deleteObject } from "firebase/storage";
-import { storage } from "../firebase.js";
+import { storage } from "../firebase";
 import {
     DISCOVER_COLLECTION_NAME,
     USER_COLLECTION_NAME
-} from "../INTERFACE/CONSTANTS_FIREBASE.js";
+} from "../INTERFACE/CONSTANTS_FIREBASE";
 
 // Set the maximum length for the recipe name
 const MAX_RECIPE_NAME_LENGTH = 32;

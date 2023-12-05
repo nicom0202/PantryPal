@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Pressable, Text, Image } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, ScrollView, Pressable, Text } from 'react-native';
 import { v4 as uuidv4 } from 'uuid'; 
 
-import RecipeModal from '../../COMPONENTS/recipeModal.js';
-import ClickableBox from '../../COMPONENTS/clickableBox.js';
-import { GridStyle, ButtonStyle, TextStyle, ContainerStyle, } from '../../STYLES/styles.js';
-import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes.js';
+import RecipeModal from '../../COMPONENTS/RecipeModal';
+import ClickableBox from '../../COMPONENTS/ClickableBox';
+import { GridStyle, ButtonStyle, TextStyle, ContainerStyle, } from '../../STYLES/Styles';
+import pullSavedRecipes from '../../INTERFACE/PullSavedRecipes';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 
