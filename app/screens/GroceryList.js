@@ -11,24 +11,29 @@ export default function GroceryList({ route }) {
 
     useEffect(() => {
         const fetchData = async () => {
-        try {
-            if (route.params && route.params.selectedRecipes) {
-                const { selectedRecipes } = route.params;
-                console.log(selectedRecipes);
-
-                RecipeModalArray = selectedRecipes;
-
-                // Ingredients is map: name-->quantity from selected recipes
-                const ingredients = await GetIngredients(RecipeModalArray);
-                setIngredientsForUsers(ingredients);
-            } else {
-                // Handle the case when selectedRecipes is null
-                console.log("selectedRecipes is null or undefined");
+            try {
+                if (route.params && route.params.selectedRecipes) {
+                    const { selectedRecipes } = route.params;
+                    RecipeModalArray = selectedRecipes;
+                    // Ingredients is map: name-->quantity from selected recipes
+                    const ingredients = await GetIngredients(RecipeModalArray);
+                    const combinedIngredients = {};
+                    // Iterate through ingredients and add same name quantities together
+                    Object.entries(ingredients).forEach(([ingredient, quantity]) => {
+                        const lowercaseIngredient = ingredient.toLowerCase();
+                        combinedIngredients[lowercaseIngredient] = 
+                        (combinedIngredients[lowercaseIngredient] || 0) + quantity;
+                    });
+                    setIngredientsForUsers(combinedIngredients);
+                } else {
+                    // Handle the case when selectedRecipes is null
+                    console.log("selectedRecipes is null or undefined");
+                }
+            } catch (error) {
+                console.error("Error fetching ingredients:", error);
             }
-        } catch (TypeError) {
-            console.error("Error fetching ingredients:", error);
-        }
         };
+    
         fetchData();
     }, [route.params]);
 
